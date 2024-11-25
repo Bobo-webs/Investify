@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="icon" href="./assets/images/logo-icon.jpg" />
+    <link rel="stylesheet" href="./assets/css/login.css" />
+    <script type="module" src="./assets/js/login.js" defer></script>
+  </head>
+
+  <body>
+    <!-- ================= Loading ================== -->
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+
+    <form class="loginDiv" id="loginDiv">
+      <a href="index.html" class="logo-wrapper">
+        <span class="span-logo">
+          <img
+            class="logo-img"
+            src="./assets/images/logo.png"
+            loading="lazy"
+            alt="Investify"
+          />
+        </span>
+        <h2>Investify</h2>
+      </a>
+      <div class="inputField">
+        <input type="email" id="email" required aria-invalid="false" />
+        <label>Email</label>
+      </div>
+      <div class="inputField">
+        <input type="password" id="password" required aria-invalid="false" />
+        <label>Password</label>
+      </div>
+      <div
+        class="error"
+        aria-errormessage="Invalid email or password."
+        id="error"
+      >
+        <p>You have entered an invalid email or password.</p>
+      </div>
+      <p class="reset-already"><a href="forgot.html">Forgot Password?</a></p>
+      <p class="reset-already-two">
+        Don't have an account? <a href="register.html">Register</a>
+      </p>
+      <button id="submit" class="login">Login</button>
+    </form>
+
+    <!-- ------------------------------- Error and Success Popup -------------------------- -->
+    <div id="popup-success" class="popup">
+      <div class="popup-content">
+        <img src="./assets/images/checked.png" alt="" />
+        <h2>Login Successful!</h2>
+        <p>Please wait...</p>
+      </div>
+    </div>
+    <div id="popup-error" class="popup">
+      <div class="popup-content">
+        <img src="./assets/images/cancel.png" alt="" />
+        <h2>Login Failed</h2>
+        <p>Invalid email or password. Please try again.</p>
+        <button class="close" id="close-popup-error">OK</button>
+      </div>
+    </div>
+
+    <!-- ---------------------------- Validation Script --------------------------- -->
+    <script>
+      const username = document.getElementById("email");
+      const password = document.getElementById("password");
+      const success = document.getElementById("success");
+      const error = document.getElementById("error");
+      const div = document.getElementById("loginDiv");
+
+      document.getElementById("submit").onclick = function () {
+        let valid = email.checkValidity() && password.checkValidity();
+
+        if (!valid) {
+          error.style.display = "block";
+          error.style.animation = "shake 0.5s 1";
+          password.setAttribute("aria-invalid", "true");
+          email.setAttribute("aria-invalid", "true");
+        } else {
+          error.style.display = "none";
+          div.style.display = "none";
+          success.style.display = "block";
+        }
+      };
+
+      username.addEventListener("keyup", function (event) {
+        let userValid = email.checkValidity();
+        let passValid = password.checkValidity();
+
+        if (passValid) {
+          password.setAttribute("aria-invalid", "false");
+        }
+        if (userValid) {
+          email.setAttribute("aria-invalid", "false");
+        }
+      });
+
+      password.addEventListener("keyup", function (event) {
+        let passValid = password.checkValidity();
+        let userValid = email.checkValidity();
+
+        if (passValid) {
+          password.setAttribute("aria-invalid", "false");
+        }
+        if (userValid) {
+          email.setAttribute("aria-invalid", "false");
+        }
+      });
+    </script>
+  </body>
+</html>

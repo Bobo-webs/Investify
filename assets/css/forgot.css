@@ -1,0 +1,286 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  font-family: "Poppins";
+}
+
+html,
+body {
+  background-color: #f0f3f0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+:root {
+  --pry-color: #133917;
+  --bg-color: #fff;
+}
+
+
+/* Remove the light blue outline on mobile devices */
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* If you want to target specific elements, use the following */
+a,
+img,
+button,
+input {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure it covers most mobile browsers */
+a,
+img,
+button,
+input {
+  outline: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  /* Safari */
+  -moz-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  /* Firefox */
+  -ms-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  /* Internet Explorer/Edge */
+  tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  /* Standard */
+}
+
+
+/* ================= loading ============== */
+#progress-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: #f3f3f3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+#progress-bar {
+  width: 0;
+  height: 100%;
+  background-color: #4caf50;
+}
+
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  color: var(--pry-color);
+}
+
+.span-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px -8px #7c7c7c;
+  margin-right: 10px;
+  background: #fff;
+}
+
+.logo-img {
+  width: 1.5em;
+  height: 1em;
+}
+
+input[type="email"] {
+  display: block;
+  width: 77%;
+  margin-left: 10.5%;
+  margin-top: 6%;
+  margin-bottom: 2%;
+  min-width: 100px;
+  height: 30px;
+  padding: 4px;
+  padding-right: 4px;
+  padding-left: 4px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+  border-bottom: 2px solid #4a7d47;
+  font-size: 18px;
+  z-index: 3;
+}
+
+input[type="email"]:focus {
+  outline: none;
+}
+
+input[type="email"]:autofill {
+  background-color: var(--bg-color) !important;
+}
+
+.loginDiv {
+  position: relative;
+  margin: 0 1rem;
+  width: 100%;
+  max-width: 300px;
+  height: 280px;
+  background-color: var(--bg-color);
+  box-sizing: content-box;
+  box-shadow: 0 0 20px -8px #bcbdbc;
+  border-radius: 20px;
+}
+
+.return {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+}
+
+.return a {
+  color: var(--pry-color);
+  text-decoration: underline;
+}
+
+.login {
+  position: absolute;
+  bottom: 32px;
+  left: 30%;
+  width: 40%;
+  padding: 5px;
+  background-color: var(--pry-color);
+  color: white;
+  border: 2px solid var(--pry-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.5s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.login:hover {
+  background-color: #fff;
+  color: var(--pry-color);
+  transition: all 0.5s;
+}
+
+.login:active {
+  bottom: 32px;
+  font-size: 18px;
+  background-color: #385e35;
+  transition: all 0.1s;
+  box-shadow: 0 0 10px -7px #2d5c29;
+  color: var(--bg-color);
+}
+
+h1 {
+  text-align: center;
+  padding-top: 24px;
+  font-family: "Poppins";
+  padding-bottom: 15px;
+  color: #253e24;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+label {
+  position: relative;
+  top: -40px;
+  margin-left: 10.5%;
+  font-size: 18px;
+  z-index: 0;
+  transition: all 0.4s;
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#email:focus~label,
+#email:valid~label {
+  font-size: 14px;
+  top: -70px;
+  transition: all 0.2s;
+  color: #4a7d47;
+}
+
+.inputField {
+  height: 60px;
+}
+
+/* Your existing CSS styles */
+
+.popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.popup-content {
+  background-color: white;
+  margin: 200px auto;
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.popup-content img {
+  width: 100px;
+  height: 100px;
+}
+
+#popup-success h2,
+#sent-email h2 {
+  color: rgb(95, 158, 0);
+}
+
+.close {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  background: var(--pry-color);
+  border: 1px solid var(--pry-color);
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+@media (max-width: 480px) {
+
+  p,
+  label,
+  a,
+  button {
+    font-size: small;
+  }
+}
