@@ -12024,10 +12024,12 @@ textarea.form-control {
   .popup-content {
     padding: 2rem 40px;
   }
+
   .popup-content img {
     width: 50px;
     height: 50px;
   }
+
   .popup-content p {
     font-size: 14px;
   }
@@ -12092,4 +12094,22 @@ textarea.form-control {
     font-size: 10px;
     padding: 5px 10px;
   }
+}
+
+.brand {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.brand img {
+  width: 55px;
+  height: 40px;
+}
+
+.brand h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--pry-color);
 }
