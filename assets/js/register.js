@@ -149,13 +149,29 @@ const showError = (message) => {
 };
 
 const closePopup = () => {
-  window.location.href = "register.html";
+  const dangerPopup = document.querySelector(".danger-popup");
+  if (dangerPopup) {
+    dangerPopup.classList.add("hidden");
+  }
 };
 
 // Attach the closePopup function to the close button
 document.querySelector(".close").addEventListener("click", closePopup);
 
-// Submit event listener
+// Danger Popup functions
+const showDangerPopup = (message) => {
+  const dangerMessage = document.getElementById("danger-message");
+  dangerMessage.textContent = message;
+  const dangerPopup = document.getElementById("danger-popup");
+  dangerPopup.classList.add("show");
+
+  // Auto-hide the popup after 5 seconds
+  setTimeout(() => {
+    dangerPopup.classList.remove("show");
+  }, 10000);
+};
+
+// Modify the existing submit event listener to show the danger popup
 submit.addEventListener("click", async (event) => {
   event.preventDefault();
 
@@ -188,15 +204,19 @@ submit.addEventListener("click", async (event) => {
           })
           .catch((error) => {
             console.error("Error writing user data:", error);
-            showPopup("Error writing user data: " + error.message);
+            showError("Error writing user data.");
           });
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        showError(errorMessage);
-        setTimeout(() => {
-          window.location.href = "register.html";
-        }, 3000);
+        if (error.code === "auth/email-already-in-use") {
+          showDangerPopup("This email has already been taken.");
+        } else {
+          console.error("Error creating user:", error);
+          showDangerPopup("" + error.message);
+          setTimeout(() => {
+            window.location.href = "register.html";
+          }, 5000);
+        }
       });
   }
 });
