@@ -12091,7 +12091,7 @@ textarea.form-control {
 
 @media (max-width: 400px) {
   .danger-popup {
-    font-size: 10px;
+    font-size: 14px;
     padding: 5px 10px;
   }
 }
