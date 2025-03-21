@@ -17467,6 +17467,7 @@ input:checked+.slider-two:before {
 .pricing-header {
   color: var(--font-color);
   font-weight: 800;
+  text-transform: uppercase;
 }
 
 .pricing-features {
