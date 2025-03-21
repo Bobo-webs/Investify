@@ -17436,7 +17436,7 @@ input:checked+.slider-two:before {
 }
 
 .pricing-plan {
-  border-bottom: 1px solid #e1f1ff;
+  border-bottom: 1px solid var(--font-color);
   padding: 25px;
 }
 
@@ -17447,7 +17447,7 @@ input:checked+.slider-two:before {
 @media (min-width: 900px) {
   .pricing-plan {
     border-bottom: none;
-    border-right: 1px solid #e1f1ff;
+    border-right: 1px solid var(--font-color);
     flex-basis: 100%;
     padding: 25px 50px;
   }
@@ -17478,7 +17478,7 @@ input:checked+.slider-two:before {
 }
 
 .pricing-features-item {
-  border-top: 1px solid #e1f1ff;
+  border-top: 1px solid var(--font-color);
   font-size: 12px;
   line-height: 1.5;
   padding: 15px 0;
@@ -17489,7 +17489,7 @@ input:checked+.slider-two:before {
 }
 
 .pricing-features-item:last-child {
-  border-bottom: 1px solid #e1f1ff;
+  border-bottom: 1px solid var(--font-color);
 }
 
 .pricing-price {
