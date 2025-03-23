@@ -4,14 +4,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/fireba
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import {
   getDatabase,
   ref,
   get,
   child,
-  set
+  set,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -34,7 +34,7 @@ const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("re-fund-amount").textContent = "-"; // Display "-" until data is loaded
-  const numberElement = document.querySelectorAll('#number-element');
+  const numberElement = document.querySelectorAll("#number-element");
 
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
@@ -56,51 +56,52 @@ document.addEventListener("DOMContentLoaded", function () {
   if (numberElement) {
     const number = parseFloat(numberElement.textContent.trim());
     if (!isNaN(number)) {
-        numberElement.textContent = number.toLocaleString('en-US');
+      numberElement.textContent = number.toLocaleString("en-US");
     }
-}
+  }
 
-  const depositForm = document.getElementById('depositForm');
-  depositForm.addEventListener('submit', handleDepositSubmit);
+  const depositForm = document.getElementById("depositForm");
+  depositForm.addEventListener("submit", handleDepositSubmit);
 });
-
 
 // ============== Funding =================//
 function handleDepositSubmit(event) {
   event.preventDefault(); // Prevent form from submitting normally
 
-  const crypto = document.getElementById('crypto').value;
-  const fundAmount = document.getElementById('fund-amount').value.trim();
+  const crypto = document.getElementById("crypto").value;
+  const fundAmount = document.getElementById("fund-amount").value.trim();
   const user = auth.currentUser;
 
   if (user) {
-    const userRef = ref(database, 'users/' + user.uid + '/funding');
+    const userRef = ref(database, "users/" + user.uid + "/funding");
     set(userRef, {
-      amount: fundAmount
-    }).then(() => {
-      showPrompt('Please Wait...');
-      updateFundAmount(user.uid); // Update the displayed fund amount after saving
-    }).catch(error => {
-      console.error('Error saving deposit:', error);
-      showPrompt('Error saving deposit. Please try again.');
-    });
+      amount: fundAmount,
+    })
+      .then(() => {
+        showPrompt("Please Wait...");
+        updateFundAmount(user.uid); // Update the displayed fund amount after saving
+      })
+      .catch((error) => {
+        console.error("Error saving deposit:", error);
+        showPrompt("Error saving deposit. Please try again.");
+      });
   } else {
-    showPrompt('No user is signed in. Please sign in first.');
+    showPrompt("No user is signed in. Please sign in first.");
   }
 }
 
 function showPrompt(message) {
-  const promptContainer = document.createElement('div');
+  const promptContainer = document.createElement("div");
   promptContainer.textContent = message;
-  promptContainer.style.position = 'fixed';
-  promptContainer.style.top = '40%';
-  promptContainer.style.left = '50%';
-  promptContainer.style.transform = 'translateX(-50%)';
-  promptContainer.style.backgroundColor = '#133917';
-  promptContainer.style.color = '#fff';
-  promptContainer.style.padding = '10px 20px';
-  promptContainer.style.borderRadius = '5px';
-  promptContainer.style.zIndex = '1000';
+  promptContainer.style.position = "fixed";
+  promptContainer.style.top = "40%";
+  promptContainer.style.left = "50%";
+  promptContainer.style.transform = "translateX(-50%)";
+  promptContainer.style.backgroundColor = "#133917";
+  promptContainer.style.color = "#fff";
+  promptContainer.style.padding = "10px 20px";
+  promptContainer.style.borderRadius = "5px";
+  promptContainer.style.zIndex = "1000";
   document.body.appendChild(promptContainer);
 
   setTimeout(() => {
@@ -108,11 +109,10 @@ function showPrompt(message) {
   }, 5000);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const depositForm = document.getElementById('depositForm');
-  depositForm.addEventListener('submit', handleDepositSubmit);
+document.addEventListener("DOMContentLoaded", function () {
+  const depositForm = document.getElementById("depositForm");
+  depositForm.addEventListener("submit", handleDepositSubmit);
 });
-
 
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
@@ -123,7 +123,9 @@ function displayUserData(uid) {
         const userData = snapshot.val();
         const firstname = userData.firstname || " User ";
 
-        document.getElementById("welcomeMessage").textContent = `Welcome, ${firstname}!`;
+        document.getElementById(
+          "welcomeMessage"
+        ).textContent = `Welcome, ${firstname}!`;
         const userDataDiv = document.querySelector(".user-info");
         userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
@@ -136,7 +138,6 @@ function displayUserData(uid) {
     });
 }
 
-
 // ====================== Retrieving Fund amount data =======================//
 function updateFundAmount(uid) {
   const dbRef = ref(database);
@@ -145,11 +146,11 @@ function updateFundAmount(uid) {
       if (snapshot.exists()) {
         const depositData = snapshot.val();
         const amount = depositData.amount || "0";
-        document.querySelectorAll('#re-fund-amount').forEach(element => {
+        document.querySelectorAll("#re-fund-amount").forEach((element) => {
           element.textContent = `$${amount}`;
         });
       } else {
-        document.querySelectorAll('#re-fund-amount').forEach(element => {
+        document.querySelectorAll("#re-fund-amount").forEach((element) => {
           element.textContent = "-";
         });
       }
@@ -159,28 +160,33 @@ function updateFundAmount(uid) {
     });
 }
 
-
 // ============== Logout Fx ================ //
-logoutButton.addEventListener('click', () => {
+logoutButton.addEventListener("click", () => {
   localStorage.clear(); // Clear the storage
   confirmationPopup.classList.add("show");
+  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 });
 
-confirmYes.addEventListener('click', () => {
-  signOut(auth).then(() => {
-    showPopup("Logged out successfully!");
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 5000);
-  }).catch((error) => {
-    console.error("Error logging out:", error);
-    showPopup("Error logging out: " + error.message);
-  });
+confirmYes.addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      showPopup("Logged out successfully!");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 5000);
+    })
+    .catch((error) => {
+      console.error("Error logging out:", error);
+      showPopup("Error logging out: " + error.message);
+    });
+
   confirmationPopup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 });
 
-confirmNo.addEventListener('click', () => {
+confirmNo.addEventListener("click", () => {
   confirmationPopup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 });
 
 const showPopup = (message) => {
@@ -188,11 +194,13 @@ const showPopup = (message) => {
   const popupMessage = document.getElementById("popup-message");
   popupMessage.textContent = message;
   popup.classList.add("show");
+  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 };
 
 const closePopup = () => {
   const popup = document.getElementById("popup");
   popup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);

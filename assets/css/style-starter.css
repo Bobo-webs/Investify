@@ -17460,8 +17460,8 @@ input:checked+.slider-two:before {
 .pricing-img {
   margin-bottom: 25px;
   max-width: 100%;
-  width: 150px;
-  height: 150px;
+  width: 70px;
+  height: 70px;
 }
 
 .pricing-header {

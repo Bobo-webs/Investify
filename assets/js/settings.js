@@ -194,6 +194,7 @@ form.addEventListener("submit", async (e) => {
 logoutButton.addEventListener("click", () => {
   localStorage.clear(); // Clear the storage
   confirmationPopup.classList.add("show");
+  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 });
 
 confirmYes.addEventListener("click", () => {
@@ -208,11 +209,14 @@ confirmYes.addEventListener("click", () => {
       console.error("Error logging out:", error);
       showPopup("Error logging out: " + error.message);
     });
+
   confirmationPopup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 });
 
 confirmNo.addEventListener("click", () => {
   confirmationPopup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 });
 
 const showPopup = (message) => {
@@ -220,11 +224,13 @@ const showPopup = (message) => {
   const popupMessage = document.getElementById("popup-message");
   popupMessage.textContent = message;
   popup.classList.add("show");
+  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 };
 
 const closePopup = () => {
   const popup = document.getElementById("popup");
   popup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);

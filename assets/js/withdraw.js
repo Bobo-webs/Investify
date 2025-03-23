@@ -113,38 +113,47 @@ function displayUserData(uid) {
 }
 
 // ============== Logout Fx ================ //
-logoutButton.addEventListener('click', () => {
+logoutButton.addEventListener("click", () => {
     localStorage.clear(); // Clear the storage
     confirmationPopup.classList.add("show");
-});
-
-confirmYes.addEventListener('click', () => {
-    signOut(auth).then(() => {
+    document.getElementById("popup-overlay").classList.add("show"); // Show overlay
+  });
+  
+  confirmYes.addEventListener("click", () => {
+    signOut(auth)
+      .then(() => {
         showPopup("Logged out successfully!");
         setTimeout(() => {
-            window.location.href = "login.html";
+          window.location.href = "login.html";
         }, 5000);
-    }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("Error logging out:", error);
         showPopup("Error logging out: " + error.message);
-    });
+      });
+  
     confirmationPopup.classList.remove("show");
-});
-
-confirmNo.addEventListener('click', () => {
+    document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+  });
+  
+  confirmNo.addEventListener("click", () => {
     confirmationPopup.classList.remove("show");
-});
-
-const showPopup = (message) => {
+    document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+  });
+  
+  const showPopup = (message) => {
     const popup = document.getElementById("popup");
     const popupMessage = document.getElementById("popup-message");
     popupMessage.textContent = message;
     popup.classList.add("show");
-};
-
-const closePopup = () => {
+    document.getElementById("popup-overlay").classList.add("show"); // Show overlay
+  };
+  
+  const closePopup = () => {
     const popup = document.getElementById("popup");
     popup.classList.remove("show");
-};
-
-document.querySelector(".close").addEventListener("click", closePopup);
+    document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+  };
+  
+  document.querySelector(".close").addEventListener("click", closePopup);
+  

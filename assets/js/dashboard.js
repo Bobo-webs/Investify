@@ -4,14 +4,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/fireba
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import {
   getDatabase,
   ref,
   get,
   child,
-  onChildAdded
+  onChildAdded,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -33,7 +33,6 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
-
   onAuthStateChanged(auth, (user) => {
     const loadingScreen = document.getElementById("loading-screen");
     const dashboardContent = document.getElementById("dashboard-content");
@@ -50,8 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
 
 // ============== Display user data from Realtime Db ============== //
 function displayUserData(uid) {
@@ -73,8 +70,6 @@ function displayUserData(uid) {
             <div class="cardName">Balance</div>
           </div>
         `;
-
-
 
         const investmentsElement = document.getElementById("investments");
         investmentsElement.innerHTML = `
@@ -111,13 +106,13 @@ function displayUserData(uid) {
     });
 }
 
-
-
 // =================== Transaction Fx ======================= //
 // Function to format date
 function formatDate(timestamp) {
   const date = new Date(timestamp);
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}<br>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  return `${
+    date.getMonth() + 1
+  }/${date.getDate()}/${date.getFullYear()}<br>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 }
 
 // Function to add a new transaction to the table
@@ -129,7 +124,9 @@ function addTransactionToTable(transaction) {
       <td>${transaction.type}</td>
       <td>$${transaction.amount}</td>
       <td>${formatDate(transaction.date)}</td>
-      <td><span class="status ${transaction.status.toLowerCase()}">${transaction.status}</span></td>
+      <td><span class="status ${transaction.status.toLowerCase()}">${
+    transaction.status
+  }</span></td>
   `;
 
   tableBody.appendChild(row);
@@ -149,30 +146,33 @@ function listenForNewTransactions(userId) {
 const userId = "USER_ID"; // Replace with the actual user ID
 listenForNewTransactions(userId);
 
-
-
-
 // ============== Logout Fx ================ //
-logoutButton.addEventListener('click', () => {
+logoutButton.addEventListener("click", () => {
   localStorage.clear(); // Clear the storage
   confirmationPopup.classList.add("show");
+  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 });
 
-confirmYes.addEventListener('click', () => {
-  signOut(auth).then(() => {
-    showPopup("Logged out successfully!");
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 5000);
-  }).catch((error) => {
-    console.error("Error logging out:", error);
-    showPopup("Error logging out: " + error.message);
-  });
+confirmYes.addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      showPopup("Logged out successfully!");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 5000);
+    })
+    .catch((error) => {
+      console.error("Error logging out:", error);
+      showPopup("Error logging out: " + error.message);
+    });
+
   confirmationPopup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 });
 
-confirmNo.addEventListener('click', () => {
+confirmNo.addEventListener("click", () => {
   confirmationPopup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 });
 
 const showPopup = (message) => {
@@ -180,11 +180,13 @@ const showPopup = (message) => {
   const popupMessage = document.getElementById("popup-message");
   popupMessage.textContent = message;
   popup.classList.add("show");
+  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 };
 
 const closePopup = () => {
   const popup = document.getElementById("popup");
   popup.classList.remove("show");
+  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);
