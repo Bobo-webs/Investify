@@ -89,7 +89,6 @@ function displayUserData(uid) {
 }
 
 // ============== Logout Fx ================ //
-// ============== Logout Fx ================ //
 logoutButton.addEventListener("click", () => {
   localStorage.clear(); // Clear the storage
   confirmationPopup.classList.add("show");
@@ -133,6 +132,7 @@ const closePopup = () => {
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);
+
 // ============== Form Submission Check ============== //
 document
   .getElementById("investmentForm")
