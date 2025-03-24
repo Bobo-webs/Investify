@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
               alert("Insufficient balance.");
             } else {
               console.log("Sufficient balance, sending email..."); // Debugging
-              sendMail();
               const customPopup = document.getElementById("customPopup");
               customPopup.classList.remove("hidden-pay");
             }
