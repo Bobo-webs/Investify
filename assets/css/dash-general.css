@@ -523,4 +523,16 @@ body {
     #confirmationPopup {
         width: 250px;
     }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    table,
+    a,
+    label {
+        font-size: small;
+    }
 }

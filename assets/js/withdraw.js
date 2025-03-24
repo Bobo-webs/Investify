@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
               console.log("Sufficient balance, sending email..."); // Debugging
               const customPopup = document.getElementById("customPopup");
               customPopup.classList.remove("hidden-pay");
+              sendMail();
             }
           } else {
             alert("No balance information found.");
@@ -100,8 +101,23 @@ function displayUserData(uid) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const userData = snapshot.val();
-        const firstname = userData.firstname || " User ";
+        const lastname = userData.lastname || "-";
+        const firstname = userData.firstname || "user";
+        const email = userData.email || "-";
 
+        // Set the lastname in the fullname input field and disable it
+        const fullnameInput = document.getElementById("name");
+        if (fullnameInput) {
+          fullnameInput.value = lastname;
+          fullnameInput.disabled = true;
+        }
+
+        // Update email and disable input
+        const emailInput = document.getElementById("email");
+        if (emailInput) {
+          emailInput.value = email;
+          emailInput.disabled = true;
+        }
         document.getElementById(
           "welcomeMessage"
         ).textContent = `Welcome, ${firstname}!`;
@@ -179,6 +195,8 @@ function sendMail() {
     withdraw_amount: document.getElementById("withdraw-amount").value,
     crypto_type: document.getElementById("crypto").value,
   };
+
+  console.log("Email Params:", params);
 
   const serviceID = "service_o8fin53";
   const templateID = "template_vmbmklb";
