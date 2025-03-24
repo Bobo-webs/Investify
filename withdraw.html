@@ -121,7 +121,7 @@
           </div>
         </div>
 
-        <!-- ================= Fund Wallet Section =============== -->
+        <!-- ================= Withdrawal Section =============== -->
         <p class="withdrawal-description">
           Choose the cryptocurrency option suitable for you, insert your
           withdrawal wallet's address, enter amount to be withdrawn, wait for a
@@ -138,9 +138,25 @@
               <option value="ethereum">Ethereum (ETH)</option>
               <option value="tether">Tether (USDT)</option>
             </select>
-
-            <label for="address">Wallet Address:</label>
-            <input type="text" id="wallet-address" name="address" required />
+            <input
+              type="text"
+              id="name"
+              placeholder="Your name"
+              style="display: none"
+            />
+            <input
+              type="email"
+              id="email"
+              placeholder="Your email"
+              style="display: none"
+            />
+            <label for="wallet-address">Wallet Address:</label>
+            <input
+              type="text"
+              id="wallet-address"
+              name="wallet-address"
+              required
+            />
 
             <label for="amount" id="number-element">Amount($):</label>
             <input
@@ -156,7 +172,7 @@
         </div>
       </div>
 
-      <!-- ========================== Popups ====================== -->
+      <!-- ========================== Logout Popup ====================== -->
       <div id="popup-overlay"></div>
       <div id="confirmationPopup" class="popup">
         <div class="popup-content">
@@ -169,9 +185,35 @@
           </div>
         </div>
       </div>
+
+      <!-- ========================== # Popup ====================== -->
       <div id="popup" class="popup">
         <span id="popup-message"></span>
         <span class="close-popup">&times;</span>
+      </div>
+    </div>
+
+    <!-- =================== Withdrawal Popup ====================== -->
+    <div class="popup-full hidden-pay" id="customPopup">
+      <div class="popup-fund">
+        <div class="popup-content">
+          <img src="./assets/images/refresh.png" alt="" />
+          <h2>Withdrawal Processing...</h2>
+          <p>
+            Your Funds are on the way! <br />
+            Kindly wait while your transaction is processing(within 1 hour).
+          </p>
+          <p>
+            NOTE: <br />
+            If your funds don't reflect in 2 hours time contact us using our
+            service center form by clicking the contact link below : <br />
+            <a href="contact.html#contact" style="color: #fff"> CONTACT </a>
+          </p>
+          <button id="popupOkButton">
+            <a href="javascript:location.reload()" style="color: #000"> OK </a>
+            <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
       </div>
     </div>
 
