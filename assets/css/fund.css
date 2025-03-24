@@ -142,3 +142,117 @@
 .flex {
   display: flex;
 }
+
+/* -------- Deposit Popup -------------- */
+.popup-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(5px);
+  color: var(--pry-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200000;
+}
+
+.popup-fund {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px;
+  height: 300px;
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.popup-fund img {
+  width: 50px;
+  height: 50px;
+}
+
+.popup-content {
+  text-align: center;
+  color: var(--pry-color) !important;
+}
+
+.popup-content h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.popup-content p a {
+  color: var(--pry-color) !important;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 8px 15px;
+  background-color: #33e633;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.hidden-pay {
+  display: none;
+}
+
+
+/* Confirm payment */
+.btn-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn-div button {
+  padding: 8px;
+  border-radius: 5px;
+  border: 0;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-div button a {
+  color: var(--white) !important;
+}
+
+.btn-div button a:hover {
+  color: var(--white) !important;
+  transition: 1s;
+}
+
+.btn-cancel {
+  background-color: #e2091f;
+}
+
+.btn-cancel:hover {
+  background-color: #b31323;
+}
+
+.btn-success {
+  background-color: #00a300;
+  color: var(--white);
+}
+
+.btn-success:hover {
+  background-color: #156415;
+  color: var(--white);
+  transition: 1s;
+}

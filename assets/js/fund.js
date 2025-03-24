@@ -160,6 +160,23 @@ function updateFundAmount(uid) {
     });
 }
 
+// Show the custom popup when the "Confirm Payment" button is clicked
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("confirmPaymentButton")) {
+    const customPopup = document.getElementById("customPopup");
+    customPopup.classList.remove("hidden-pay");
+  }
+});
+
+// When the user clicks "OK" in the custom popup, show the browser alert and close the custom popup
+document.getElementById("popupOkButton").addEventListener("click", function () {
+  alert("Verifying your deposit... Account will be credited upon confirmation");
+
+  window.location.href = "fund.html";
+  const customPopup = document.getElementById("customPopup");
+  customPopup.classList.add("hidden-pay");
+});
+
 // ============== Logout Fx ================ //
 logoutButton.addEventListener("click", () => {
   localStorage.clear(); // Clear the storage

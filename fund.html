@@ -124,8 +124,7 @@
         <!-- ================= Fund Wallet Section =============== -->
         <p class="deposit-description">
           Choose the cryptocurrency option suitable for you, make your deposit
-          and send proof of payment with details to:
-          info.investify.traders@gmail.com
+          and click the confirm payment button to proceed.
         </p>
         <div class="deposit-container" id="fund">
           <h2>📥FUND WALLET</h2>
@@ -163,6 +162,14 @@
             <button id="copy-button">Copy</button>
             <span id="copy-prompt" class="hidden">Copied!</span>
           </div>
+          <div class="btn-div">
+            <button class="btn-cancel">
+              <a href="javascript:location.reload()">Cancel</a>
+            </button>
+            <button class="btn-success confirmPaymentButton">
+              Confirm Payment
+            </button>
+          </div>
         </div>
 
         <div class="crypto-display" id="ethereum">
@@ -178,10 +185,18 @@
             <button id="copy-button">Copy</button>
             <span id="copy-prompt" class="hidden">Copied!</span>
           </div>
+          <div class="btn-div">
+            <button class="btn-cancel">
+              <a href="javascript:location.reload()">Cancel</a>
+            </button>
+            <button class="btn-success confirmPaymentButton">
+              Confirm Payment
+            </button>
+          </div>
         </div>
 
         <div class="crypto-display" id="tether">
-          <h2>💲USDT ADDRESS</h2>
+          <h2>USDT ADDRESS</h2>
           <img src="./assets/images/usdt.jpeg" alt="" />
           <h3 id="re-fund-amount">-</h3>
           <p class="fund-description">
@@ -192,6 +207,14 @@
             <p id="text-to-copy">TWEJVp4NLmZLdqfPZ8MLNg8t1i4QmHDMJv</p>
             <button id="copy-button">Copy</button>
             <span id="copy-prompt" class="hidden">Copied!</span>
+          </div>
+          <div class="btn-div">
+            <button class="btn-cancel">
+              <a href="javascript:location.reload()">Cancel</a>
+            </button>
+            <button class="btn-success confirmPaymentButton">
+              Confirm Payment
+            </button>
           </div>
         </div>
       </div>
@@ -209,10 +232,33 @@
           </div>
         </div>
       </div>
-      
+
       <div id="popup" class="popup">
         <span id="popup-message"></span>
         <span class="close-popup">&times;</span>
+      </div>
+    </div>
+
+    <!-- Custom funding Popup -->
+    <div class="popup-full hidden-pay" id="customPopup">
+      <div class="popup-fund">
+        <div class="popup-content">
+          <img src="./assets/images/refresh.png" alt="" />
+          <h2>Payment Confirmation</h2>
+          <p>
+            Please send your payment evidence to:
+            <br>
+            <a
+              href="mailto:info.investify.traders@gmail.com"
+              style="color: #fff"
+              >info.investify.traders@gmail.com</a
+            >
+          </p>
+          <button id="popupOkButton">
+            DONE
+            <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
       </div>
     </div>
 
