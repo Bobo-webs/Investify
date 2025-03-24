@@ -24,6 +24,13 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
     <script type="module" src="./assets/js/withdraw.js"></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "7i6JfilgULhjmZa6l",
+        });
+      })();
+    </script>
   </head>
 
   <body>
@@ -167,7 +174,7 @@
               required
             />
 
-            <button type="submit">Withdraw</button>
+            <button type="submit" onclick="sendMail()">Withdraw</button>
           </form>
         </div>
       </div>

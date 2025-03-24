@@ -1,5 +1,3 @@
-// Initialize Firebase (make sure this is done before using Firebase)
-// Replace the config object with your Firebase project's config
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
@@ -33,7 +31,7 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("re-fund-amount").textContent = "-"; // Display "-" until data is loaded
+  document.getElementById("re-fund-amount").textContent = "-";
   const numberElement = document.querySelectorAll("#number-element");
 
   onAuthStateChanged(auth, (user) => {
@@ -66,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ============== Funding =================//
 function handleDepositSubmit(event) {
-  event.preventDefault(); // Prevent form from submitting normally
+  event.preventDefault();
 
   const crypto = document.getElementById("crypto").value;
   const fundAmount = document.getElementById("fund-amount").value.trim();
@@ -79,7 +77,7 @@ function handleDepositSubmit(event) {
     })
       .then(() => {
         showPrompt("Please Wait...");
-        updateFundAmount(user.uid); // Update the displayed fund amount after saving
+        updateFundAmount(user.uid);
       })
       .catch((error) => {
         console.error("Error saving deposit:", error);
@@ -121,7 +119,23 @@ function displayUserData(uid) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const userData = snapshot.val();
-        const firstname = userData.firstname || " User ";
+        const lastname = userData.lastname || "-";
+        const firstname = userData.firstname || "user";
+        const email = userData.email || "-";
+
+        // Set the lastname in the fullname input field and disable it
+        const fullnameInput = document.getElementById("name");
+        if (fullnameInput) {
+          fullnameInput.value = lastname;
+          fullnameInput.disabled = true;
+        }
+
+        // Update email and disable input
+        const emailInput = document.getElementById("email");
+        if (emailInput) {
+          emailInput.value = email;
+          emailInput.disabled = true;
+        }
 
         document.getElementById(
           "welcomeMessage"
@@ -130,8 +144,10 @@ function displayUserData(uid) {
         userDataDiv.innerHTML = `
           <h3>👋Hello, ${firstname}!</h3>
         `;
-        updateFundAmount(uid); // Update the displayed fund amount when user data is displayed
+        updateFundAmount(uid);
       }
+
+      sendMail();
     })
     .catch((error) => {
       console.error("Error retrieving user data: ", error);
@@ -160,7 +176,7 @@ function updateFundAmount(uid) {
     });
 }
 
-// Show the custom popup when the "Confirm Payment" button is clicked
+// ---------- Deposit popup --------- //
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("confirmPaymentButton")) {
     const customPopup = document.getElementById("customPopup");
@@ -168,7 +184,7 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// When the user clicks "OK" in the custom popup, show the browser alert and close the custom popup
+// ---------- Deposit browser alert popup --------- //
 document.getElementById("popupOkButton").addEventListener("click", function () {
   alert("Verifying your deposit... Account will be credited upon confirmation");
 
@@ -198,12 +214,12 @@ confirmYes.addEventListener("click", () => {
     });
 
   confirmationPopup.classList.remove("show");
-  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+  document.getElementById("popup-overlay").classList.remove("show");
 });
 
 confirmNo.addEventListener("click", () => {
   confirmationPopup.classList.remove("show");
-  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+  document.getElementById("popup-overlay").classList.remove("show");
 });
 
 const showPopup = (message) => {
@@ -211,13 +227,41 @@ const showPopup = (message) => {
   const popupMessage = document.getElementById("popup-message");
   popupMessage.textContent = message;
   popup.classList.add("show");
-  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
+  document.getElementById("popup-overlay").classList.add("show");
 };
 
 const closePopup = () => {
   const popup = document.getElementById("popup");
   popup.classList.remove("show");
-  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+  document.getElementById("popup-overlay").classList.remove("show");
 };
 
 document.querySelector(".close").addEventListener("click", closePopup);
+
+// ============== Send Email Function ============== //
+function sendMail() {
+  document
+    .getElementById("depositForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var params = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        fund_amount: document.getElementById("fund-amount").value,
+        crypto_type: document.getElementById("crypto").value,
+      };
+
+      console.log(params);
+
+      const serviceID = "service_o8fin53";
+      const templateID = "template_plo6qzw";
+
+      emailjs
+        .send(serviceID, templateID, params)
+        .then((res) => {
+          console.log("Email sent successfully", res);
+        })
+        .catch((err) => console.log("Error sending email:", err));
+    });
+}

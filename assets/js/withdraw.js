@@ -1,5 +1,3 @@
-// Initialize Firebase (make sure this is done before using Firebase)
-// Replace the config object with your Firebase project's config
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
@@ -71,6 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (withdrawAmount > balance) {
               alert("Insufficient balance.");
             } else {
+              console.log("Sufficient balance, sending email..."); // Debugging
+              sendMail();
               const customPopup = document.getElementById("customPopup");
               customPopup.classList.remove("hidden-pay");
             }
@@ -171,10 +171,23 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// ---------- Withdrawal browser alert --------- //
-document.getElementById("popupOkButton").addEventListener("click", function () {
-  alert("Verifying your deposit... Account will be credited upon confirmation");
-  window.location.href = "withdraw.html";
-  const customPopup = document.getElementById("customPopup");
-  customPopup.classList.add("hidden-pay");
-});
+// ============== Send Email Function ============== //
+function sendMail() {
+  var params = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    wallet_address: document.getElementById("wallet-address").value,
+    withdraw_amount: document.getElementById("withdraw-amount").value,
+    crypto_type: document.getElementById("crypto").value,
+  };
+
+  const serviceID = "service_o8fin53";
+  const templateID = "template_vmbmklb";
+
+  emailjs
+    .send(serviceID, templateID, params)
+    .then((res) => {
+      console.log("Email sent successfully", res);
+    })
+    .catch((err) => console.log("Error sending email:", err));
+}
