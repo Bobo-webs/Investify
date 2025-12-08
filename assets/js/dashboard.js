@@ -1,192 +1,205 @@
-// Initialize Firebase (make sure this is done before using Firebase)
-// Replace the config object with your Firebase project's config
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+// DASHBOARD.JS
+import { auth, db } from "/assets/js/firebase-init.js";
+
 import {
-  getAuth,
-  onAuthStateChanged,
-  signOut,
-} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-import {
-  getDatabase,
-  ref,
-  get,
-  child,
-  onChildAdded,
+    ref as dbRef,
+    get,
+    update,
+    onValue
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
-  authDomain: "login-example-c7c78.firebaseapp.com",
-  projectId: "login-example-c7c78",
-  storageBucket: "login-example-c7c78.appspot.com",
-  messagingSenderId: "298272317823",
-  appId: "1:298272317823:web:07b88844cd084699197a4a",
-  databaseURL: "https://login-example-c7c78-default-rtdb.firebaseio.com",
-};
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const database = getDatabase(app);
-const logoutButton = document.getElementById("logoutButton");
+
+// -------------------------------------
+// DOM ELEMENTS
+// -------------------------------------
+const logoutButtons = document.querySelectorAll(".logoutBtn");
 const confirmYes = document.getElementById("confirmYes");
 const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
+const loadingScreen = document.getElementById("loading-overlay");
 
-document.addEventListener("DOMContentLoaded", function () {
-  onAuthStateChanged(auth, (user) => {
-    const loadingScreen = document.getElementById("loading-screen");
-    const dashboardContent = document.getElementById("dashboard-content");
+// popup overlay might be named differently across pages; try both IDs
+const popupOverlay = document.getElementById("popupOverlay") || document.getElementById("popup-overlay");
 
-    if (user) {
-      loadingScreen.style.display = "none";
-      dashboardContent.style.display = "block";
+// -------------------------------------
+// LOADING HELPERS
+// -------------------------------------
+function showLoading() {
+    if (loadingScreen) loadingScreen.style.display = "flex";
+}
 
-      const userId = user.uid;
-      displayUserData(userId);
-      listenForNewTransactions(userId); // Listen for new transactions
-    } else {
-      window.location.href = "login.html";
+function hideLoading() {
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.style.display = "none";
+        }, 300);
     }
-  });
-});
+}
 
-// ============== Display user data from Realtime Db ============== //
-function displayUserData(uid) {
-  const dbRef = ref(database);
-  get(child(dbRef, `users/${uid}`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        const userData = snapshot.val();
-        const firstname = userData.firstname || " User ";
-        const balance = userData.balance || " 0 ";
-        const investments = userData.investments || " 0 ";
-        const deposits = userData.deposits || " 0 ";
-        const referrals = userData.referrals || " 0 ";
+// -------------------------------------
+// AUTH CHECK
+// -------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    showLoading();
 
-        const balanceElement = document.getElementById("balance");
-        balanceElement.innerHTML = `
-          <div id="balance">
-            <div class="numbers">$${balance}.00</div>
-            <div class="cardName">Balance</div>
-          </div>
-        `;
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
 
-        const investmentsElement = document.getElementById("investments");
-        investmentsElement.innerHTML = `
-        <div id="investments">
-            <div class="numbers">$${investments}.00</div>
-            <div class="cardName">Investments</div>
-          </div>
-        `;
+            // 🔥 IMPORTANT — Refresh auth user info first
+            await user.reload();
 
-        const depositsElement = document.getElementById("deposits");
-        depositsElement.innerHTML = `
-          <div id="balance">
-            <div class="numbers">$${deposits}.00</div>
-            <div class="cardName">Deposits</div>
-          </div>
-        `;
+            // 🔥 AUTHENTICATED FIREBASE EMAIL (after verification)
+            const authEmail = user.email;
 
-        const referralsElement = document.getElementById("referrals");
-        referralsElement.innerHTML = `
-          <div id="balance">
-            <div class="numbers">${referrals}</div>
-            <div class="cardName">Referrals</div>
-          </div>
-        `;
+            // 🔥 SYNC EMAIL WITH DATABASE IF DIFFERENT
+            const userRef = dbRef(db, `users/${user.uid}/email`);
 
-        const userDataDiv = document.querySelector(".user-info");
-        userDataDiv.innerHTML = `
-          <h3>👋Hello, ${firstname}!</h3>
-        `;
-      }
-    })
-    .catch((error) => {
-      console.error("Error retrieving user data: ", error);
+            onValue(userRef, async (snapshot) => {
+                const dbEmail = snapshot.val();
+
+                if (dbEmail !== authEmail) {
+                    // Update DB only AFTER verification
+                    await update(dbRef(db, `users/${user.uid}`), {
+                        email: authEmail
+                    });
+
+                    console.log(
+                        "%cEmail synced with database after verification: " + authEmail,
+                        "color:#22c55e;font-weight:bold;"
+                    );
+                }
+            });
+
+            // Load user data afterward
+            displayUserData(user.uid).finally(() => {
+                hideLoading();
+            });
+
+        } else {
+            // Not logged in — redirect to login page
+            window.location.href = "login.html";
+        }
     });
-}
-
-// =================== Transaction Fx ======================= //
-// Function to format date
-function formatDate(timestamp) {
-  const date = new Date(timestamp);
-  return `${
-    date.getMonth() + 1
-  }/${date.getDate()}/${date.getFullYear()}<br>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-}
-
-// Function to add a new transaction to the table
-function addTransactionToTable(transaction) {
-  const tableBody = document.querySelector("table tbody");
-  const row = document.createElement("tr");
-
-  row.innerHTML = `
-      <td>${transaction.type}</td>
-      <td>$${transaction.amount}</td>
-      <td>${formatDate(transaction.date)}</td>
-      <td><span class="status ${transaction.status.toLowerCase()}">${
-    transaction.status
-  }</span></td>
-  `;
-
-  tableBody.appendChild(row);
-}
-
-// Function to listen for new transactions
-function listenForNewTransactions(userId) {
-  const transactionsRef = ref(database, `users/${userId}/transactions`);
-
-  onChildAdded(transactionsRef, (snapshot) => {
-    const newTransaction = snapshot.val();
-    addTransactionToTable(newTransaction);
-  });
-}
-
-// Example usage: Replace 'userId' with the actual user ID
-const userId = "USER_ID"; // Replace with the actual user ID
-listenForNewTransactions(userId);
-
-// ============== Logout Fx ================ //
-logoutButton.addEventListener("click", () => {
-  localStorage.clear(); // Clear the storage
-  confirmationPopup.classList.add("show");
-  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
 });
 
-confirmYes.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => {
-      showPopup("Logged out successfully!");
-      setTimeout(() => {
-        window.location.href = "login.html";
-      }, 5000);
-    })
-    .catch((error) => {
-      console.error("Error logging out:", error);
-      showPopup("Error logging out: " + error.message);
-    });
 
-  confirmationPopup.classList.remove("show");
-  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+// -------------------------------------
+// DISPLAY USER DATA — SAFE, MODULAR, NEVER BREAKS
+// -------------------------------------
+async function displayUserData(uid) {
+    try {
+        const snapshot = await get(dbRef(db, `users/${uid}`));
+        if (!snapshot.exists()) {
+            console.warn("No user data found for UID:", uid);
+            return;
+        }
+
+        const data = snapshot.val();
+
+        // Extract values safely
+        const firstname = (data.firstname || "User").toString().trim();
+        const balance = Number(data.balance || 0);
+        const deposits = Number(data.deposits || 0);
+        const withdrawals = Number(data.withdrawals || 0);
+
+        // Helper to format currency
+        const fmt = (num) => `$${num.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })}`;
+
+        // === UPDATE ONLY IF ELEMENT EXISTS ON CURRENT PAGE ===
+        const heroTitle = document.getElementById("userTitle");
+        if (heroTitle) heroTitle.innerHTML = `Hello, ${firstname}`;
+
+        const profileUsername = document.querySelector(".profile-trigger .username");
+        if (profileUsername) profileUsername.textContent = firstname;
+
+        const availableBalance = document.querySelector(".tx-available span");
+        if (availableBalance) availableBalance.textContent = fmt(balance);
+
+        // TOTAL BALANCE (visible version)
+        const totalBalance = document.getElementById("totalBalance");
+        if (totalBalance) totalBalance.textContent = fmt(balance);
+
+        // TOTAL DEPOSITS
+        const totalDeposits = document.getElementById("totalDeposits");
+        if (totalDeposits) totalDeposits.textContent = fmt(deposits);
+
+        // TOTAL WITHDRAWALS
+        const totalWithdrawals = document.getElementById("totalWithdrawals");
+        if (totalWithdrawals) totalWithdrawals.textContent = fmt(withdrawals);
+
+        console.log("User data displayed successfully");
+
+    } catch (error) {
+        console.error("Failed to load user data:", error);
+    }
+}
+
+
+
+// -------------------------------------
+// POPUP CONTROL
+// -------------------------------------
+
+function showPopup() {
+    confirmationPopup?.classList.add("show");
+    popupOverlay?.classList.add("show");
+}
+
+function hidePopup() {
+    confirmationPopup?.classList.remove("show");
+    popupOverlay?.classList.remove("show");
+}
+
+logoutButtons.forEach(btn => {
+    btn.addEventListener("click", showPopup);
 });
 
-confirmNo.addEventListener("click", () => {
-  confirmationPopup.classList.remove("show");
-  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
+// YES → Logout user
+confirmYes?.addEventListener("click", () => {
+    signOut(auth)
+        .then(() => {
+            hidePopup();
+            window.location.href = "login.html"; // redirect
+        })
+        .catch((err) => {
+            console.error("Error signing out:", err);
+            hidePopup();
+        });
 });
 
-const showPopup = (message) => {
-  const popup = document.getElementById("popup");
-  const popupMessage = document.getElementById("popup-message");
-  popupMessage.textContent = message;
-  popup.classList.add("show");
-  document.getElementById("popup-overlay").classList.add("show"); // Show overlay
-};
+// NO → Close popup
+confirmNo?.addEventListener("click", hidePopup);
 
-const closePopup = () => {
-  const popup = document.getElementById("popup");
-  popup.classList.remove("show");
-  document.getElementById("popup-overlay").classList.remove("show"); // Hide overlay
-};
+popupOverlay?.addEventListener("click", hidePopup);
 
-document.querySelector(".close").addEventListener("click", closePopup);
+
+
+// -------------------------------------
+// THEME TOGGLER
+// -------------------------------------
+/*
+const themeToggle = document.querySelector('.theme-toggle');
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            document.documentElement.classList.toggle('dark');
+
+            // Save preference
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+*/

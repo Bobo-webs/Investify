@@ -1,113 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forgot Password</title>
-    <link rel="icon" href="./assets/images/logo-icon.jpg" />
-    <link rel="stylesheet" href="./assets/css/forgot.css" />
-  </head>
 
-  <body>
-    <!-- ================= Loading ================== -->
-    <div id="progress-bar-container">
-      <div id="progress-bar"></div>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta property="og:title" content="Investify Traders" />
+  <meta property="og:description"
+    content="We help you achieve financial success across global markets, delivering real-time data and seamless trading for assets ranging from stocks and forex to crypto, indices, and CFDs." />
+  <meta property="og:image" content="https://investifytraders.net/assets/images/logo-icon.jpg" />
+  <meta property="og:url" content="https://investifytraders.net" />
+  <title>Forgot Password - Investify</title>
+
+  <!-- ===== Styling ===== -->
+  <link rel="icon" href="./assets/images/logo-icon.jpg" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/forgot.css" />
+
+  <!-- ===== Script ===== -->
+  <script src="/assets/js/network-state.js"></script>
+  <script src="/assets/js/toast.js"></script>
+  <script type="module" src="./assets/js/forgot.js"></script>
+
+</head>
+
+<body>
+
+  <form class="loginDiv" id="loginDiv">
+    <a href="index.html" class="logo-wrapper">
+      <span class="span-logo">
+        <img class="logo-img" src="./assets/images/logo.png" loading="lazy" alt="Investify" />
+      </span>
+      <h2>Investify</h2>
+    </a>
+    <div class="inputField">
+      <input type="email" id="email" />
+      <label>Email</label>
     </div>
+    <p class="return"><a href="login.html">Go back to login</a></p>
+    <button id="submit" class="login">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </form>
 
-    <form class="loginDiv" id="loginDiv">
-      <a href="index.html" class="logo-wrapper">
-        <span class="span-logo">
-          <img
-            class="logo-img"
-            src="./assets/images/logo.png"
-            loading="lazy"
-            alt="Investify"
-          />
-        </span>
-        <h2>Investify</h2>
-      </a>
-      <div class="inputField">
-        <input type="email" id="email" required />
-        <label>Email</label>
-      </div>
-      <p class="return"><a href="login.html">Go back to login</a></p>
-      <button id="submit" class="login">Reset</button>
-    </form>
+</body>
 
-    <!-- ------------------------------- Error and Success Popup -------------------------- -->
-    <div id="popup-success" class="popup">
-      <div class="popup-content">
-        <img src="./assets/images/checked.png" alt="" />
-        <h2>Login Successful!</h2>
-        <p>Please wait...</p>
-      </div>
-    </div>
-    <div id="popup-error" class="popup">
-      <div class="popup-content">
-        <img src="./assets/images/cancel.png" alt="" />
-        <h2>Login Failed</h2>
-        <p>Invalid email or password. Please try again.</p>
-        <button class="close" id="close-popup-error">OK</button>
-      </div>
-    </div>
-    <div id="sent-email" class="popup">
-      <div class="popup-content">
-        <h2>Email Sent✅</h2>
-        <p>Check your email for password reset link</p>
-        <button class="close" id="close-sent">OK</button>
-      </div>
-    </div>
-
-    <!-- ---------------------------- Validation Script --------------------------- -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-      import {
-        getAuth,
-        sendPasswordResetEmail,
-      } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
-        authDomain: "login-example-c7c78.firebaseapp.com",
-        projectId: "login-example-c7c78",
-        storageBucket: "login-example-c7c78.appspot.com",
-        messagingSenderId: "298272317823",
-        appId: "1:298272317823:web:07b88844cd084699197a4a",
-        databaseURL: "https://login-example-c7c78-default-rtdb.firebaseio.com",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-
-      // Add event listener to the form
-      document
-        .getElementById("loginDiv")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const email = document.getElementById("email").value.trim();
-
-          if (!email) {
-            alert("Please enter a valid email address.");
-            return;
-          }
-
-          sendPasswordResetEmail(auth, email)
-            .then(() => {
-              document.getElementById("sent-email").style.display = "flex";
-            })
-            .catch((error) => {
-              const errorMessage = error.message;
-              alert(`Error: ${errorMessage}`);
-            });
-        });
-
-      document
-        .getElementById("close-sent")
-        .addEventListener("click", function () {
-          document.getElementById("sent-email").style.display = "none";
-        });
-    </script>
-  </body>
 </html>

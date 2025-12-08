@@ -75,7 +75,7 @@ input {
 }
 
 html {
-  font-family: sans-serif;
+  font-family: "Poppins";
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -96,9 +96,7 @@ section {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Poppins";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -170,8 +168,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  font-family: "Poppins";
   font-size: 1em;
 }
 
@@ -231,7 +228,7 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-family: inherit;
+  font-family: "Poppins";
   font-size: inherit;
   line-height: inherit;
 }
@@ -6884,9 +6881,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -7011,9 +7006,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -11408,8 +11401,7 @@ button.bg-dark:focus {
 }
 
 .text-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace !important;
+  font-family: "Poppins" !important;
 }
 
 .text-justify {
@@ -11757,7 +11749,7 @@ a.text-dark:focus {
 }
 
 body {
-  font-family: "Lato", Arial, sans-serif;
+  font-family: "Poppins";
   font-size: 16px;
   line-height: 1;
   font-weight: normal;
@@ -11792,7 +11784,7 @@ h5,
 .h5 {
   line-height: 1.5;
   font-weight: 400;
-  font-family: "Lato", Arial, sans-serif;
+  font-family: "Poppins";
   color: #000;
 }
 
@@ -11826,7 +11818,7 @@ h5,
 .login-wrap {
   position: relative;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 20px;
   -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
   -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
   box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
@@ -11993,18 +11985,20 @@ textarea.form-control {
 .popup-content {
   background-color: #fff;
   display: flex;
-  height: 200px;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border-radius: 20px;
-  padding: 2rem 50px;
-  height: 250px;
-  width: 80%;
-  max-width: 500px;
+  padding: 1rem 50px;
+  max-width: 340px;
   text-align: center;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(0px);
+}
+
+@media (max-width: 480px) {
+  .popup-content {
+    width: 80%;
+  }
+
 }
 
 .popup-content img {
@@ -12012,12 +12006,16 @@ textarea.form-control {
   height: 70px;
 }
 
-.popup-content p {
-  color: #133917;
+.popup-content p:nth-child(1) {
+  color: rgb(20, 132, 46);
   font-weight: bold;
   font-size: 18px;
   margin: 0;
   margin-top: 1rem;
+}
+
+.popup-content p:nth-child(3) {
+  line-height: 18px;
 }
 
 @media (max-width: 481px) {
@@ -12063,39 +12061,6 @@ textarea.form-control {
   background-color: transparent;
 }
 
-/* ------------- Danger popup ------------- */
-.danger-popup {
-  width: 100%;
-  max-width: 100%;
-  padding: 0px 20px;
-  background-color: #ff6776;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  display: none;
-  align-items: center;
-  justify-content: flex-start;
-  z-index: 1000;
-  border-radius: 10px;
-  border: 1px solid #dc3545;
-  margin: 0 auto 2rem auto;
-}
-
-#danger-message {
-  margin-left: 1rem;
-}
-
-.danger-popup.show {
-  display: flex;
-}
-
-@media (max-width: 400px) {
-  .danger-popup {
-    font-size: 14px;
-    padding: 5px 10px;
-  }
-}
-
 .brand {
   display: flex;
   flex-direction: row;
@@ -12112,4 +12077,53 @@ textarea.form-control {
   font-size: 1.7rem;
   font-weight: 700;
   color: var(--pry-color);
+}
+
+/* --------------------------- Loading Overlay -------------------------- */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease;
+}
+
+#loading-overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--pry-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-overlay p {
+  color: #fff;
+  font-size: 16px;
+  margin-top: 1rem;
 }

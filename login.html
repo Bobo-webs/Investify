@@ -1,117 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
-    <link rel="icon" href="./assets/images/logo-icon.jpg" />
-    <link rel="stylesheet" href="./assets/css/login.css" />
-    <script type="module" src="./assets/js/login.js" defer></script>
-  </head>
 
-  <body>
-    <!-- ================= Loading ================== -->
-    <div id="progress-bar-container">
-      <div id="progress-bar"></div>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta property="og:title" content="Investify Traders" />
+  <meta property="og:description"
+    content="We help you achieve financial success across global markets, delivering real-time data and seamless trading for assets ranging from stocks and forex to crypto, indices, and CFDs." />
+  <meta property="og:image" content="https://investifytraders.net/assets/images/logo-icon.jpg" />
+  <meta property="og:url" content="https://investifytraders.net" />
+  <title>Sign In - Investify</title>
+
+  <!-- Styling -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="./assets/images/logo-icon.jpg" />
+  <link rel="stylesheet" href="./assets/css/login.css" />
+
+  <!-- Script -->
+  <script src="/assets/js/network-state.js"></script>
+  <script src="/assets/js/toast.js"></script>
+  <script type="module" src="/assets/js/firebase-init.js"></script>
+  <script type="module" src="./assets/js/login.js" defer></script>
+</head>
+
+<body>
+  <form class="loginDiv" id="loginDiv">
+    <a href="index.html" class="logo-wrapper">
+      <span class="span-logo">
+        <img class="logo-img" src="./assets/images/logo.png" loading="lazy" alt="Investify" />
+      </span>
+      <h2>Investify</h2>
+    </a>
+    <div class="inputField">
+      <input type="email" id="email" required aria-invalid="false" />
+      <label>Email</label>
     </div>
+    <div class="inputField">
+      <input type="password" id="password" required aria-invalid="false" />
+      <label>Password</label>
+    </div>
+    <div class="error" aria-errormessage="Invalid email or password." id="error">
+      <p>You have entered an invalid email or password.</p>
+    </div>
+    <p class="reset-already"><a href="forgot.html">Forgot Password?</a></p>
+    <p class="reset-already-two">
+      Don't have an account? <a href="register.html">Register</a>
+    </p>
+    <button type="submit" id="submit" class="login">
+      <span class="fa fa-paper-plane"></span>
+    </button>
+  </form>
 
-    <form class="loginDiv" id="loginDiv">
-      <a href="index.html" class="logo-wrapper">
-        <span class="span-logo">
-          <img
-            class="logo-img"
-            src="./assets/images/logo.png"
-            loading="lazy"
-            alt="Investify"
-          />
-        </span>
-        <h2>Investify</h2>
-      </a>
-      <div class="inputField">
-        <input type="email" id="email" required aria-invalid="false" />
-        <label>Email</label>
-      </div>
-      <div class="inputField">
-        <input type="password" id="password" required aria-invalid="false" />
-        <label>Password</label>
-      </div>
-      <div
-        class="error"
-        aria-errormessage="Invalid email or password."
-        id="error"
-      >
-        <p>You have entered an invalid email or password.</p>
-      </div>
-      <p class="reset-already"><a href="forgot.html">Forgot Password?</a></p>
-      <p class="reset-already-two">
-        Don't have an account? <a href="register.html">Register</a>
-      </p>
-      <button id="submit" class="login">Login</button>
-    </form>
-
-    <!-- ------------------------------- Error and Success Popup -------------------------- -->
-    <div id="popup-success" class="popup">
-      <div class="popup-content">
-        <img src="./assets/images/checked.png" alt="" />
-        <h2>Login Successful!</h2>
-        <p>Please wait...</p>
+  <!-- ------------------------------- Error and Success Popup -------------------------- -->
+  <div id="popup-success" class="popup">
+    <div class="popup-content">
+      <img src="./assets/images/checked.jpg" alt="login-success" />
+      <div>
+        <p id="popup-message"></p>
+        <p>Success!</p>
+        <p>Redirecting to your dashboard <br> please wait...</p>
       </div>
     </div>
-    <div id="popup-error" class="popup">
-      <div class="popup-content">
-        <img src="./assets/images/cancel.png" alt="" />
-        <h2>Login Failed</h2>
-        <p>Invalid email or password. Please try again.</p>
-        <button class="close" id="close-popup-error">OK</button>
-      </div>
-    </div>
+  </div>
 
-    <!-- ---------------------------- Validation Script --------------------------- -->
-    <script>
-      const username = document.getElementById("email");
-      const password = document.getElementById("password");
-      const success = document.getElementById("success");
-      const error = document.getElementById("error");
-      const div = document.getElementById("loginDiv");
+  <!-- GLOBAL LOADING -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p>Authenticating...</p>
+  </div>
 
-      document.getElementById("submit").onclick = function () {
-        let valid = email.checkValidity() && password.checkValidity();
+  <!-- ---------------------------- Validation Script --------------------------- -->
+  <script>
+    const username = document.getElementById("email");
+    const password = document.getElementById("password");
+    const success = document.getElementById("success");
+    const error = document.getElementById("error");
+    const div = document.getElementById("loginDiv");
 
-        if (!valid) {
-          error.style.display = "block";
-          error.style.animation = "shake 0.5s 1";
-          password.setAttribute("aria-invalid", "true");
-          email.setAttribute("aria-invalid", "true");
-        } else {
-          error.style.display = "none";
-          div.style.display = "none";
-          success.style.display = "block";
-        }
-      };
+    document.getElementById("submit").onclick = function () {
+      let valid = email.checkValidity() && password.checkValidity();
 
-      username.addEventListener("keyup", function (event) {
-        let userValid = email.checkValidity();
-        let passValid = password.checkValidity();
+      if (!valid) {
+        error.style.display = "block";
+        error.style.animation = "shake 0.5s 1";
+        password.setAttribute("aria-invalid", "true");
+        email.setAttribute("aria-invalid", "true");
+      } else {
+        error.style.display = "none";
+      }
+    };
 
-        if (passValid) {
-          password.setAttribute("aria-invalid", "false");
-        }
-        if (userValid) {
-          email.setAttribute("aria-invalid", "false");
-        }
-      });
+    username.addEventListener("keyup", function (event) {
+      let userValid = email.checkValidity();
+      let passValid = password.checkValidity();
 
-      password.addEventListener("keyup", function (event) {
-        let passValid = password.checkValidity();
-        let userValid = email.checkValidity();
+      if (passValid) {
+        password.setAttribute("aria-invalid", "false");
+      }
+      if (userValid) {
+        email.setAttribute("aria-invalid", "false");
+      }
+    });
 
-        if (passValid) {
-          password.setAttribute("aria-invalid", "false");
-        }
-        if (userValid) {
-          email.setAttribute("aria-invalid", "false");
-        }
-      });
-    </script>
-  </body>
+    password.addEventListener("keyup", function (event) {
+      let passValid = password.checkValidity();
+      let userValid = email.checkValidity();
+
+      if (passValid) {
+        password.setAttribute("aria-invalid", "false");
+      }
+      if (userValid) {
+        email.setAttribute("aria-invalid", "false");
+      }
+    });
+
+  </script>
+</body>
+
 </html>

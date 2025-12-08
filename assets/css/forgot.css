@@ -59,31 +59,27 @@ input {
   /* Standard */
 }
 
-
-/* ================= loading ============== */
-#progress-bar-container {
-  width: 100%;
-  height: 4px;
-  background-color: #f3f3f3;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
+.loginDiv {
+  position: relative;
+  margin: 0 1rem;
+  padding: 2rem 3rem;
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--bg-color);
+  box-sizing: content-box;
+  box-shadow: 0 0 20px -8px #bcbdbc;
+  border-radius: 20px;
 }
-
-#progress-bar {
-  width: 0;
-  height: 100%;
-  background-color: #4caf50;
-}
-
 
 .logo-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 2rem;
+  gap: 5px;
+  width: fit-content;
+  height: 30px;
+  margin: 0 auto;
   color: var(--pry-color);
 }
 
@@ -93,33 +89,28 @@ input {
   justify-content: center;
   padding: 5px;
   border-radius: 5px;
-  box-shadow: 0 0 20px -8px #7c7c7c;
-  margin-right: 10px;
+  box-shadow: 0 4px 10px rgba(13, 17, 23, 0.03);
   background: #fff;
 }
 
 .logo-img {
-  width: 1.5em;
+  width: 1.7em;
   height: 1em;
 }
 
 input[type="email"] {
   display: block;
-  width: 77%;
-  margin-left: 10.5%;
-  margin-top: 6%;
-  margin-bottom: 2%;
+  width: 100%;
   min-width: 100px;
   height: 30px;
   padding: 4px;
-  padding-right: 4px;
-  padding-left: 4px;
   border: none;
   border-radius: 8px;
   background-color: var(--bg-color);
   border-bottom: 2px solid #4a7d47;
   font-size: 18px;
   z-index: 3;
+  margin-top: 4rem;
 }
 
 input[type="email"]:focus {
@@ -128,18 +119,6 @@ input[type="email"]:focus {
 
 input[type="email"]:autofill {
   background-color: var(--bg-color) !important;
-}
-
-.loginDiv {
-  position: relative;
-  margin: 0 1rem;
-  width: 100%;
-  max-width: 300px;
-  height: 280px;
-  background-color: var(--bg-color);
-  box-sizing: content-box;
-  box-shadow: 0 0 20px -8px #bcbdbc;
-  border-radius: 20px;
 }
 
 .return {
@@ -154,47 +133,27 @@ input[type="email"]:autofill {
 }
 
 .login {
-  position: absolute;
-  bottom: 32px;
-  left: 30%;
-  width: 40%;
-  padding: 5px;
+  float: right;
+  width: 50px;
+  height: 50px;
   background-color: var(--pry-color);
   color: white;
-  border: 2px solid var(--pry-color);
-  border-radius: 8px;
+  border: 1px solid var(--pry-color);
+  border-radius: 50%;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   transition: all 0.5s;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .login:hover {
-  background-color: #fff;
-  color: var(--pry-color);
+  background-color: #2e7436;
+  border: 1px solid #2e7436;
   transition: all 0.5s;
 }
 
-.login:active {
-  bottom: 32px;
-  font-size: 18px;
-  background-color: #385e35;
-  transition: all 0.1s;
-  box-shadow: 0 0 10px -7px #2d5c29;
-  color: var(--bg-color);
-}
-
 h1 {
-  text-align: center;
-  padding-top: 24px;
   font-family: "Poppins";
-  padding-bottom: 15px;
   color: #253e24;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -207,7 +166,6 @@ h1 {
 label {
   position: relative;
   top: -40px;
-  margin-left: 10.5%;
   font-size: 18px;
   z-index: 0;
   transition: all 0.4s;
@@ -232,50 +190,8 @@ label {
   height: 60px;
 }
 
-/* Your existing CSS styles */
 
-.popup {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-}
-
-.popup-content {
-  background-color: white;
-  margin: 200px auto;
-  padding: 20px;
-  width: 50%;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.popup-content img {
-  width: 100px;
-  height: 100px;
-}
-
-#popup-success h2,
-#sent-email h2 {
-  color: rgb(95, 158, 0);
-}
-
-.close {
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  background: var(--pry-color);
-  border: 1px solid var(--pry-color);
-  padding: 0.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-
-@media (max-width: 480px) {
+@media (max-width: 320px) {
 
   p,
   label,

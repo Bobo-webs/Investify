@@ -1,32 +1,18 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+// REGISTER.JS
+
+import { auth, db } from "/assets/js/firebase-init.js";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
+    createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+
 import {
-  getDatabase,
   ref,
-  set,
+  set
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDosNrhPrcRC2UpOu9Wu3N2p3jaUwbJyDI",
-  authDomain: "login-example-c7c78.firebaseapp.com",
-  projectId: "login-example-c7c78",
-  storageBucket: "login-example-c7c78.appspot.com",
-  messagingSenderId: "298272317823",
-  appId: "1:298272317823:web:07b88844cd084699197a4a",
-  databaseURL: "https://login-example-c7c78-default-rtdb.firebaseio.com",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const database = getDatabase(app);
+console.log("%cREGISTER MODULE LOADED", "color:#8b5cf6;font-weight:bold;font-size:16px;background:#000;padding:8px 16px;border-radius:8px;");
 
 // DOM Elements
-const form = document.getElementById("form");
 const firstname = document.getElementById("firstname");
 const lastname = document.getElementById("lastname");
 const email = document.getElementById("email");
@@ -34,9 +20,16 @@ const password = document.getElementById("password");
 const password2 = document.getElementById("password2");
 const submit = document.getElementById("submit");
 const popup = document.getElementById("popup");
-const errorPopup = document.getElementById("error-popup");
 const popupMessage = document.getElementById("popup-message");
-const errorMessage = document.getElementById("error-message");
+
+// Loading Overlay functions
+const showLoading = () => {
+  document.getElementById("loading-overlay").classList.add("show");
+};
+
+const hideLoading = () => {
+  document.getElementById("loading-overlay").classList.remove("show");
+};
 
 // Form validation
 const setError = (element, message) => {
@@ -81,7 +74,7 @@ const validateInputs = async () => {
   } else if (!isValidUsername(firstnameValue)) {
     setError(
       firstname,
-      "3-16 chars, begin with a letter. Contain: letters, numbers underscores and periods."
+      "3-16 chars, begin with a letter. Contain: letters, numbers, underscores, and periods."
     );
     isValid = false;
   } else {
@@ -128,50 +121,13 @@ const validateInputs = async () => {
   return isValid;
 };
 
-// Add event listener to form submit
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const isValid = await validateInputs();
-  if (isValid) {
-    // Proceed with form submission
-  }
-});
-
 // Popup functions
 const showPopup = (message) => {
   popupMessage.textContent = message;
   popup.classList.add("show");
 };
 
-const showError = (message) => {
-  errorMessage.textContent = message;
-  errorPopup.classList.add("show");
-};
-
-const closePopup = () => {
-  const dangerPopup = document.querySelector(".danger-popup");
-  if (dangerPopup) {
-    dangerPopup.classList.add("hidden");
-  }
-};
-
-// Attach the closePopup function to the close button
-document.querySelector(".close").addEventListener("click", closePopup);
-
-// Danger Popup functions
-const showDangerPopup = (message) => {
-  const dangerMessage = document.getElementById("danger-message");
-  dangerMessage.textContent = message;
-  const dangerPopup = document.getElementById("danger-popup");
-  dangerPopup.classList.add("show");
-
-  // Auto-hide the popup after 5 seconds
-  setTimeout(() => {
-    dangerPopup.classList.remove("show");
-  }, 10000);
-};
-
-// Modify the existing submit event listener to show the danger popup
+// Main Submit Logic with Loading Integration
 submit.addEventListener("click", async (event) => {
   event.preventDefault();
 
@@ -181,41 +137,48 @@ submit.addEventListener("click", async (event) => {
     const lastnameValue = lastname.value.trim();
     const passwordValue = password.value.trim();
 
+    showLoading(); // Show loading before Firebase call
+
     createUserWithEmailAndPassword(auth, emailValue, passwordValue)
       .then((userCredential) => {
         const user = userCredential.user;
 
         // Store user data in Realtime Database
-        set(ref(database, "users/" + user.uid), {
+        set(ref(db, "users/" + user.uid), {
           firstname: firstnameValue,
           lastname: lastnameValue,
           email: emailValue,
-          role: "user",
           balance: 0,
-          investments: 0,
           deposits: 0,
+          withdrawals: 0,
+          cryptoSignal: "",
+          forexSignal: "",
+          indexSignal: "",
+          stockSignal: "",
           referrals: 0,
+          role: "user",
         })
           .then(() => {
+            hideLoading(); // Hide loading after success
             showPopup("Account Created Successfully.");
             setTimeout(() => {
               window.location.href = "login.html";
             }, 5000);
           })
           .catch((error) => {
+            hideLoading();
             console.error("Error writing user data:", error);
-            showError("Error writing user data.");
+            showToast("Error writing user data.", "error");
           });
       })
       .catch((error) => {
+        hideLoading();
         if (error.code === "auth/email-already-in-use") {
-          showDangerPopup("This email has already been taken.");
+          showToast("Email already in use.", "error");
         } else {
           console.error("Error creating user:", error);
           showDangerPopup("" + error.message);
-          setTimeout(() => {
-            window.location.href = "register.html";
-          }, 5000);
+          showToast("" + error.message, "error");
         }
       });
   }

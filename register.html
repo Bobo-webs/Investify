@@ -1,186 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Register - Investify</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Styling -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="./assets/css/register.css" />
-    <link rel="icon" href="./assets/images/logo.png" />
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta property="og:title" content="Investify Traders" />
+  <meta property="og:description"
+    content="We help you achieve financial success across global markets, delivering real-time data and seamless trading for assets ranging from stocks and forex to crypto, indices, and CFDs." />
+  <meta property="og:image" content="https://investifytraders.net/assets/images/logo-icon.jpg" />
+  <meta property="og:url" content="https://investifytraders.net" />
+  <title>Register - Investify</title>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js"></script>
-  </head>
-  <body>
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-7 col-lg-5">
-            <div class="login-wrap p-4 p-md-5">
-              <a class="brand" href="index.html"
-                ><img
-                  src="./assets/images/logo-icon.jpg"
-                  alt="investify-traders"
-              />
+  <!-- Styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/register.css" />
+  <link rel="icon" href="./assets/images/logo.png" />
+
+  <!-- Script -->
+  <script src="/assets/js/network-state.js"></script>
+  <script type="module" src="/assets/js/firebase-init.js"></script>
+  <script src="/assets/js/toast.js"></script>
+</head>
+
+<body>
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+          <div class="login-wrap p-4 p-md-5">
+            <a class="brand" href="index.html"><img src="./assets/images/logo-icon.jpg" alt="investify-traders" />
               <h1>Investify</h1>
             </a>
-              <h4 class="mb-4" style="font-weight: 500; font-size: 1.3rem">
-                Create an account 🧾
-              </h4>
-              <!-- Danger Alert Popup -->
-              <div id="danger-popup" class="danger-popup">
-                <p>⚠️</p>
-                <p id="danger-message"></p>
+            <h4 class="mb-4" style="font-weight: 500; font-size: 1.3rem">
+              Create an account 🧾
+            </h4>
+            <form action="/" id="form" class="signup-form">
+              <div class="form-group">
+                <label class="label" for="firstname">Username</label>
+                <input type="text" id="firstname" class="form-control" />
+                <div class="error"></div>
               </div>
-              <form action="/" id="form" class="signup-form">
-                <div class="form-group">
-                  <label class="label" for="firstname">Username</label>
-                  <input type="text" id="firstname" class="form-control" />
-                  <div class="error"></div>
-                </div>
-                <div class="form-group">
-                  <label class="label" for="lastname">Full Name</label>
-                  <input type="text" id="lastname" class="form-control" />
-                  <div class="error"></div>
-                </div>
-                <div class="form-group">
-                  <label class="label" for="email">Email Address</label>
-                  <input type="email" id="email" class="form-control" />
-                  <div class="error"></div>
-                </div>
-                <div class="form-group">
-                  <label class="label" for="password">Password</label>
-                  <input id="password" type="password" class="form-control" />
-                  <i
-                    class="fa-solid fa-eye"
-                    onclick="togglePassword('password', this)"
-                  ></i>
-                  <i
-                    class="fa-solid fa-eye-slash"
-                    onclick="togglePassword('password', this)"
-                  ></i>
-                  <div class="error"></div>
-                </div>
+              <div class="form-group">
+                <label class="label" for="lastname">Full Name</label>
+                <input type="text" id="lastname" class="form-control" />
+                <div class="error"></div>
+              </div>
+              <div class="form-group">
+                <label class="label" for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" />
+                <div class="error"></div>
+              </div>
+              <div class="form-group">
+                <label class="label" for="password">Password</label>
+                <input id="password" type="password" class="form-control" />
+                <i class="fa-solid fa-eye" onclick="togglePassword('password', this)"></i>
+                <i class="fa-solid fa-eye-slash" onclick="togglePassword('password', this)"></i>
+                <div class="error"></div>
+              </div>
 
-                <div class="form-group">
-                  <label class="label" for="password2">Confirm Password</label>
-                  <input id="password2" type="password" class="form-control" />
-                  <i
-                    class="fa-solid fa-eye"
-                    onclick="togglePassword('password2', this)"
-                  ></i>
-                  <i
-                    class="fa-solid fa-eye-slash"
-                    onclick="togglePassword('password2', this)"
-                  ></i>
-                  <div class="error"></div>
-                </div>
+              <div class="form-group">
+                <label class="label" for="password2">Confirm Password</label>
+                <input id="password2" type="password" class="form-control" />
+                <i class="fa-solid fa-eye" onclick="togglePassword('password2', this)"></i>
+                <i class="fa-solid fa-eye-slash" onclick="togglePassword('password2', this)"></i>
+                <div class="error"></div>
+              </div>
 
-                <div class="form-group d-flex justify-content-end mt-5">
-                  <button
-                    type="submit"
-                    id="submit"
-                    class="btn btn-primary submit"
-                  >
-                    <span class="fa fa-paper-plane"></span>
-                  </button>
-                </div>
-              </form>
-              <p class="text-center">
-                Already have an account? <a href="login.html">Sign In</a>
-              </p>
-            </div>
+              <div class="form-group d-flex justify-content-end mt-5">
+                <button type="submit" id="submit" class="btn btn-primary submit">
+                  <span class="fa fa-paper-plane"></span>
+                </button>
+              </div>
+            </form>
+            <p class="text-center">
+              Already have an account? <a href="login.html">Sign In</a>
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Popup Prompt -->
-    <div id="popup" class="popup">
-      <div class="popup-content">
-        <img src="./assets/images/checked.jpg" alt="login-success" />
-        <span class="close" onclick="closePopup()"></span>
+  <!-- Popup Prompt -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <img src="./assets/images/checked.jpg" alt="login-success" />
+      <div>
+        <p>Success!</p>
         <p id="popup-message"></p>
-        <p>
-          Redirecting to Login Page <br />
-          please wait...
-        </p>
+        <p>Redirecting to login page <br> please wait...</p>
       </div>
     </div>
+  </div>
 
-    <!--
-    <div id="error-popup" class="popup">
-      <div class="popup-content">
-        <img
-          src="./assets/images/cancel.png"
-          style="width: 75px"
-          alt="login-failed"
-        />
-        <p id="error-message"></p>
-        <i
-          class="fa fa-x"
-          style="color: #000; position: absolute; top: 5%; right: 5%"
-          class="close"
-          onclick="closePopup()"
-        ></i>
-      </div>
-    </div>
-    -->
+  <!-- GLOBAL LOADING -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p>Creating your account...</p>
+  </div>
 
-    <!-- -------- Script ------- -->
-    <script type="module" src="./assets/js/register.js" defer></script>
-    <script>
-      // Password toggle fx
-      function togglePassword(inputId, icon) {
-        const input = document.getElementById(inputId);
-        const isPasswordHidden = input.type === "password";
+  <!-- -------- Script ------- -->
+  <script type="module" src="./assets/js/register.js" defer></script>
+  <script>
+    // Password toggle fx
+    function togglePassword(inputId, icon) {
+      const input = document.getElementById(inputId);
+      const isPasswordHidden = input.type === "password";
 
-        // Toggle input type
-        input.type = isPasswordHidden ? "text" : "password";
+      // Toggle input type
+      input.type = isPasswordHidden ? "text" : "password";
 
-        // Toggle visibility of icons
-        const eyeIcon = icon.parentElement.querySelector(".fa-eye");
-        const eyeSlashIcon = icon.parentElement.querySelector(".fa-eye-slash");
+      // Toggle visibility of icons
+      const eyeIcon = icon.parentElement.querySelector(".fa-eye");
+      const eyeSlashIcon = icon.parentElement.querySelector(".fa-eye-slash");
 
-        if (isPasswordHidden) {
-          eyeIcon.style.display = "inline";
-          eyeSlashIcon.style.display = "none";
-        } else {
-          eyeIcon.style.display = "none";
-          eyeSlashIcon.style.display = "inline";
-        }
+      if (isPasswordHidden) {
+        eyeIcon.style.display = "inline";
+        eyeSlashIcon.style.display = "none";
+      } else {
+        eyeIcon.style.display = "none";
+        eyeSlashIcon.style.display = "inline";
       }
+    }
 
-      // Ensure correct initial state
-      document.addEventListener("DOMContentLoaded", function () {
-        document
-          .querySelectorAll(".fa-eye")
-          .forEach((icon) => (icon.style.display = "none"));
-      });
-    </script>
-  </body>
+    // Ensure correct initial state
+    document.addEventListener("DOMContentLoaded", function () {
+      document
+        .querySelectorAll(".fa-eye")
+        .forEach((icon) => (icon.style.display = "none"));
+    });
+  </script>
+</body>
+
 </html>

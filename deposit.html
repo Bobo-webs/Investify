@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Withdraw - Investify</title>
+    <title>Deposit - Investify</title>
 
     <!-- ======== Styling ======= -->
     <link rel="icon" href="/assets/images/logo-icon.jpg" />
@@ -17,7 +17,7 @@
     <script src="/assets/js/toast.js"></script>
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/dashboard.js"></script>
-    <script type="module" src="/assets/js/withdraw.js"></script>
+    <script type="module" src="/assets/js/deposit.js"></script>
     <script src="/assets/js/contact-modal.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -120,12 +120,12 @@
                 </a>
 
                 <div class="section-title">TRANSACTIONS</div>
-                <a href="deposit.html">
+                <a class="active" href="deposit.html">
                     <span class="icon"><i class="fa-solid fa-circle-down"></i></span>
                     <span>Deposit</span>
                 </a>
 
-                <a class="active" href="withdraw.html">
+                <a href="withdraw.html">
                     <span class="icon"><i class="fa-solid fa-circle-up"></i></span>
                     <span>Withdraw</span>
                 </a>
@@ -158,8 +158,9 @@
             <div class="topbar">
                 <div class="left-controls">
                     <button class="home-icon" id="menuToggle" aria-label="Toggle menu">
-                        <i class="fa-solid fa-bars-staggered"></i>
+                        <i class="fa-solid fa-bars-staggered "></i>
                     </button>
+
 
                 </div>
 
@@ -193,7 +194,7 @@
             <div class="card balance-card">
 
                 <div class="balance-header">
-                    <div class="balance-title">TOTAL BALANCE <sub>/ USD</sub> </div>
+                    <div class="balance-title">TOTAL BALANCE <sub>/ USD</sub></div>
                     <button class="eye-toggle" id="toggleBtn"><i class="fa-solid fa-eye"></i></button>
                 </div>
 
@@ -204,8 +205,8 @@
                 </div>
 
                 <div class="balance-row">
-                    <div class="balance-label">Total Withdrawals <sub>/ USD</sub></div>
-                    <div class="balance-value" id="totalWithdrawals">-</div>
+                    <div class="balance-label">Total Deposits <sub>/ USD</sub></div>
+                    <div class="balance-value" id="totalDeposits">-</div>
                     <div id="depositsHidden" class="balance-value hidden-balance">
                         ****
                     </div>
@@ -214,34 +215,29 @@
                 <!-- You can add more rows like Profit, Withdrawn, etc. -->
             </div>
 
-            <!-- WITHDRAWAL CARD -->
-            <div class="card withdraw-card">
-                <form class="withdraw-form" id="withdrawForm">
-                    <!-- Progress Steps (3 Steps) -->
+            <!-- DEPOSIT CARD -->
+            <div class="card deposit-card">
+                <form class="deposit-form" id="depositForm">
+                    <!-- Progress Steps -->
                     <div class="progress-container">
                         <div class="progress-line" id="progressLine"></div>
                         <div style="z-index: 3 !important;">
                             <div class="step active" id="step1">1</div>
-                            <div class="step-label">Crypto</div>
+                            <div class="step-label" style="margin-left: 18px;">Choose coin</div>
                         </div>
                         <div style="margin-left: auto; z-index: 3 !important;">
                             <div class="step" id="step2">2</div>
-                            <div class="step-label">Amount</div>
-                        </div>
-                        <div style="margin-left: auto; z-index: 3 !important;">
-                            <div class="step" id="step3">3</div>
-                            <div class="step-label">Address</div>
+                            <div class="step-label">Deposit Amount</div>
                         </div>
                     </div>
 
                     <!-- Step 1: Choose Crypto -->
-                    <label>Choose Withdrawal Coin</label>
+                    <label>Choose Deposit Coin</label>
                     <select id="cryptoSelect" required>
                         <option value="" disabled selected>Select crypto</option>
                         <option value="BTC">Bitcoin (BTC)</option>
                         <option value="ETH">Ethereum (ETH)</option>
                         <option value="USDT">TRC20 (USDT)</option>
-                        <option value="USDC">TRC20 (USDC)</option>
                     </select>
 
                     <div class="crypto-buttons">
@@ -254,33 +250,71 @@
                         <button type="button" class="crypto-btn" data-value="USDT">
                             <img src="/assets/images/tether-usdt-logo.png" alt="USDT"> USDT
                         </button>
-                        <button type="button" class="crypto-btn" data-value="USDC">
-                            <img src="/assets/images/usd-coin-usdc-logo.png" alt="USDC"> USDC
-                        </button>
                     </div>
 
                     <!-- Step 2: Amount -->
-                    <label>Withdrawal Amount (USD)</label>
+                    <label>Deposit Amount (USD)</label>
                     <input type="number" id="amountInput" placeholder="Minimum of $20" min="20" step="0.01" required />
-
-                    <!-- Step 3: Wallet Address + Saved Addresses -->
-                    <label style="margin-top: 2rem;">Wallet Address</label>
-                    <div class="wallet-input-group">
-                        <select id="savedAddresses" class="saved-address-select">
-                            <option value="">-- Select saved address --</option>
-                        </select>
-                        <input type="text" id="walletAddress" placeholder="Enter or paste wallet address" required />
-                        <button type="button" id="saveAddressBtn" class="save-btn" title="Save this address">
-                            <i class="fa-solid fa-bookmark"></i>
-                        </button>
-                    </div>
-                    <small class="address-note"><i class="fa-solid fa-circle-info"></i>Double-check address. Withdrawals
-                        cannot be reversed.</small>
 
                     <button class="submit-btn" id="submitBtn" disabled>
                         <i class="fa fa-paper-plane"></i>
                     </button>
                 </form>
+
+            </div>
+
+
+            <!-- CONFIRMATION CARD (initially hidden) -->
+            <div id="depositConfirmContainer" style="display: none;">
+                <div class="card deposit-confirmation-card">
+                    <!-- Header -->
+                    <div class="dc-header">
+                        <div class="dc-asset">
+                            <span class="dc-label">Crypto</span>
+                            <div class="dc-asset-item">
+                                <img id="dcCoinIcon" src="" alt="" class="dc-coin-icon">
+                                <span class="dc-coin-name" id="dcCoinName">Bitcoin <strong id="dcTicker">BTC</strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="dc-address-section">
+                        <span class="dc-label">Deposit address</span>
+                        <div class="dc-address-box">
+                            <input type="text" id="depositAddress" class="dc-address-input" readonly>
+                            <button type="button" id="copyBtn" class="dc-copy-btn">
+                                <i data-feather="copy"></i>
+                            </button>
+                        </div>
+                        <small class="dc-address-note"><i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;Only send
+                            <span>BTC</span>
+                            assets to this address. Other assets will be lost forever.
+                        </small>
+                    </div>
+
+                    <!-- QR + Details -->
+                    <div class="dc-bottom">
+                        <div class="dc-qr">
+                            <img id="qrCodeImg" src="" alt="QR Code">
+                        </div>
+                        <div class="dc-details">
+                            <div class="dc-detail-row">
+                                <span>Transaction Fee (USD)</span>
+                                <strong>0.00</strong>
+                            </div>
+                            <div class="dc-detail-row">
+                                <span>Total Value (USD)</span>
+                                <strong id="totalUsdValue">0.00</strong>
+                            </div>
+                            <div class="dc-detail-row">
+                                <span>Total Value (<span id="totalValueTicker">BTC</span>)</span>
+                                <strong id="totalCryptoValue">0.00</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--  -->
@@ -314,7 +348,7 @@
             const balanceVisible = document.getElementById('totalBalance');
             const balanceHidden = document.getElementById('balanceHidden');
 
-            const depositsVisible = document.getElementById('totalWithdrawals');
+            const depositsVisible = document.getElementById('totalDeposits');
             const depositsHidden = document.getElementById('depositsHidden');
 
             // Load state
@@ -349,6 +383,147 @@
                 localStorage.setItem('balanceHidden', isHidden);
                 applyState();
             });
+        });
+    </script>
+
+    <!-- DYNAMIC CRYPTO VALUE + COINGECKO -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // === Get elements safely ===
+            const btcEl = document.getElementById('liveBtc');
+            const ethEl = document.getElementById('liveEth');
+            const totalUsdEl = document.getElementById('totalUsdValue');
+            const tickerEl = document.getElementById('totalValueTicker');
+            const cryptoValueEl = document.getElementById('totalCryptoValue');
+
+            // === Only proceed if we have the critical ones ===
+            if (!totalUsdEl || !tickerEl || !cryptoValueEl) {
+                console.error("CRITICAL: totalUsdValue, totalValueTicker, or totalCryptoValue missing!");
+                return;
+            }
+
+            // Optional: live price elements (we can work without them temporarily)
+            if (!btcEl || !ethEl) {
+                console.warn("liveBtc or liveEth missing — using fallback prices until loaded");
+            }
+
+            let latestPrices = { BTC: 0, ETH: 0 };
+
+            // === Fetch from CoinGecko ===
+            async function updatePricesFromCoinGecko() {
+                if (!btcEl || !ethEl) return; // skip if not present
+
+                try {
+                    const res = await fetch(
+                        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd',
+                        { cache: "no-store" }
+                    );
+                    if (!res.ok) throw new Error("HTTP " + res.status);
+
+                    const data = await res.json();
+                    const btcPrice = parseFloat(data.bitcoin.usd);
+                    const ethPrice = parseFloat(data.ethereum.usd);
+
+                    btcEl.textContent = btcPrice.toFixed(2);
+                    ethEl.textContent = ethPrice.toFixed(2);
+
+                    latestPrices.BTC = btcPrice;
+                    latestPrices.ETH = ethPrice;
+
+                    console.log(`CoinGecko → BTC: $${btcPrice.toFixed(2)} | ETH: $${ethPrice.toFixed(2)}`);
+                } catch (err) {
+                    console.warn("CoinGecko failed (will retry):", err.message);
+                }
+            }
+
+            // === Calculate crypto amount ===
+            function calculateCryptoValue() {
+                const usdAmount = parseFloat(totalUsdEl.textContent) || 0;
+                const crypto = tickerEl.textContent.trim().toUpperCase();
+
+                let livePrice = 0;
+                if (crypto === 'BTC') livePrice = latestPrices.BTC || parseFloat(btcEl?.textContent) || 0;
+                else if (crypto === 'ETH') livePrice = latestPrices.ETH || parseFloat(ethEl?.textContent) || 0;
+                else if (crypto === 'USDT') livePrice = 1.00;
+                else return;
+
+                if (livePrice <= 0 || usdAmount <= 0) {
+                    cryptoValueEl.textContent = "0.00000000";
+                    return;
+                }
+
+                const cryptoAmount = usdAmount / livePrice;
+                cryptoValueEl.textContent = cryptoAmount.toFixed(8).replace(/\.?0+$/, '');
+            }
+
+            // === Main update function ===
+            async function updateAll() {
+                await updatePricesFromCoinGecko();
+                calculateCryptoValue();
+            }
+
+            // === Start everything ===
+            updateAll();
+            setInterval(updateAll, 30000); // Every 5 seconds
+
+            // === React instantly when USD amount or crypto ticker changes ===
+            const observer = new MutationObserver(calculateCryptoValue);
+            observer.observe(totalUsdEl, { childList: true, characterData: true, subtree: true });
+            observer.observe(tickerEl, { childList: true, characterData: true, subtree: true });
+
+            // Optional: observe live prices if they appear later
+            if (btcEl) observer.observe(btcEl, { childList: true, characterData: true });
+            if (ethEl) observer.observe(ethEl, { childList: true, characterData: true });
+
+            console.log("%cDYNAMIC CRYPTO VALUE + COINGECKO ACTIVE (Safe & Reliable)", "color: #00ff00; font-weight: bold;");
+        });
+    </script>
+
+    <!-- 1. FEATHER ICONS -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- 2. COPY SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyBtn = document.getElementById('copyBtn');
+            const addressInput = document.getElementById('depositAddress');
+
+            if (!copyBtn || !addressInput) {
+                console.error("copyBtn or depositAddress not found!");
+                return;
+            }
+
+            // We'll work directly with innerHTML instead of relying on <i> + data-feather
+            let isCheck = false;
+
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(addressInput.value);
+
+                    // SUCCESS: Show checkmark
+                    if (!isCheck) {
+                        copyBtn.innerHTML = '<i data-feather="check"></i>';
+                        copyBtn.classList.add('copied');
+                        feather.replace(); // Re-render the new icon
+                        isCheck = true;
+                    }
+
+                    // Revert to copy icon after 2 seconds
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i data-feather="copy"></i>';
+                        copyBtn.classList.remove('copied');
+                        feather.replace();
+                        isCheck = false;
+                    }, 2000);
+
+                } catch (err) {
+                    console.error("Copy failed:", err);
+                    showToast("Copy failed — please select and copy manually", "error");
+                }
+            });
+
+            // Initial icon render
+            feather.replace();
         });
     </script>
 
@@ -396,97 +571,59 @@
         });
     </script>
 
+    <!-- DEPOSIT FORM VALIDATION -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cryptoSelect = document.getElementById('cryptoSelect');
-            const cryptoBtns = document.querySelectorAll('.crypto-btn');
-            const amountInput = document.getElementById('amountInput');
-            const walletAddress = document.getElementById('walletAddress');
-            const savedAddresses = document.getElementById('savedAddresses');
-            const saveAddressBtn = document.getElementById('saveAddressBtn');
-            const submitBtn = document.getElementById('submitBtn');
+        const cryptoSelect = document.getElementById('cryptoSelect');
+        const cryptoBtns = document.querySelectorAll('.crypto-btn');
+        const amountInput = document.getElementById('amountInput');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const progressLine = document.getElementById('progressLine');
 
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-            const step3 = document.getElementById('step3');
-            const progressLine = document.getElementById('progressLine');
-
-            // Load saved addresses
-            function loadSavedAddresses() {
-                const saved = JSON.parse(localStorage.getItem('savedWithdrawAddresses') || '[]');
-                savedAddresses.innerHTML = '<option value="">-- Select saved address --</option>';
-                saved.forEach(addr => {
-                    const opt = document.createElement('option');
-                    opt.value = addr.address;
-                    opt.textContent = `${addr.label} (${addr.address.slice(0, 8)}...${addr.address.slice(-6)})`;
-                    savedAddresses.appendChild(opt);
-                });
-            }
-
-            // Save address
-            saveAddressBtn.addEventListener('click', () => {
-                const addr = walletAddress.value.trim();
-                if (!addr || addr.length < 20) {
-                    showToast('Enter a valid wallet address first', "error");
-                    return;
-                }
-                const label = prompt('Name this address (e.g. My Ledger, Binance)', 'My Wallet');
-                if (label) {
-                    const saved = JSON.parse(localStorage.getItem('savedWithdrawAddresses') || '[]');
-                    if (!saved.some(s => s.address === addr)) {
-                        saved.push({ label, address: addr });
-                        localStorage.setItem('savedWithdrawAddresses', JSON.stringify(saved));
-                        loadSavedAddresses();
-                        showToast('Address saved!', "success");
-                    }
-                }
-            });
-
-            // Sync saved address → input
-            savedAddresses.addEventListener('change', () => {
-                if (savedAddresses.value) {
-                    walletAddress.value = savedAddresses.value;
-                }
-                checkCompletion();
-            });
-
-            // Sync crypto select ↔ buttons
-            cryptoSelect.addEventListener('change', () => {
-                cryptoBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.value === cryptoSelect.value));
-                checkCompletion();
-            });
-
+        // Sync select → buttons
+        cryptoSelect.addEventListener('change', () => {
+            const value = cryptoSelect.value;
             cryptoBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    cryptoSelect.value = btn.dataset.value;
-                    cryptoBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    checkCompletion();
-                });
+                btn.classList.toggle('active', btn.dataset.value === value);
             });
-
-            // Real-time validation
-            amountInput.addEventListener('input', checkCompletion);
-            walletAddress.addEventListener('input', checkCompletion);
-
-            function checkCompletion() {
-                const cryptoOk = cryptoSelect.value;
-                const amountOk = parseFloat(amountInput.value) >= 20;
-                const addressOk = walletAddress.value.trim().length >= 20;
-
-                step1.classList.toggle('active', cryptoOk);
-                step2.classList.toggle('active', cryptoOk && amountOk);
-                step3.classList.toggle('active', cryptoOk && amountOk && addressOk);
-
-                progressLine.classList.toggle('active', cryptoOk && amountOk);
-
-                submitBtn.disabled = !(cryptoOk && amountOk && addressOk);
-            }
-
-            // Init
-            loadSavedAddresses();
             checkCompletion();
         });
+
+        // Sync buttons → select
+        cryptoBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const value = btn.dataset.value;
+                cryptoSelect.value = value;
+                cryptoBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                checkCompletion();
+            });
+        });
+
+        // Amount input
+        amountInput.addEventListener('input', checkCompletion);
+
+        function checkCompletion() {
+            const cryptoSelected = cryptoSelect.value !== "";
+            const amountValid = amountInput.value >= 20;
+
+            // Update Step 1
+            step1.classList.toggle('active', cryptoSelected);
+
+            // Update Step 2 & progress line
+            if (cryptoSelected && amountValid) {
+                step2.classList.add('active');
+                progressLine.classList.add('active');
+                submitBtn.disabled = false;
+            } else {
+                step2.classList.remove('active');
+                progressLine.classList.remove('active');
+                submitBtn.disabled = true;
+            }
+        }
+
+        // Initial check
+        checkCompletion();
     </script>
 
 </body>

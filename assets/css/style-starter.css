@@ -11947,7 +11947,7 @@ a.text-dark:focus {
 
 .fa-navicon:before,
 .fa-reorder:before,
-.fa-bars:before {
+.fa-bars-staggered:before {
   content: "";
 }
 
