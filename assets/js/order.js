@@ -1,4 +1,4 @@
-// order.js
+// ORDER.JS
 import { app, auth, db } from "/assets/js/firebase-init.js";
 
 // IMPORT DATABASE FUNCTIONS
@@ -14,7 +14,8 @@ import {
 // IMPORT AUTH FUNCTION
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-// ==================== DOM ELEMENTS ====================
+
+// ======= DOM ELEMENTS ======= //
 const el = id => document.getElementById(id);
 const assetEl = el('tx-asset');
 const tfEl = el('tx-tf');
@@ -29,7 +30,8 @@ if (!ordersEl || !assetEl || !tfEl || !amountEl || !buyEl || !sellEl) {
     console.warn("Transaction widget missing required elements");
 }
 
-// ==================== NO DATA IMAGE ====================
+
+// ====== NO DATA IMAGE ====== //
 const noDataImg = `<img class="nodata" src="/assets/images/nodata.png" alt="No active trades">`;
 
 function showNoData() {
@@ -46,12 +48,14 @@ function hideNoData() {
 
 setTimeout(showNoData, 150);
 
-// ==================== UTILS ====================
+
+// ======== UTILS ======== //
 function formatMoney(n) {
     return Number(n).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
 
-// ==================== CREATE ORDER ROW ====================
+
+// ======= CREATE ORDER ROW ======= //
 function createOrderRow(trade, tradeId) {
     hideNoData();
 
@@ -64,12 +68,12 @@ function createOrderRow(trade, tradeId) {
         <div class="tx-order-left">
             <div class="tx-order-symbol">${trade.symbol}</div>
             <div class="tx-order-action ${trade.direction === 'buy' ? 'buy' : 'sell'}">
-                ${trade.direction.toUpperCase()} · $${formatMoney(trade.amount)}
+                <div>${trade.direction.toUpperCase()}</div>
+                <div>$${formatMoney(trade.amount)}</div>
             </div>
         </div>
         <div class="tx-order-right">
             <div class="tx-order-timer">
-                <svg viewBox="0 0 24 24"><path d="M12 7V12L15 14" stroke="currentColor" stroke-width="1.5"/></svg>
                 <span class="tx-timer-text">--</span>
             </div>
             <div class="tx-order-pnl neutral">
@@ -105,7 +109,8 @@ function createOrderRow(trade, tradeId) {
     }, 500);
 }
 
-// ==================== SUBMIT TRADE ====================
+
+// ======== SUBMIT TRADE ======== //
 async function submitTrade(direction) {
     const symbol = assetEl?.value?.trim();
     const timeframe = tfEl?.value;
@@ -167,7 +172,8 @@ async function submitTrade(direction) {
     }
 }
 
-// ==================== SYNC UI WITH FIREBASE — INSTANT NO-DATA (100% FIXED) ====================
+
+// ======= SYNC UI WITH FIREBASE — INSTANT NO-DATA (100% FIXED) ========== //
 function startLiveOrdersSync() {
     onAuthStateChanged(auth, (user) => {
         if (!user) {
@@ -199,7 +205,8 @@ function startLiveOrdersSync() {
     });
 }
 
-// ==================== AUTO-CLOSE EXPIRED TRADES (unchanged & perfect) ====================
+
+// ========== AUTO-CLOSE EXPIRED TRADES ========= //
 function startTradeExpirationWatcher() {
     onAuthStateChanged(auth, (user) => {
         if (!user) return;
@@ -227,7 +234,8 @@ function startTradeExpirationWatcher() {
     });
 }
 
-// ==================== BUTTONS & INIT ====================
+
+// ======= BUTTONS & INIT ======== //
 quickEl?.addEventListener('change', () => quickEl.value && (amountEl.value = quickEl.value));
 
 buyEl?.addEventListener('click', (e) => { e.preventDefault(); submitTrade("buy"); });
@@ -243,7 +251,8 @@ if (assetEl && assetEl.options.length === 0 && typeof COINS !== "undefined") {
     });
 }
 
-// ==================== START EVERYTHING
+
+// ====== START EVERYTHING ======= //
 document.addEventListener("DOMContentLoaded", () => {
     startLiveOrdersSync();
     startTradeExpirationWatcher();
