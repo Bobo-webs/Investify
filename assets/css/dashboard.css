@@ -208,7 +208,7 @@ body {
     height: 100vh;
     background: var(--white);
     border-right: 1px solid rgba(20, 24, 32, 0.02);
-    padding: 28px 20px;
+    padding: 28px 20px 0px 20px;
     box-shadow: var(--shadow);
     position: relative;
     transition: transform .28s ease, box-shadow .28s ease;
@@ -318,12 +318,66 @@ body {
     font-weight: 700;
 }
 
-.sidebar-footer {
-    position: absolute;
-    left: 28px;
-    right: 28px;
-    bottom: 28px;
+/* SIDEBAR SUBSCRIPTION PLAN — UNIQUE, CLEAN, MODERN */
+.sub-plan-container {
+    position: sticky;
+    bottom: 0px;
+    background: var(--glass);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--hr);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 20px;
+    text-align: center;
 }
+
+.sub-plan-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.sub-plan-icon {
+    font-size: 24px;
+}
+
+.sub-plan-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: capitalize;
+}
+
+.sub-plan-upgrade-btn {
+    display: block !important;
+    margin: 0 auto !important;
+    background: var(--accent);
+    color: var(--white) !important;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.sub-plan-upgrade-btn:hover {
+    background: var(--hover);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .sub-plan-container {
+        padding: 14px;
+    }
+
+    .sub-plan-name {
+        font-size: 18px;
+    }
+}
+
+
 
 /* ======= MAIN ======= */
 .main {
@@ -653,7 +707,7 @@ body {
 @media (max-width:1000px) {
     .sidebar {
         width: 260px;
-        max-width: 260px
+        max-width: 260px;
     }
 }
 
@@ -701,7 +755,7 @@ body {
 @media (max-width:480px) {
     .sidebar {
         width: 240px;
-        padding: 15px
+        padding: 15px 15px 0 15px;
     }
 
     .brand h1 {
@@ -2857,6 +2911,6 @@ x = 0.005555...%
 
     .sidebar {
         width: 200px;
-        padding: 10px
+        padding: 10px 10px 0px 10px;
     }
 }
