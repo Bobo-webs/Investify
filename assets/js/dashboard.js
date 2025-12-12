@@ -22,8 +22,6 @@ const confirmYes = document.getElementById("confirmYes");
 const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 const loadingScreen = document.getElementById("loading-overlay");
-
-// popup overlay might be named differently across pages; try both IDs
 const popupOverlay = document.getElementById("popupOverlay") || document.getElementById("popup-overlay");
 
 // -------------------------------------
@@ -50,13 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     onAuthStateChanged(auth, async (user) => {
         if (user) {
 
-            // 🔥 IMPORTANT — Refresh auth user info first
             await user.reload();
 
-            // 🔥 AUTHENTICATED FIREBASE EMAIL (after verification)
             const authEmail = user.email;
 
-            // 🔥 SYNC EMAIL WITH DATABASE IF DIFFERENT
             const userRef = dbRef(db, `users/${user.uid}/email`);
 
             onValue(userRef, async (snapshot) => {
@@ -89,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // -------------------------------------
-// DISPLAY USER DATA — SAFE, MODULAR, NEVER BREAKS
+// DISPLAY USER DATA
 // -------------------------------------
 async function displayUserData(uid) {
     try {
@@ -123,7 +118,7 @@ async function displayUserData(uid) {
         const availableBalance = document.querySelector(".tx-available span");
         if (availableBalance) availableBalance.textContent = fmt(balance);
 
-        // TOTAL BALANCE (visible version)
+        // TOTAL BALANCE
         const totalBalance = document.getElementById("totalBalance");
         if (totalBalance) totalBalance.textContent = fmt(balance);
 
@@ -167,7 +162,7 @@ confirmYes?.addEventListener("click", () => {
     signOut(auth)
         .then(() => {
             hidePopup();
-            window.location.href = "login.html"; // redirect
+            window.location.href = "login.html";
         })
         .catch((err) => {
             console.error("Error signing out:", err);
