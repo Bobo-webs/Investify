@@ -700,8 +700,8 @@ body {
 
 @media (max-width:480px) {
     .sidebar {
-        width: 260px;
-        padding: 20px
+        width: 240px;
+        padding: 15px
     }
 
     .brand h1 {
@@ -2216,6 +2216,7 @@ svg rect {
     padding: 6px;
     margin-bottom: 32px;
     gap: 8px;
+    font-family: "Poppins" !important;
 }
 
 .tab-btn {
@@ -2792,5 +2793,10 @@ x = 0.005555...%
     select,
     span {
         font-size: 12px !important;
+    }
+
+    .sidebar {
+        width: 200px;
+        padding: 10px
     }
 }

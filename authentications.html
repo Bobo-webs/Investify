@@ -40,22 +40,22 @@
 
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label>Your Name</label>
+                    <label for="contactName">Your Name</label>
                     <input type="text" id="contactName" placeholder="John Doe" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Email Address</label>
+                    <label for="contactEmail">Email Address</label>
                     <input type="email" id="contactEmail" placeholder="john@example.com" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Subject</label>
+                    <label for="contactSubject">Subject</label>
                     <input type="text" id="contactSubject" placeholder="How can we help?" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Message</label>
+                    <label for="contactMessage">Message</label>
                     <textarea id="contactMessage" rows="5" placeholder="Write your message..." required></textarea>
                 </div>
 
@@ -197,14 +197,14 @@
                 <!-- Change Email Tab -->
                 <div class="tab-content active" id="email">
                     <form class="settings-form" id="changeEmailForm">
-                        <label>Current Email</label>
+                        <label for="currentEmail">Current Email</label>
                         <input type="email" id="currentEmail" value="" disabled />
 
-                        <label>New Email Address</label>
+                        <label for="newEmail">New Email Address</label>
                         <input type="email" id="newEmail" placeholder="Enter new email" required />
 
                         <div class="form-group">
-                            <label>Current Password</label>
+                            <label for="currentEmailPassword">Current Password</label>
                             <input type="password" id="currentEmailPassword" placeholder="Enter current password"
                                 required />
                             <i class="fa-solid fa-eye see" onclick="togglePassword('currentEmailPassword', this)"></i>

@@ -110,7 +110,7 @@ async function displayUserData(uid) {
 
         // === UPDATE ONLY IF ELEMENT EXISTS ON CURRENT PAGE ===
         const heroTitle = document.getElementById("userTitle");
-        if (heroTitle) heroTitle.innerHTML = `Hello, ${firstname}`;
+        if (heroTitle) heroTitle.innerHTML = `Hello, ${firstname} 👋`;
 
         const profileUsername = document.querySelector(".profile-trigger .username");
         if (profileUsername) profileUsername.textContent = firstname;

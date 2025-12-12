@@ -40,22 +40,22 @@
 
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label>Your Name</label>
+                    <label for="contactName">Your Name</label>
                     <input type="text" id="contactName" placeholder="John Doe" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Email Address</label>
+                    <label for="contactEmail">Email Address</label>
                     <input type="email" id="contactEmail" placeholder="john@example.com" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Subject</label>
+                    <label for="contactSubject">Subject</label>
                     <input type="text" id="contactSubject" placeholder="How can we help?" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Message</label>
+                    <label for="contactMessage">Message</label>
                     <textarea id="contactMessage" rows="5" placeholder="Write your message..." required></textarea>
                 </div>
 
@@ -207,13 +207,13 @@
 
                     <!-- STEP 1: Personal Info -->
                     <div class="kyc-step active" id="stepPersonal">
-                        <label>Full Name</label>
+                        <label for="kycName">Full Name</label>
                         <input type="text" id="kycName" placeholder="John Doe" required />
 
-                        <label>Date of Birth</label>
+                        <label for="kycDOB">Date of Birth</label>
                         <input type="date" id="kycDOB" required />
 
-                        <label>Phone Number</label>
+                        <label for="kycPhone">Phone Number</label>
                         <input type="tel" id="kycPhone" placeholder="+1 (555) 000-0000" required />
 
                         <button type="button" class="kyc-next-btn" id="toAddress">
@@ -223,19 +223,19 @@
 
                     <!-- STEP 2: Address -->
                     <div class="kyc-step" id="stepAddress">
-                        <label>Street Address</label>
+                        <label for="kycStreet">Street Address</label>
                         <input type="text" id="kycStreet" placeholder="123 Main Street" required />
 
-                        <label>City</label>
+                        <label for="kycCity">City</label>
                         <input type="text" id="kycCity" placeholder="New York" required />
 
-                        <label>State / Province</label>
+                        <label for="kycState">State / Province</label>
                         <input type="text" id="kycState" placeholder="NY" required />
 
-                        <label>Postal Code</label>
+                        <label for="kycPostal">Postal Code</label>
                         <input type="text" id="kycPostal" placeholder="10001" required />
 
-                        <label>Country</label>
+                        <label for="kycCountry">Country</label>
                         <select id="kycCountry" required>
                             <option value="" disabled selected>Select country</option>
                             <option value="US">United States</option>
@@ -257,7 +257,7 @@
 
                     <!-- STEP 3: Document Upload -->
                     <div class="kyc-step" id="stepDocuments">
-                        <label>Document Type</label>
+                        <label for="kycDocType">Document Type</label>
                         <select id="kycDocType" required>
                             <option value="" disabled selected>Choose document</option>
                             <option value="passport">Passport</option>
@@ -265,11 +265,11 @@
                             <option value="license">Driver's License</option>
                         </select>
 
-                        <label>Front of Document</label>
+                        <label for="kycFront">Front of Document</label>
                         <input type="file" id="kycFront" accept="image/*,.pdf" required />
                         <small class="kyc-note">Clear photo, max 5MB</small>
 
-                        <label>Back of Document (if applicable)</label>
+                        <label for="kycBack">Back of Document (if applicable)</label>
                         <input type="file" id="kycBack" accept="image/*,.pdf" />
 
                         <div class="kyc-btn-group">

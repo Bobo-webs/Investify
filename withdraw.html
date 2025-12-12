@@ -49,22 +49,22 @@
 
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label>Your Name</label>
+                    <label for="contactName">Your Name</label>
                     <input type="text" id="contactName" placeholder="John Doe" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Email Address</label>
+                    <label for="contactEmail">Email Address</label>
                     <input type="email" id="contactEmail" placeholder="john@example.com" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Subject</label>
+                    <label for="contactSubject">Subject</label>
                     <input type="text" id="contactSubject" placeholder="How can we help?" required />
                 </div>
 
                 <div class="form-group">
-                    <label>Message</label>
+                    <label for="contactMessage">Message</label>
                     <textarea id="contactMessage" rows="5" placeholder="Write your message..." required></textarea>
                 </div>
 
@@ -235,7 +235,7 @@
                     </div>
 
                     <!-- Step 1: Choose Crypto -->
-                    <label>Choose Withdrawal Coin</label>
+                    <label for="cryptoSelect">Choose Withdrawal Coin</label>
                     <select id="cryptoSelect" required>
                         <option value="" disabled selected>Select crypto</option>
                         <option value="BTC">Bitcoin (BTC)</option>
@@ -260,11 +260,11 @@
                     </div>
 
                     <!-- Step 2: Amount -->
-                    <label>Withdrawal Amount (USD)</label>
+                    <label for="amountInput">Withdrawal Amount (USD)</label>
                     <input type="number" id="amountInput" placeholder="Minimum of $20" min="20" step="0.01" required />
 
                     <!-- Step 3: Wallet Address + Saved Addresses -->
-                    <label style="margin-top: 2rem;">Wallet Address</label>
+                    <label for="walletAddress" style="margin-top: 2rem;">Wallet Address</label>
                     <div class="wallet-input-group">
                         <select id="savedAddresses" class="saved-address-select">
                             <option value="">-- Select saved address --</option>
