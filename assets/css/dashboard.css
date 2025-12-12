@@ -145,12 +145,12 @@ body {
     inset: 0px;
     border-radius: 50%;
     border: 5px solid var(--accent);
-    animation: prixClipFix 2s linear infinite;
+    animation: prixClipFix 1.2s linear infinite;
 }
 
 .spinner::after {
     border-color: var(--accent);
-    animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
+    animation: prixClipFix 1.2s linear infinite, rotate 0.3s linear infinite reverse;
     inset: 6px;
 }
 
@@ -1150,6 +1150,13 @@ body {
 
 
 /* ======= OPEN TRADES ======= */
+.nodata {
+    display: block;
+    margin: 0 auto;
+    width: 165px;
+    height: 110px;
+}
+
 .tx-h {
     display: flex;
     align-items: center;
@@ -1273,6 +1280,37 @@ body {
 svg path,
 svg rect {
     fill: var(--caution-yellow);
+}
+
+
+
+.tx-order-close {
+    position: absolute;
+    right: -5px;
+    top: 12%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.tx-close-btn {
+    width: max-content;
+    height: fit-content;
+    background: #dc2626;
+    border: none;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.tx-close-btn:hover {
+    background: #b91c1c;
 }
 
 

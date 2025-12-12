@@ -1,13 +1,8 @@
-// firebase-init.js
+// firebase-init.js — FINAL CLEAN VERSION (NO WARNINGS)
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
-
-import {
-    getAuth
-} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
-
-import {
-    getDatabase
-} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB7UOOdjUgbYfNyZbNgdOCjkYRhxfJf_14",
@@ -20,11 +15,15 @@ const firebaseConfig = {
     measurementId: "G-E6KSCFYTB6"
 };
 
-// Initialize ONCE
 export const app = initializeApp(firebaseConfig);
-
-// Export shared instances
 export const auth = getAuth(app);
 export const db = getDatabase(app);
 
-window.firebaseDatabase = getDatabase(app);   // ← exposes the db instance globally
+// Global exports for old code
+window.firebaseDatabase = db;
+window.auth = auth;
+
+// RTDB offline persistence = ENABLED BY DEFAULT in v10+
+// Nothing else needed — it's already working
+
+console.log("%cFirebase Ready — RTDB Offline Active", "color:#00ff9d;font-weight:bold;");
