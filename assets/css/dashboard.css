@@ -2185,6 +2185,66 @@ svg rect {
 }
 
 
+/* ======= KYC STATUS ======== */
+.kyc-status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    text-align: center;
+    min-height: fit-content;
+}
+
+.kyc-status-container .status-icon {
+    font-size: 80px;
+    margin-bottom: 24px;
+}
+
+.kyc-status-container.pending .status-icon {
+    color: var(--caution-yellow);
+}
+
+.kyc-status-container.success .status-icon {
+    color: var(--success-green);
+}
+
+.kyc-status-container.failed .status-icon {
+    color: var(--red);
+}
+
+.kyc-status-container h3 {
+    font-size: 28px;
+    margin: 0 0 16px;
+    color: var(--text);
+}
+
+.kyc-status-container p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+.refresh-btn {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background: var(--hover);
+    transform: translateY(-2px);
+}
+
+
 /* ======= AUTHENTICATIONS SETTINGS ======== */
 .account-settings-card {
     margin-top: 2rem;
