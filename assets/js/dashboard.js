@@ -1,4 +1,5 @@
-// DASHBOARD.JS
+// DASHBOARD.JS — FINAL WITH SUBSCRIPTION PLAN IN SIDEBAR
+
 import { auth, db } from "/assets/js/firebase-init.js";
 
 import {
@@ -24,6 +25,9 @@ const confirmationPopup = document.getElementById("confirmationPopup");
 const loadingScreen = document.getElementById("loading-overlay");
 const popupOverlay = document.getElementById("popupOverlay") || document.getElementById("popup-overlay");
 
+// SUBSCRIPTION PLAN ELEMENTS (SAFE — NO ERROR IF NOT PRESENT)
+const subPlanNameEl = document.getElementById("subPlanName");
+
 // -------------------------------------
 // LOADING HELPERS
 // -------------------------------------
@@ -40,14 +44,13 @@ function hideLoading() {
 }
 
 // -------------------------------------
-// AUTH CHECK
+// AUTH CHECK & PLAN DISPLAY
 // -------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
     showLoading();
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-
             await user.reload();
 
             const authEmail = user.email;
@@ -58,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const dbEmail = snapshot.val();
 
                 if (dbEmail !== authEmail) {
-                    // Update DB only AFTER verification
                     await update(dbRef(db, `users/${user.uid}`), {
                         email: authEmail
                     });
@@ -70,13 +72,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Load user data afterward
+            // Load user data
             displayUserData(user.uid).finally(() => {
                 hideLoading();
             });
 
+            // === LOAD CURRENT PLAN INTO SIDEBAR (SAFE) ===
+            if (subPlanNameEl) {
+                const planRef = dbRef(db, `users/${user.uid}/subscription/plan`);
+
+                onValue(planRef, (snapshot) => {
+                    let plan = snapshot.val() || "Free";
+
+                    const formatted = plan.charAt(0).toUpperCase() + plan.slice(1);
+
+                    subPlanNameEl.innerHTML = `${formatted} <span>Plan</span>`;
+                }, (error) => {
+                    console.warn("Failed to load plan:", error);
+                    subPlanNameEl.innerHTML = 'Free <span>Plan</span>';
+                });
+            }
+
         } else {
-            // Not logged in — redirect to login page
             window.location.href = "login.html";
         }
     });
@@ -96,19 +113,16 @@ async function displayUserData(uid) {
 
         const data = snapshot.val();
 
-        // Extract values safely
         const firstname = (data.firstname || "User").toString().trim();
         const balance = Number(data.balance || 0);
         const deposits = Number(data.deposits || 0);
         const withdrawals = Number(data.withdrawals || 0);
 
-        // Helper to format currency
         const fmt = (num) => `$${num.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         })}`;
 
-        // === UPDATE ONLY IF ELEMENT EXISTS ON CURRENT PAGE ===
         const heroTitle = document.getElementById("userTitle");
         if (heroTitle) heroTitle.innerHTML = `Hello, ${firstname} 👋`;
 
@@ -118,15 +132,12 @@ async function displayUserData(uid) {
         const availableBalance = document.querySelector(".tx-available span");
         if (availableBalance) availableBalance.textContent = fmt(balance);
 
-        // TOTAL BALANCE
         const totalBalance = document.getElementById("totalBalance");
         if (totalBalance) totalBalance.textContent = fmt(balance);
 
-        // TOTAL DEPOSITS
         const totalDeposits = document.getElementById("totalDeposits");
         if (totalDeposits) totalDeposits.textContent = fmt(deposits);
 
-        // TOTAL WITHDRAWALS
         const totalWithdrawals = document.getElementById("totalWithdrawals");
         if (totalWithdrawals) totalWithdrawals.textContent = fmt(withdrawals);
 
@@ -137,12 +148,9 @@ async function displayUserData(uid) {
     }
 }
 
-
-
 // -------------------------------------
 // POPUP CONTROL
 // -------------------------------------
-
 function showPopup() {
     confirmationPopup?.classList.add("show");
     popupOverlay?.classList.add("show");
@@ -157,7 +165,6 @@ logoutButtons.forEach(btn => {
     btn.addEventListener("click", showPopup);
 });
 
-// YES → Logout user
 confirmYes?.addEventListener("click", () => {
     signOut(auth)
         .then(() => {
@@ -170,12 +177,9 @@ confirmYes?.addEventListener("click", () => {
         });
 });
 
-// NO → Close popup
 confirmNo?.addEventListener("click", hidePopup);
 
 popupOverlay?.addEventListener("click", hidePopup);
-
-
 
 // -------------------------------------
 // THEME TOGGLER

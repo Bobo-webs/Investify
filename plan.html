@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>User Profile - Investify</title>
+    <title>Plans - Investify</title>
 
     <!-- ======== Styling ======= -->
     <link rel="icon" href="/assets/images/logo-icon.jpg" />
@@ -17,7 +17,7 @@
     <script src="/assets/js/toast.js"></script>
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/dashboard.js"></script>
-    <script type="module" src="/assets/js/profile.js"></script>
+    <script type="module" src="/assets/js/plan.js"></script>
     <script src="/assets/js/contact-modal.js"></script>
 </head>
 
@@ -137,16 +137,15 @@
                     <span>Authentications</span>
                 </a>
 
-                <a href="profile.html" class="active">
+                <a href="profile.html">
                     <span class="icon"><i class="fa-solid fa-user"></i></span>
                     <span>User Profile</span>
                 </a>
 
-                <!-- SUBSCRIPTION PLAN UI -->
                 <div class="sub-plan-container" id="subPlanContainer">
                     <div class="sub-plan-header">
                         <i class="fa-solid fa-crown sub-plan-icon"></i>
-                        <span class="sub-plan-name" id="subPlanName">Basic Plan</span>
+                        <span class="sub-plan-name" id="subPlanName">Basic <span>Plan</span></span>
                     </div>
                     <a href="plan.html" class="sub-plan-upgrade-btn" id="subPlanUpgrade">View Plans</a>
                 </div>
@@ -190,42 +189,102 @@
                 </div>
             </div>
 
-            <!-- USER PROFILE CARD -->
-            <div class="card profile-card">
-                <div class="profile-header">
-                    <img src="./assets/images/avatar2.png" alt="Profile" class="profile-avatar">
-                    <div class="profile-info">
-                        <h3 class="profile-username" id="profileUsername">Loading...</h3>
-                        <p class="profile-email" id="profileEmail">Loading...</p>
+            <!-- YEARLY/MONTHLY TOGGLE SWITCH -->
+            <div class="billing-toggle">
+                <span class="toggle-label monthly active">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="billingSwitch">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label yearly">Yearly</span>
+            </div>
+            <span class="save-tag">Save up to 20% yearly</span>
+
+            <!-- PLAN CARDS -->
+            <div class="plans-container">
+                <!-- FREE PLAN -->
+                <div class="plan-card" data-plan="free" data-monthly="0" data-yearly="0">
+                    <div class="plan-header">
+                        <h4>Free Plan</h4>
                     </div>
+                    <div class="plan-price">
+                        <span class="price-amount" data-monthly="$0" data-yearly="$0">$0</span>
+                        <span class="price-period">/ forever</span>
+                    </div>
+                    <div class="plan-rate">0%</div>
+                    <div class="plan-desc">Standard trade returns</div>
+                    <a href="index.html#pricing" class="plan-more">See more →</a>
+                    <button class="plan-subscribe current-plan">Current Plan</button>
                 </div>
 
-                <form class="profile-form" id="profileForm">
-                    <div class="profile-field">
-                        <label for="username" class="profile-label">Username</label>
-                        <input type="text" class="profile-input" id="username" placeholder="Enter username" required />
-                        <i class="fa-solid fa-pen-to-square profile-edit"></i>
+                <!-- COUPLES PLAN -->
+                <div class="plan-card active" data-plan="couples" data-monthly="199" data-yearly="2000">
+                    <div class="plan-header">
+                        <h4>Couples Plan</h4>
+                        <div class="popular-tag">Most Popular</div>
                     </div>
-
-                    <div class="profile-field">
-                        <label for="fullName" class="profile-label">Full Name</label>
-                        <input type="text" class="profile-input" id="fullName" placeholder="Enter full name" required />
-                        <i class="fa-solid fa-pen-to-square profile-edit"></i>
+                    <div class="plan-price">
+                        <span class="price-amount" data-monthly="$199" data-yearly="$2000">$199</span>
+                        <span class="price-period">/ month</span>
                     </div>
+                    <div class="plan-rate">40%</div>
+                    <div class="plan-desc">Boosted Profit per Trade</div>
+                    <a href="index.html#pricing" class="plan-more">See more →</a>
+                    <button class="plan-subscribe">Subscribe Now</button>
+                </div>
 
-                    <div class="profile-field">
-                        <label for="email" class="profile-label">Email Account</label>
-                        <input type="email" class="profile-input profile-input-disabled" id="email" disabled />
+                <!-- COMPOUNDING PLAN -->
+                <div class="plan-card" data-plan="compounding" data-monthly="499" data-yearly="5500">
+                    <div class="plan-header">
+                        <h4>Compounding Plan</h4>
                     </div>
-
-                    <button type="submit" class="profile-save-btn">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
+                    <div class="plan-price">
+                        <span class="price-amount" data-monthly="$499" data-yearly="$5500">$499</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+                    <div class="plan-rate">50%</div>
+                    <div class="plan-desc">Boosted Profit per Trade</div>
+                    <a href="index.html#pricing" class="plan-more">See more →</a>
+                    <button class="plan-subscribe">Subscribe Now</button>
+                </div>
             </div>
 
-            <!--  -->
+            <!-- SUBSCRIPTION CONFIRM MODAL -->
+            <div class="sub-modal-overlay" id="subModalOverlay">
+                <div class="sub-modal">
+                    <!-- CLOSE BUTTON (X) -->
+                    <button class="sub-modal-close" id="closeSubModal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <div class="sub-modal-header">
+                        <h3>Confirm Subscription</h3>
+                    </div>
+                    <div class="sub-modal-body">
+                        <div class="sub-modal-plan">
+                            <span>Subscription Plan</span>
+                            <div class="sub-selected-plan" id="selectedPlanName">Couples</div>
+                        </div>
+                        <div class="sub-modal-rate">
+                            <span>Rate of Return</span>
+                            <div class="sub-rate-value" id="selectedRate">40%</div>
+                        </div>
+                        <div class="sub-modal-price">
+                            <span>Price</span>
+                            <div class="sub-price-value" id="selectedPrice">$199 / month</div>
+                        </div>
+                        <div class="sub-modal-balance">
+                            <span>Balance</span>
+                            <div id="userBalance">....</div>
+                        </div>
+                    </div>
+                    <button class="sub-confirm-btn" id="confirmSubscription">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
 
+
+            <!-- -->
 
         </main>
     </div>
@@ -242,6 +301,41 @@
             </div>
         </div>
     </div>
+
+    <!-- SWITCH MONTHLY/YEARLY PRICES -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const switchInput = document.getElementById('billingSwitch');
+            const monthlyLabel = document.querySelector('.toggle-label.monthly');
+            const yearlyLabel = document.querySelector('.toggle-label.yearly');
+
+            if (!switchInput) return;
+
+            switchInput.addEventListener('change', () => {
+                const isYearly = switchInput.checked;
+
+                // Toggle labels
+                monthlyLabel.classList.toggle('active', !isYearly);
+                yearlyLabel.classList.toggle('active', isYearly);
+
+                // Update all prices
+                document.querySelectorAll('.price-amount').forEach(el => {
+                    const monthly = el.dataset.monthly;
+                    const yearly = el.dataset.yearly;
+                    el.textContent = isYearly ? yearly : monthly;
+                });
+
+                // Update period text
+                document.querySelectorAll('.price-period').forEach(el => {
+                    if (el.closest('.plan-card').querySelector('.price-amount').textContent === "$0") {
+                        el.textContent = "";
+                    } else {
+                        el.textContent = isYearly ? "" : "";
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- SIDEBAR TOGGLE -->
     <script>

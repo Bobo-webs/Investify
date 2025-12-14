@@ -20,6 +20,10 @@
     --radius: 14px;
 }
 
+section {
+    scroll-margin-top: 80px;
+}
+
 /*
 .dark {
     --bg: #1f5f26;
@@ -321,14 +325,16 @@ body {
 /* SIDEBAR SUBSCRIPTION PLAN — UNIQUE, CLEAN, MODERN */
 .sub-plan-container {
     position: sticky;
-    bottom: 0px;
+    bottom: 40px;
     background: var(--glass);
     backdrop-filter: blur(4px);
     border: 1px solid var(--hr);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    /* border-top-left-radius: 15px;
+    border-top-right-radius: 15px; */
+    border-radius: 15px;
     padding: 20px;
     text-align: center;
+    margin-top: 2.5rem;
 }
 
 .sub-plan-header {
@@ -344,7 +350,7 @@ body {
 }
 
 .sub-plan-name {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--accent);
     text-transform: capitalize;
@@ -373,7 +379,7 @@ body {
     }
 
     .sub-plan-name {
-        font-size: 18px;
+        font-size: 14px;
     }
 }
 
@@ -2702,6 +2708,331 @@ svg rect {
         font-size: 22px;
     }
 }
+
+
+
+/* PLANS — CLEAN, MINIMAL, YOUR COLOR SPEC */
+.plans-container {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.plan-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 12px 7px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card.active {
+    position: relative;
+    border: 2px solid var(--accent);
+    overflow: visible;
+}
+
+.plan-card.active::after {
+    content: "\f521";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--accent);
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.plan-header {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.plan-header h4 {
+    font-size: 18px;
+    color: var(--accent);
+    margin: 0;
+    font-weight: 900;
+}
+
+.popular-tag {
+    position: absolute;
+    top: 33px;
+    right: -46px;
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    transform: rotate(90deg);
+}
+
+.plan-rate {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 8px 0;
+}
+
+.plan-desc {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.plan-more {
+    display: block;
+    margin: 10px 0;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.plan-more:hover {
+    color: var(--hover);
+}
+
+.plan-subscribe {
+    width: 70%;
+    padding: 16px 0px;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plan-subscribe:hover {
+    background: var(--hover);
+    transform: translateY(-2px);
+}
+
+/* BILLING TOGGLE */
+.billing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 40px 0 10px 0;
+    font-size: 16px;
+}
+
+.toggle-label {
+    font-weight: 600;
+    color: var(--muted);
+    transition: color 0.3s ease;
+}
+
+.toggle-label.active {
+    color: var(--accent);
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--muted);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background: var(--white);
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background: var(--accent);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.save-tag {
+    background: var(--accent);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+/* PLANS — UPDATED WITH PRICES */
+.plan-price {
+    margin: 20px 0;
+}
+
+.price-amount {
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.plan-card:first-child .plan-subscribe {
+    cursor: default;
+}
+
+
+/* SUBSCRIPTION MODAL */
+.sub-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub-modal-overlay.active {
+    display: flex;
+}
+
+.sub-modal {
+    background: var(--white);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 420px;
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.sub-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: var(--muted);
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.sub-modal-close:hover {
+    transform: scale(1.1);
+}
+
+.sub-modal-header h3 {
+    font-size: 19px;
+    color: var(--accent);
+    margin: 0 0 24px;
+}
+
+.sub-modal-plan,
+.sub-modal-rate,
+.sub-modal-price,
+.sub-modal-balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hr);
+    font-size: 14px;
+}
+
+.sub-modal-plan span,
+.sub-modal-rate span,
+.sub-modal-price span,
+.sub-modal-balance span {
+    color: var(--muted);
+}
+
+.sub-selected-plan,
+.sub-rate-value,
+.sub-price-value,
+#userBalance {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 14px;
+}
+
+.sub-confirm-btn {
+    float: right;
+    width: 55px;
+    height: 55px;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.sub-confirm-btn:hover {
+    background: var(--hover);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
