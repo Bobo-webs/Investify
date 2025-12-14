@@ -2737,7 +2737,12 @@ svg rect {
     position: relative;
     border: 2px solid var(--accent);
     overflow: visible;
-    margin-top: 2rem;
+}
+
+@media (max-width: 663px) {
+    .plan-card.active {
+        margin-top: 2rem;
+    }
 }
 
 .plan-card.active::after {
