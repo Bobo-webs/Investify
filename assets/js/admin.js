@@ -1,4 +1,4 @@
-// DASHBOARD.JS
+// ADMIN.JS
 
 import { auth, db } from "/assets/js/firebase-init.js";
 
@@ -24,8 +24,6 @@ const confirmNo = document.getElementById("confirmNo");
 const confirmationPopup = document.getElementById("confirmationPopup");
 const loadingScreen = document.getElementById("loading-overlay");
 const popupOverlay = document.getElementById("popupOverlay") || document.getElementById("popup-overlay");
-
-const subPlanNameEl = document.getElementById("subPlanName");
 
 // -------------------------------------
 // LOADING HELPERS
@@ -58,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const roleSnap = await get(dbRef(db, `users/${user.uid}/role`));
         const role = roleSnap.val();
 
-        if (role !== "user") {
+        if (role !== "admin") {
             // Boot out immediately if not "user"
             showToast("Access denied", "error");
             await signOut(auth);
@@ -80,11 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 await update(dbRef(db, `users/${user.uid}`), {
                     email: authEmail
                 });
-
-                console.log(
-                    "%cEmail synced: " + authEmail,
-                    "color:#22c55e;font-weight:bold;"
-                );
             }
         });
 
@@ -92,22 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
         displayUserData(user.uid).finally(() => {
             hideLoading();
         });
-
-        // Load current plan into sidebar
-        if (subPlanNameEl) {
-            const planRef = dbRef(db, `users/${user.uid}/subscription/plan`);
-
-            onValue(planRef, (snapshot) => {
-                let plan = snapshot.val() || "free";
-
-                const formatted = plan.charAt(0).toUpperCase() + plan.slice(1);
-
-                subPlanNameEl.innerHTML = `${formatted} <span>Plan</span>`;
-            }, (error) => {
-                console.warn("Failed to load plan:", error);
-                subPlanNameEl.innerHTML = 'Free <span>Plan</span>';
-            });
-        }
     });
 });
 
@@ -126,32 +103,9 @@ async function displayUserData(uid) {
         const data = snapshot.val();
 
         const firstname = (data.firstname || "User").toString().trim();
-        const balance = Number(data.balance || 0);
-        const deposits = Number(data.deposits || 0);
-        const withdrawals = Number(data.withdrawals || 0);
-
-        const fmt = (num) => `$${num.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        })}`;
-
-        const heroTitle = document.getElementById("userTitle");
-        if (heroTitle) heroTitle.innerHTML = `Hello, ${firstname} 👋`;
 
         const profileUsername = document.querySelector(".profile-trigger .username");
         if (profileUsername) profileUsername.textContent = firstname;
-
-        const availableBalance = document.querySelector(".tx-available span");
-        if (availableBalance) availableBalance.textContent = fmt(balance);
-
-        const totalBalance = document.getElementById("totalBalance");
-        if (totalBalance) totalBalance.textContent = fmt(balance);
-
-        const totalDeposits = document.getElementById("totalDeposits");
-        if (totalDeposits) totalDeposits.textContent = fmt(deposits);
-
-        const totalWithdrawals = document.getElementById("totalWithdrawals");
-        if (totalWithdrawals) totalWithdrawals.textContent = fmt(withdrawals);
 
         console.log("User data displayed successfully");
 
