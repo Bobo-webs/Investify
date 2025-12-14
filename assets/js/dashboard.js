@@ -181,6 +181,8 @@ confirmNo?.addEventListener("click", hidePopup);
 
 popupOverlay?.addEventListener("click", hidePopup);
 
+
+
 // -------------------------------------
 // THEME TOGGLER
 // -------------------------------------
