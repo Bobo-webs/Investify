@@ -3029,7 +3029,7 @@ input:checked+.slider:before {
 .admin-users-container {
     margin-top: 2rem;
     background: var(--white);
-    border-radius: 24px;
+    border-radius: 12px;
     padding: 0;
     padding-bottom: 5px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -3048,14 +3048,18 @@ input:checked+.slider:before {
     color: var(--white);
     position: sticky;
     top: 0;
+    z-index: 20;
 }
 
 .admin-users-table th:first-child {
-    border-top-left-radius: 24px;
+    position: sticky;
+    left: 0;
+    border-top-left-radius: 12px;
+    z-index: 21;
 }
 
 .admin-users-table th:last-child {
-    border-top-right-radius: 20px;
+    border-top-right-radius: 12px;
 }
 
 .admin-users-table td {
@@ -3064,9 +3068,17 @@ input:checked+.slider:before {
     color: var(--accent);
 }
 
+.admin-users-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--white);
+}
+
 .admin-users-table td .admin-actions {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
 }
 
