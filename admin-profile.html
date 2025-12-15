@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Auth-Admin - Investify</title>
+    <title>Admin Profile - Investify</title>
 
     <!-- ======== Styling ======= -->
     <link rel="icon" href="/assets/images/logo-icon.jpg" />
@@ -17,7 +17,7 @@
     <script src="/assets/js/toast.js"></script>
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/admin.js"></script>
-    <script type="module" src="/assets/js/authentications.js"></script>
+    <script type="module" src="/assets/js/profile.js"></script>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
                     <!-- <span class="badge">5</span> -->
                 </a>
 
-                <a href="deposits-mgt.html">
+                <a href="#">
                     <span class="icon"><i class="fa-solid fa-circle-down"></i></span>
                     <span>Deposits</span>
                 </a>
@@ -83,12 +83,12 @@
 
 
                 <div class="section-title">ADMIN SETTINGS</div>
-                <a class="active" href="#">
+                <a href="auth-admin.html">
                     <span class="icon"><i class="fa-solid fa-lock"></i></span>
                     <span>Authentications</span>
                 </a>
 
-                <a href="admin-profile.html">
+                <a class="active" href="#">
                     <span class="icon"><i class="fa-solid fa-user"></i></span>
                     <span>Admin Profile</span>
                 </a>
@@ -131,75 +131,38 @@
                 </div>
             </div>
 
-            <!-- AUTHENTICATIONS -->
-            <div class="card account-settings-card">
-                <div class="settings-header">
-                    <h3>Authentication Settings</h3>
-                    <p>Manage your email and password securely</p>
+            <!-- USER PROFILE CARD -->
+            <div class="card profile-card">
+                <div class="profile-header">
+                    <img src="./assets/images/avatar2.png" alt="Profile" class="profile-avatar">
+                    <div class="profile-info">
+                        <h3 class="profile-username" id="profileUsername">.....</h3>
+                        <p class="profile-email" id="profileEmail">.....</p>
+                    </div>
                 </div>
 
-                <!-- Tabs -->
-                <div class="settings-tabs">
-                    <button class="tab-btn" data-tab="email">Change Email</button>
-                    <button class="tab-btn" data-tab="password">Change Password</button>
-                </div>
+                <form class="profile-form" id="profileForm">
+                    <div class="profile-field">
+                        <label for="username" class="profile-label">Username</label>
+                        <input type="text" class="profile-input" id="username" placeholder="Enter username" required />
+                        <i class="fa-solid fa-pen-to-square profile-edit"></i>
+                    </div>
 
-                <!-- Change Email Tab -->
-                <div class="tab-content active" id="email">
-                    <form class="settings-form" id="changeEmailForm">
-                        <label for="currentEmail">Current Email</label>
-                        <input type="email" id="currentEmail" value="" disabled />
+                    <div class="profile-field">
+                        <label for="fullName" class="profile-label">Full Name</label>
+                        <input type="text" class="profile-input" id="fullName" placeholder="Enter full name" required />
+                        <i class="fa-solid fa-pen-to-square profile-edit"></i>
+                    </div>
 
-                        <label for="newEmail">New Email Address</label>
-                        <input type="email" id="newEmail" placeholder="Enter new email" required />
+                    <div class="profile-field">
+                        <label for="email" class="profile-label">Email Account</label>
+                        <input type="email" class="profile-input profile-input-disabled" id="email" disabled />
+                    </div>
 
-                        <div class="form-group">
-                            <label for="currentEmailPassword">Current Password</label>
-                            <input type="password" id="currentEmailPassword" placeholder="Enter current password"
-                                required />
-                            <i class="fa-solid fa-eye see" onclick="togglePassword('currentEmailPassword', this)"></i>
-                            <i class="fa-solid fa-eye-slash unsee"
-                                onclick="togglePassword('currentEmailPassword', this)"></i>
-                        </div>
-
-                        <button type="submit" class="submit-btn">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
-
-                </div>
-
-                <!-- Change Password Tab -->
-                <div class="tab-content" id="password">
-                    <form class="settings-form" id="changePasswordForm">
-                        <div class="form-group">
-                            <label for="currentPassword">Current Password</label>
-                            <input type="password" id="currentPassword" placeholder="Enter current password" required />
-                            <i class="fa-solid fa-eye see" onclick="togglePassword('currentPassword', this)"></i>
-                            <i class="fa-solid fa-eye-slash unsee"
-                                onclick="togglePassword('currentPassword', this)"></i>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirmPassword">New Password</label>
-                            <input type="password" id="newPassword" placeholder="Min. 8 characters" required />
-                            <i class="fa-solid fa-eye see" onclick="togglePassword('newPassword', this)"></i>
-                            <i class="fa-solid fa-eye-slash unsee" onclick="togglePassword('newPassword', this)"></i>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirmPassword">Confirm New Password</label>
-                            <input type="password" id="confirmPassword" placeholder="Re-type new password" required />
-                            <i class="fa-solid fa-eye see" onclick="togglePassword('confirmPassword', this)"></i>
-                            <i class="fa-solid fa-eye-slash unsee"
-                                onclick="togglePassword('confirmPassword', this)"></i>
-                        </div>
-
-                        <button type="submit" class="submit-btn">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
+                    <button type="submit" class="profile-save-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
             </div>
 
             <!--  -->
@@ -220,76 +183,6 @@
             </div>
         </div>
     </div>
-
-    <!-- PASSWORD TOGGLE -->
-    <script>
-        function togglePassword(inputId, icon) {
-            const input = document.getElementById(inputId);
-            const isPasswordHidden = input.type === "password";
-
-            // Toggle input type
-            input.type = isPasswordHidden ? "text" : "password";
-
-            // Toggle visibility of icons
-            const eyeIcon = icon.parentElement.querySelector(".fa-eye");
-            const eyeSlashIcon = icon.parentElement.querySelector(".fa-eye-slash");
-
-            if (isPasswordHidden) {
-                eyeIcon.style.display = "block";
-                eyeSlashIcon.style.display = "none";
-            } else {
-                eyeIcon.style.display = "none";
-                eyeSlashIcon.style.display = "block";
-            }
-        }
-
-        // Ensure correct initial state
-        document.addEventListener("DOMContentLoaded", function () {
-            document
-                .querySelectorAll(".fa-eye")
-                .forEach((icon) => (icon.style.display = "none"));
-        });
-    </script>
-
-    <!-- TAB SWITCHING -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
-            const STORAGE_KEY = 'activeSettingsTab';
-
-            // Load saved tab from localStorage (or default to first)
-            const savedTab = localStorage.getItem(STORAGE_KEY) || 'email';
-
-            function activateTab(tabId) {
-                // Update buttons
-                tabButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.tab === tabId);
-                });
-
-                // Update content
-                tabContents.forEach(content => {
-                    content.classList.toggle('active', content.id === tabId);
-                });
-
-                // Save to localStorage
-                localStorage.setItem(STORAGE_KEY, tabId);
-            }
-
-            // Activate saved tab on load
-            activateTab(savedTab);
-
-            // Tab click handler
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const target = button.dataset.tab;
-                    activateTab(target);
-                });
-            });
-
-            console.log("%cTAB SYSTEM LOADED — ACTIVE TAB: " + savedTab, "color:#8b5cf6;font-weight:bold;");
-        });
-    </script>
 
     <!-- SIDEBAR TOGGLE -->
     <script>
