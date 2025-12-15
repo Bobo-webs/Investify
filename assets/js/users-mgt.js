@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const uid = child.key;
                 const data = child.val() || {};
 
+                if (data.role === "admin") {
+                    return;
+                }
+
                 const row = document.createElement('tr');
                 row.dataset.uid = uid;
                 row.innerHTML = `
