@@ -3228,7 +3228,8 @@ input:checked+.slider:before {
     font-size: 15px;
 }
 
-.admin-edit-form input {
+.admin-edit-form input,
+.admin-edit-form select {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--hr);
@@ -3238,7 +3239,8 @@ input:checked+.slider:before {
     transition: all 0.3s ease;
 }
 
-.admin-edit-form input:focus {
+.admin-edit-form input:focus,
+.admin-edit-form select:focus {
     outline: none;
     border-color: var(--accent);
 }
@@ -3279,6 +3281,24 @@ input:checked+.slider:before {
 
     .admin-edit-modal {
         padding: 20px 18px;
+    }
+}
+
+/* 2-PER-ROW FOR FIGURES */
+.admin-figure-row {
+    display: flex;
+    gap: 20px;
+}
+
+.admin-figure-row>div {
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .admin-figure-row {
+        flex-direction: column;
+        gap: 12px;
     }
 }
 
