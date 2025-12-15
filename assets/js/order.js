@@ -184,8 +184,8 @@ async function submitTrade(direction) {
             status: "open",
             openedAt: Date.now(),
             expiresAt: Date.now() + (parseInt(timeframe, 10) * 1000),
-            closedAt: null,
-            outcome: null
+            outcome: "pending",
+            closedAt: null
         };
 
         const newRef = push(openOrdersRef);
