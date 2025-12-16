@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${lastname}</td>
                     <td>${formattedDate}</td>
                     <td><span class="deposits-status ${kyc.status}">${kyc.status}</span></td>
+                    <td>${kyc.documentType}</td>
                     <td>
                         <div class="admin-image-actions">
                             <button class="admin-image-btn view" data-image="${kyc.idFront}">
@@ -97,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${kyc.dateOfBirth}</td>
                     <td>${kyc.address}</td>
                     <td>${kyc.phone}</td>
-                    <td>${kyc.documentType}</td>
                 `;
                 kycBody.appendChild(row);
             });
