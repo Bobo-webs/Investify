@@ -1,4 +1,4 @@
-// deposits-mgt.js — FINAL FIXED: EDIT WORKS, DEPOSIT UID IN TABLE, NO LASTNAME/EMAIL IN FORM
+// DEPOSITS-MGT.JS
 
 import { auth, db } from "/assets/js/firebase-init.js";
 import { ref, get, set, remove, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js"; // ← update imported

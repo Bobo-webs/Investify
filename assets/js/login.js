@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const role = snapshot.val().role || "user";
       hideLoading();
-      showPopupSuccess("Login Successful!");
+      showPopupSuccess("");
 
       setTimeout(() => {
         popup.style.display = "none";
