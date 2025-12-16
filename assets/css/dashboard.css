@@ -3359,6 +3359,29 @@ input:checked+.slider:before {
 }
 
 
+/* ======= SUBS MGT ======= */
+.sub-status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.sub-status.active {
+    background: var(--success-bg-green);
+    color: var(--success-green);
+}
+
+.sub-status.expired {
+    background: var(--black);
+    color: var(--muted);
+}
+
+.sub-status.cancelled {
+    background: var(--red-bg);
+    color: var(--red);
+}
 
 
 
