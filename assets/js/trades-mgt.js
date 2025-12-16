@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         outcomeHTML = value < 0
                             ? `<span style="color:var(--red); font-weight:bold">${formatted}</span>`
-                            : `<span style="color: var(--success-green); font-weight:bold">${formatted}</span>`;
+                            : `<span style="color:var(--success-green); font-weight:bold">${formatted}</span>`;
                     }
                 }
 

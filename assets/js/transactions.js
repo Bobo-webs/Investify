@@ -1,11 +1,11 @@
-// history.js — FINAL FIXED & PERFECT (Trades + Deposits) — ZERO ERRORS
+// TRANSACTIONS.JS
 
 import { auth, db } from "/assets/js/firebase-init.js";
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
 // ===================================================================
-// 1. TRADES HISTORY — FIXED SORT BUG
+// 1. TRADES HISTORY
 // ===================================================================
 function loadTradesHistory() {
     const tbody = document.getElementById('trades-tbody');
@@ -27,7 +27,6 @@ function loadTradesHistory() {
                 trades.push(trade);
             });
 
-            // FIXED: Was missing closing parenthesis → "a is not defined"
             trades.sort((a, b) => (b.openedAt || 0) - (a.openedAt || 0));
 
             tbody.innerHTML = trades.length === 0
@@ -50,13 +49,21 @@ function loadTradesHistory() {
                 let outcomeHTML = '';
                 if (trade.outcome !== undefined && trade.outcome !== null) {
                     const val = String(trade.outcome).trim();
-                    if (val.startsWith('-') || parseFloat(val) < 0) {
-                        outcomeHTML = `<span style="color:#ff3b5c; font-weight:bold">${val}</span>`;
-                    } else {
-                        outcomeHTML = `<span style="color:#00ff9d; font-weight:bold">+${val}</span>`;
+
+                    if (val.toLowerCase() === "pending") {
+                        outcomeHTML = `<span style="color:var(--muted); font-style:italic">Pending</span>`;
+                    }
+
+                    else if (val.startsWith('-') || parseFloat(val) < 0) {
+                        outcomeHTML = `<span style="color:var(--red); font-weight:bold">${val}</span>`;
+                    }
+
+                    else {
+                        outcomeHTML = `<span style="color:var(--success-green); font-weight:bold">+${val}</span>`;
                     }
                 } else {
-                    outcomeHTML = `<span style="color:#888; font-style:italic">Pending</span>`;
+
+                    outcomeHTML = `<span style="color:var(--muted); font-style:italic">Pending</span>`;
                 }
 
                 const row = document.createElement('tr');
@@ -66,7 +73,7 @@ function loadTradesHistory() {
                     <td><span class="market-tag">${(trade.market || 'crypto').toUpperCase()}</span></td>
                     <td class="trade-type-cell">
                         <span class="direction ${trade.direction}">${trade.direction.toUpperCase()}</span>
-                        <span style="opacity:0.8;">$${Number(trade.amount).toFixed(2)}</span>
+                        <span>$${Number(trade.amount).toFixed(2)}</span>
                     </td>
                     <td>${trade.timeframe}s</td>
                     <td>${date}</td>
@@ -80,7 +87,7 @@ function loadTradesHistory() {
 }
 
 // ===================================================================
-// 2. DEPOSITS HISTORY — Logos Fixed, Time Column, Unique 20-char IDs
+// 2. DEPOSITS HISTORY
 // ===================================================================
 function loadDepositsHistory() {
     const tbody = document.getElementById('deposits-tbody');
@@ -98,7 +105,7 @@ function loadDepositsHistory() {
             const deposits = [];
             snapshot.forEach(child => {
                 const dep = child.val();
-                dep.id = child.key; // ← Real 20-char Firebase key (-Of...)
+                dep.id = child.key;
                 deposits.push(dep);
             });
 
@@ -150,7 +157,7 @@ function loadDepositsHistory() {
 
 
 // ===================================================================
-// 3. WITHDRAWALS HISTORY — Same Elite Style as Deposits
+// 3. WITHDRAWALS HISTORY
 // ===================================================================
 function loadWithdrawalsHistory() {
     const tbody = document.getElementById('withdrawals-tbody');
@@ -168,7 +175,7 @@ function loadWithdrawalsHistory() {
             const withdrawals = [];
             snapshot.forEach(child => {
                 const wd = child.val();
-                wd.id = child.key; // ← Real 20-char Firebase key (-Oxxx...)
+                wd.id = child.key;
                 withdrawals.push(wd);
             });
 
@@ -230,7 +237,7 @@ function loadWithdrawalsHistory() {
 
 
 // ===================================================================
-// START BOTH ON LOGIN — NO CONFLICTS
+// START BOTH ON LOGIN
 // ===================================================================
 onAuthStateChanged(auth, (user) => {
     if (user) {
