@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!depositsRef.exists()) return;
 
                 depositsRef.forEach(depositSnap => {
-                    const depositId = depositSnap.key; // ← This is allDeposits/depositId
+                    const depositId = depositSnap.key;
                     const deposit = depositSnap.val() || {};
 
                     depositsList.push({
@@ -65,13 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.dataset.depositId = deposit.depositId;
 
                 row.innerHTML = `
-                    <td class="admin-actions">
-                        <button class="admin-actions-btn edit" data-useruid="${deposit.userUid}" data-depositid="${deposit.depositId}">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="admin-actions-btn delete" data-useruid="${deposit.userUid}" data-depositid="${deposit.depositId}">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                    <td>
+                        <div class="admin-actions">
+                            <button class="admin-actions-btn edit" data-useruid="${deposit.userUid}" data-depositid="${deposit.depositId}">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="admin-actions-btn delete" data-useruid="${deposit.userUid}" data-depositid="${deposit.depositId}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                     <td>${deposit.lastname}</td>
                     <td>${formattedDate}</td>
@@ -131,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const depositSnap = await get(ref(db, `users/${userUid}/allDeposits/${depositId}`));
             const deposit = depositSnap.val() || {};
 
-            // No lastname/email in form — only deposit fields
             document.getElementById('depositUid').value = depositId;
             document.getElementById('depositAmount').value = deposit.amount || 0;
             document.getElementById('depositCryptoName').value = deposit.cryptoName || '';

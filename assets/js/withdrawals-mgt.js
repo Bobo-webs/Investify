@@ -66,13 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.dataset.withdrawalId = w.withdrawalId;
 
                 row.innerHTML = `
-                    <td class="admin-actions">
-                        <button class="admin-actions-btn edit" data-useruid="${w.userUid}" data-withdrawalid="${w.withdrawalId}">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="admin-actions-btn delete" data-useruid="${w.userUid}" data-withdrawalid="${w.withdrawalId}">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                    <td>
+                        <div class="admin-actions">
+                            <button class="admin-actions-btn edit" data-useruid="${w.userUid}" data-withdrawalid="${w.withdrawalId}">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="admin-actions-btn delete" data-useruid="${w.userUid}" data-withdrawalid="${w.withdrawalId}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                     <td>${w.lastname}</td>
                     <td>${formattedDate}</td>

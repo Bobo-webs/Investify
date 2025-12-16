@@ -1,4 +1,4 @@
-// admin-trades.js — FINAL WITH OUTCOME (SIGN DROPDOWN + NUMBER)
+// TRADES.MGT.JS
 
 import { auth, db } from "/assets/js/firebase-init.js";
 import { ref, get, set, remove, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
@@ -89,13 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.dataset.tradeId = trade.tradeId;
 
                 row.innerHTML = `
-                    <td class="admin-actions">
-                        <button class="admin-actions-btn edit" data-useruid="${trade.userUid}" data-tradeid="${trade.tradeId}">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="admin-actions-btn delete" data-useruid="${trade.userUid}" data-tradeid="${trade.tradeId}">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                    <td>
+                        <div class="admin-actions">
+                            <button class="admin-actions-btn edit" data-useruid="${trade.userUid}" data-tradeid="${trade.tradeId}">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="admin-actions-btn delete" data-useruid="${trade.userUid}" data-tradeid="${trade.tradeId}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                     <td>${trade.lastname}</td>
                     <td>${trade.tradeId}</td>
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // EVENT DELEGATION
     document.body.addEventListener('click', async (e) => {
-        // DELETE (unchanged)
+        // DELETE
         const deleteBtn = e.target.closest('.admin-actions-btn.delete');
         if (deleteBtn) {
             const userUid = deleteBtn.dataset.useruid;
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('tradeTimeframe').value = trade.timeframe || 0;
             document.getElementById('tradeDirection').value = trade.direction || 'buy';
 
-            // OUTCOME: Split sign and value
+            // OUTCOME
             let outcomeValue = Math.abs(trade.outcome || 0).toFixed(2);
             let outcomeSign = 'none';
             if (trade.outcome > 0) outcomeSign = 'profit';
@@ -192,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // EDIT FORM SUBMIT — WITH OUTCOME SIGN + VALUE
+    // EDIT FORM SUBMIT
     document.getElementById('adminTradeForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -206,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const openedStr = document.getElementById('tradeOpenedAt').value;
             const openedAt = openedStr ? new Date(openedStr).getTime() : Date.now();
 
-            // OUTCOME: Combine sign and value
+            // OUTCOME
             const sign = document.getElementById('tradeOutcomeSign').value;
             const value = parseFloat(document.getElementById('tradeOutcomeValue').value) || 0;
             const outcome = sign === 'profit' ? value : sign === 'loss' ? -value : 0;

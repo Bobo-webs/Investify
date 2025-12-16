@@ -1,4 +1,4 @@
-// users-mgt.js — FINAL FIXED: EDIT WORKS, ALL IMPORTS CORRECT
+// USERS-MGT.JS
 
 import { auth, db } from "/assets/js/firebase-init.js";
 import { ref, get, set, remove, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js"; // ← ADDED update
@@ -32,13 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const row = document.createElement('tr');
                 row.dataset.uid = uid;
                 row.innerHTML = `
-                    <td class="admin-actions">
-                        <button class="admin-actions-btn edit" data-uid="${uid}">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="admin-actions-btn delete" data-uid="${uid}">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                    <td>
+                        <div class="admin-actions">
+                            <button class="admin-actions-btn edit" data-uid="${uid}">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="admin-actions-btn delete" data-uid="${uid}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                     <td>${data.lastname || 'No data'}</td>
                     <td>${data.email || 'No data'}</td>
@@ -105,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // EDIT FORM SUBMIT — NOW WORKS (update imported)
+    // EDIT FORM SUBMIT
     document.getElementById('adminEditForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -125,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 stockSignal: document.getElementById('editStockSignal').value.trim() || null
             };
 
-            await update(ref(db, `users/${uid}`), updates); // ← update now defined
+            await update(ref(db, `users/${uid}`), updates);
 
             showToast("User updated!", "success");
             overlay.classList.remove('active');

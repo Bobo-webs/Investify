@@ -322,7 +322,7 @@ body {
     font-weight: 700;
 }
 
-/* SIDEBAR SUBSCRIPTION PLAN — UNIQUE, CLEAN, MODERN */
+/* ======== SIDEBAR SUB PLAN ======== */
 .sub-plan-container {
     position: sticky;
     bottom: 40px;
@@ -812,6 +812,7 @@ body {
     overflow: scroll;
 }
 
+/* ======= ASSETS SEARCH BOX ======= */
 .searchBox {
     position: sticky;
     top: -1px;
@@ -882,7 +883,7 @@ body {
 
 
 
-/* ========= Live Assets Rows ========== */
+/* ========= LIVE ASSETS ROWS ========== */
 .cv-row {
     display: grid;
     grid-template-columns: 1fr auto auto;
@@ -1482,8 +1483,8 @@ svg rect {
     border: none !important;
 }
 
-/* ====== Extra Table Design ====== */
 
+/* ====== Extra Table Design ====== */
 .direction.buy {
     color: var(--success-green);
     font-weight: bold;
@@ -1562,7 +1563,7 @@ svg rect {
 }
 
 
-/* ========== DEPOSIT & WITHDRAW CARD ========== */
+/* ========== DEPOSIT & WITHDRAW CARD ========= */
 .deposit-card,
 .withdraw-card {
     height: max-content;
@@ -1791,7 +1792,7 @@ svg rect {
 }
 
 
-/* ========== DEPOSIT CONFIRMATION CARD =========== */
+/* ========== DEPOSIT CONFIRMATION CARD ========== */
 .deposit-confirmation-card {
     height: max-content;
     margin-top: 2rem;
@@ -1941,7 +1942,7 @@ svg rect {
 
 
 
-/* =========== Deposit-table ========== */
+/* =========== DEPOSIT TABLE ========== */
 .deposits-no-data {
     text-align: center;
     font-style: italic;
@@ -2000,7 +2001,7 @@ svg rect {
 }
 
 
-/* ======== Balance Card Style ========= */
+/* ======== BALANCE CARD ========= */
 .balance-card {
     margin-top: 2rem;
     height: max-content;
@@ -2096,7 +2097,7 @@ svg rect {
     }
 }
 
-/* ======= KYC FORM ======== */
+/* ======= KYC FORM ======= */
 .kyc-card {
     margin-top: 2rem;
     height: max-content;
@@ -2305,7 +2306,7 @@ svg rect {
 }
 
 
-/* ======= AUTHENTICATIONS SETTINGS ======== */
+/* ======= AUTHENTICATIONS SETTINGS ======= */
 .account-settings-card {
     margin-top: 2rem;
     height: max-content;
@@ -2464,8 +2465,7 @@ svg rect {
 }
 
 
-/* USER PROFILE */
-
+/* ======== USER PROFILE ======= */
 .profile-card {
     margin-top: 2rem;
     height: max-content;
@@ -2588,7 +2588,7 @@ svg rect {
 
 
 
-/* CONTACT MODAL */
+/* ======= CONTACT MODAL ======= */
 .contact-overlay {
     display: none;
     position: fixed;
@@ -2711,7 +2711,7 @@ svg rect {
 
 
 
-/* PLANS — CLEAN, MINIMAL, YOUR COLOR SPEC */
+/* ====== SUB PLANS ======= */
 .plans-container {
     display: flex;
     gap: 24px;
@@ -2921,7 +2921,7 @@ input:checked+.slider:before {
 }
 
 
-/* SUBSCRIPTION MODAL */
+/* ======= SUBSCRIPTION MODAL ======== */
 .sub-modal-overlay {
     display: none;
     position: fixed;
@@ -3025,14 +3025,13 @@ input:checked+.slider:before {
 
 
 
-/* ADMIN USERS TABLE — CLEAN, RESPONSIVE */
+/* ======== ADMIN PRESET TABLE ========= */
 .admin-users-container {
     margin-top: 2rem;
     background: var(--white);
     border-radius: 12px;
     padding: 0;
     padding-bottom: 5px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 .admin-users-table {
@@ -3074,21 +3073,24 @@ input:checked+.slider:before {
     background: var(--white);
 }
 
-.admin-users-table td .admin-actions {
+.admin-users-table td .admin-actions,
+.admin-image-actions {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
+    height: 100%;
 }
 
-.admin-actions-btn {
+.admin-actions-btn,
+.admin-image-btn {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 14px;
     transition: all 0.3s ease;
     padding: 4px 7px;
+    height: 28px;
     border-radius: 5px;
 }
 
@@ -3296,22 +3298,60 @@ input:checked+.slider:before {
     }
 }
 
-/* 2-PER-ROW FOR FIGURES */
-.admin-figure-row {
+
+
+/* ====== IMAGE VIEW/DOWNLOAD ICONS ======== */
+.admin-image-btn.view {
+    background: #f97316;
+    color: var(--bg);
+}
+
+.admin-image-btn.download {
+    background: #16a34a;
+    color: var(--white);
+}
+
+.admin-image-btn:hover {
+    transform: scale(1.2);
+}
+
+/* IMAGE MODAL */
+.admin-image-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.admin-image-modal-overlay.active {
     display: flex;
-    gap: 20px;
 }
 
-.admin-figure-row>div {
-    flex: 1;
+.admin-image-modal {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    padding: 32px;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-    .admin-figure-row {
-        flex-direction: column;
-        gap: 12px;
-    }
+#imageView {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Close button reused */
+.admin-image-modal .admin-modal-close {
+    top: 16px;
+    right: 16px;
 }
 
 
