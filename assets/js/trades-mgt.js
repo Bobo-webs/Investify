@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${trade.tradeId}</td>
                     <td>
                         <span class="direction ${trade.direction}">${trade.direction.toUpperCase()}</span>
-                        <span style="opacity:0.8;">$${Number(trade.amount).toFixed(2)}</span>
+                        <span">$${Number(trade.amount).toFixed(2)}</span>
                     </td>
                     <td>${formattedOpened}</td>
                     <td>${formattedExpires}</td>
