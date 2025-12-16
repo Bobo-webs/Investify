@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         const formatted = value > 0 ? `+${value}` : `${value}`;
 
                         outcomeHTML = value < 0
-                            ? `<span style="color:#ff3b5c; font-weight:bold">${formatted}</span>`
-                            : `<span style="color:#00ff9d; font-weight:bold">${formatted}</span>`;
+                            ? `<span style="color:var(--red); font-weight:bold">${formatted}</span>`
+                            : `<span style="color: var(--success-green); font-weight:bold">${formatted}</span>`;
                     }
                 }
 
