@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Users Management - Investify</title>
+    <title>Subscriptions Management - Investify</title>
 
     <!-- ======== Styling ======= -->
     <link rel="icon" href="/assets/images/logo-icon.jpg" />
@@ -17,7 +17,7 @@
     <script src="/assets/js/toast.js"></script>
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/admin.js"></script>
-    <script type="module" src="/assets/js/users-mgt.js"></script>
+    <script type="module" src="/assets/js/subs-mgt.js"></script>
 </head>
 
 <body>
@@ -43,24 +43,25 @@
 
             <nav class="nav">
                 <div class="section-title">USER SETTINGS</div>
-                <a class="active" href="#">
+                <a href="admin.html">
                     <span class="icon"><i class="fa-solid fa-users-gear"></i></span>
                     <span>Users</span>
                     <!-- <span class="badge">5</span> -->
                 </a>
 
                 <a href="deposits-mgt.html">
-                    <span class="icon"><span class="icon"><i class="fa-solid fa-circle-down"></i></span></span>
+                    <span class="icon"><i class="fa-solid fa-circle-down"></i></span>
                     <span>Deposits</span>
                 </a>
 
                 <a href="trades-mgt.html">
-                    <span class="icon"><i class="fa-solid fa-refresh"></i></span>
+                    <span class="icon"><i class="fa-solid fa-refresh"></i>
+                    </span>
                     <span>Trades</span>
                 </a>
 
                 <a href="withdrawals-mgt.html">
-                    <span class="icon"><span class="icon"><i class="fa-solid fa-circle-up"></i></span></span>
+                    <span class="icon"><i class="fa-solid fa-circle-up"></i></span>
                     <span>Withdrawals</span>
                 </a>
 
@@ -69,7 +70,7 @@
                     <span>Kyc Review</span>
                 </a>
 
-                <a href="subs-mgt.html">
+                <a class="active" href="#">
                     <span class="icon"><i class="fa-solid fa-repeat"></i>
                     </span>
                     <span>Subscriptions</span>
@@ -127,82 +128,8 @@
             </div>
 
 
-            <!-- USERS CARD -->
-            <!-- ADMIN USERS TABLE -->
-            <div class="admin-users-container card">
-                <table class="admin-users-table" id="adminUsersTable">
-                    <thead>
-                        <tr>
-                            <th>Actions</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Balance</th>
-                            <th>Deposits</th>
-                            <th>Withdrawals</th>
-                            <th>UID</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adminUsersBody"></tbody>
-                </table>
-            </div>
+            <!-- ADMIN SUBS MANAGEMENT TABLE -->
 
-            <!-- DELETE CONFIRM POPUP -->
-            <div class="admin-popup-overlay" id="deletePopupOverlay">
-                <div class="admin-popup">
-                    <h3>Are you sure you want to delete this user?</h3>
-                    <p>This action cannot be undone.</p>
-                    <div class="admin-popup-buttons">
-                        <button class="admin-btn admin-btn-secondary" id="deleteCancel">Back</button>
-                        <button class="admin-btn admin-btn-danger" id="deleteConfirm">Delete</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EDIT MODAL -->
-            <div class="admin-modal-overlay" id="editModalOverlay">
-                <div class="admin-edit-modal">
-                    <div class="admin-modal-header">
-                        <button class="admin-modal-close" id="closeEditModal"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    <form class="admin-edit-form" id="adminEditForm">
-
-                        <div class="editGroup">
-                            <div><label for="editLastname">Name</label>
-                                <input type="text" id="editLastname" placeholder="No data">
-                            </div>
-                            <div>
-                                <label for="editBalance">Balance</label>
-                                <input type="number" id="editBalance" step="0.01" placeholder="No data">
-                            </div>
-                        </div>
-
-                        <div class="editGroup">
-                            <div>
-                                <label for="editDeposits">Deposits</label>
-                                <input type="number" id="editDeposits" step="0.01" placeholder="No data">
-                            </div>
-
-                            <div>
-                                <label for="editWithdrawals">Withdrawals</label>
-                                <input type="number" id="editWithdrawals" step="0.01" placeholder="No data">
-                            </div>
-                        </div>
-
-                        <label for="editCryptoSignal">Crypto Signal</label>
-                        <input type="text" id="editCryptoSignal" placeholder="No data">
-
-                        <label for="editIndexSignal">Index Signal</label>
-                        <input type="text" id="editIndexSignal" placeholder="No data">
-
-                        <label for="editStockSignal">Stock Signal</label>
-                        <input type="text" id="editStockSignal" placeholder="No data">
-
-                        <button type="submit" class="admin-btn admin-btn-primary">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
 
             <!--  -->
         </main>
@@ -224,8 +151,8 @@
     <!-- CLOSE EDIT MODAL -->
     <script>
         document.body.addEventListener('click', (e) => {
-            if (e.target.closest('#closeEditModal')) {
-                document.getElementById('editModalOverlay').classList.remove('active');
+            if (e.target.closest('#closeKycModal')) {
+                document.getElementById('kycEditOverlay').classList.remove('active');
             }
         });
     </script>
