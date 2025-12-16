@@ -1,4 +1,4 @@
-// ORDER.JS — FINAL WITH EMAILJS ADMIN NOTIFICATION ON TRADE
+// ORDER.JS
 
 import { app, auth, db } from "/assets/js/firebase-init.js";
 
@@ -13,8 +13,8 @@ import {
 
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 
-// EMAILJS INIT — ADD YOUR SERVICE ID & TEMPLATE ID
-emailjs.init("OhUilmHKZjlDViGXq"); // ← Replace with your EmailJS public key
+// EMAILJS INIT
+emailjs.init("OhUilmHKZjlDViGXq");
 
 const el = id => document.getElementById(id);
 const assetEl = el('tx-asset');
@@ -50,7 +50,7 @@ function formatMoney(n) {
     return Number(n).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
 
-// CREATE ORDER ROW — WITH CLOSE BUTTON
+// CREATE ORDER ROW
 function createOrderRow(trade, tradeId) {
     hideNoData();
 
@@ -223,7 +223,7 @@ async function submitTrade(direction) {
         const newRef = push(openOrdersRef);
         await set(newRef, tradeData);
 
-        // SEND EMAIL TO ADMIN — DOES NOT BLOCK TRADE
+        // SEND EMAIL TO ADMIN
         sendTradeNotification(user, tradeData);
 
         amountEl.value = "";
