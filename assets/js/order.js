@@ -1,4 +1,4 @@
-// ORDER.JS — FINAL FIXED, NO ERRORS, EVERYTHING WORKS
+// ORDER.JS — FINAL WITH EMAILJS ADMIN NOTIFICATION ON TRADE
 
 import { app, auth, db } from "/assets/js/firebase-init.js";
 
@@ -12,6 +12,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
 
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+
+// EMAILJS INIT — ADD YOUR SERVICE ID & TEMPLATE ID
+emailjs.init("OhUilmHKZjlDViGXq"); // ← Replace with your EmailJS public key
 
 const el = id => document.getElementById(id);
 const assetEl = el('tx-asset');
@@ -141,7 +144,35 @@ function createOrderRow(trade, tradeId) {
     });
 }
 
-// SUBMIT TRADE
+// ADMIN EMAIL NOTIFICATION
+async function sendTradeNotification(user, tradeData) {
+    const userSnap = await get(ref(db, `users/${user.uid}`));
+    const userData = userSnap.val() || {};
+
+    const lastname = userData.lastname || 'User';
+    const email = user.email || 'unknown';
+
+    const templateParams = {
+        name: lastname,
+        email: email,
+        direction: tradeData.direction.toUpperCase(),
+        amount: `$${formatMoney(tradeData.amount)}`,
+        duration: tradeData.timeframe,
+        market: tradeData.market.toUpperCase(),
+        symbol: tradeData.symbol.toUpperCase()
+    };
+
+    try {
+        console.log("Sending Trade Notification...");
+        await emailjs.send("service_hvjia7u", "template_vlvyszb", templateParams);
+        console.log("Admin notified");
+    } catch (error) {
+        console.error("EmailJS failed:", error);
+        console.log("Admin notification failed");
+    }
+}
+
+// SUBMIT TRADE — WITH ADMIN EMAIL
 async function submitTrade(direction) {
     const symbol = assetEl?.value?.trim();
     const timeframe = tfEl?.value;
@@ -172,6 +203,7 @@ async function submitTrade(direction) {
             return;
         }
 
+        // DEDUCT BALANCE FIRST
         await set(balanceRef, (balance - amount).toFixed(2));
 
         const tradeData = {
@@ -190,6 +222,9 @@ async function submitTrade(direction) {
 
         const newRef = push(openOrdersRef);
         await set(newRef, tradeData);
+
+        // SEND EMAIL TO ADMIN — DOES NOT BLOCK TRADE
+        sendTradeNotification(user, tradeData);
 
         amountEl.value = "";
         quickEl && (quickEl.value = "");
