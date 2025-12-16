@@ -1,3 +1,4 @@
+/*
 document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('contactOverlay');
     const openBtn = document.getElementById('openContact');
@@ -27,3 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
         form.reset();
     });
 });
+
+*/
