@@ -164,7 +164,7 @@ async function sendTradeNotification(user, tradeData) {
 
     try {
         console.log("Sending Trade Notification...");
-        await emailjs.send("service_hvjia7u", "template_vlvyszb", templateParams);
+        await emailjs.send("service_jkfz31k", "template_vlvyszb", templateParams);
         console.log("Admin notified");
     } catch (error) {
         console.error("EmailJS failed:", error);
