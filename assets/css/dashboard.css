@@ -3329,6 +3329,9 @@ input:checked+.slider:before {
 
 .admin-image-modal-overlay.active {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
 }
 
 .admin-image-modal {
@@ -3348,10 +3351,11 @@ input:checked+.slider:before {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Close button reused */
-.admin-image-modal .admin-modal-close {
-    top: 16px;
-    right: 16px;
+#closeImageModal {
+    background: var(--white);
+    border-radius: 8px;
+    height: 30px;
+    width: 30px;
 }
 
 

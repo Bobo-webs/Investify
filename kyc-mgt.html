@@ -196,8 +196,10 @@
 
             <!-- IMAGE VIEW MODAL -->
             <div class="admin-image-modal-overlay" id="imageViewOverlay">
-                <div class="admin-image-modal">
+                <div class="admin-modal-header">
                     <button class="admin-modal-close" id="closeImageModal"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="admin-image-modal">
                     <img id="imageView" src="" alt="Document Image">
                 </div>
             </div>
@@ -225,6 +227,15 @@
         document.body.addEventListener('click', (e) => {
             if (e.target.closest('#closeKycModal')) {
                 document.getElementById('kycEditOverlay').classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- CLOSE EDIT MODAL -->
+    <script>
+        document.body.addEventListener('click', (e) => {
+            if (e.target.closest('#closeImageModal')) {
+                document.getElementById('imageViewOverlay').classList.remove('active');
             }
         });
     </script>

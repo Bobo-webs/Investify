@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="admin-image-btn view" data-image="${kyc.idFront}">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
-                            <a class="admin-image-btn download" href="${kyc.idFront}" download="idFront.jpg">
+                            <a class="admin-image-btn download" href="${kyc.idFront}" download="${kyc.userUid}-front.jpg">
                                 <i class="fa-solid fa-download"></i>
                             </a>
                         </div>
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="admin-image-btn view" data-image="${kyc.idBack || ''}">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
-                            <a class="admin-image-btn download" href="${kyc.idBack || '#'}" download="idBack.jpg" ${kyc.idBack ? '' : 'disabled'}>
+                            <a class="admin-image-btn download" href="${kyc.idBack || '#'}" download="${kyc.userUid}-back.jpg" ${kyc.idBack ? '' : 'disabled'}>
                                 <i class="fa-solid fa-download"></i>
                             </a>
                             ${kyc.idBack ? '' : '<span>No image</span>'}
