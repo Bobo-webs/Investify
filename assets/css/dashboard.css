@@ -3384,6 +3384,59 @@ input:checked+.slider:before {
 }
 
 
+/* ======== GLOBAL ADMIN SEARCH ========*/
+.admin-search-toggle {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 -15px 0 !important;
+    justify-content: center;
+}
+
+.admin-search-input {
+    flex: 1;
+    max-width: 0;
+    opacity: 0;
+    padding: 8px 15px;
+    border: 1px solid var(--hr);
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.admin-search-input.show {
+    max-width: 400px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.admin-search-input:focus {
+    border-color: var(--accent);
+}
+
+.admin-users-table tr.hidden {
+    display: none;
+}
+
+
+/* SEARCH NOT FOUND MESSAGE */
+.admin-search-empty {
+    display: none;
+    text-align: left;
+    padding: 24px;
+    font-size: 15px;
+    color: var(--accent);
+}
+
+.admin-search-empty.show {
+    display: table-row;
+}
+
+.admin-search-empty td {
+    padding: 24px;
+    font-style: italic;
+    border: none;
+}
 
 
 

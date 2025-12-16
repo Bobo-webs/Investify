@@ -18,6 +18,7 @@
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/admin.js"></script>
     <script type="module" src="/assets/js/kyc-mgt.js"></script>
+    <script src="/assets/js/admin-search.js"></script>
 </head>
 
 <body>
@@ -102,6 +103,7 @@
                 </div>
 
                 <div class="topbar-right">
+                    <a class="home-icon" id="adminSearchBtn"><i class="fa-solid fa-search"></i></a>
                     <a href="index.html" class="home-icon"><i class="fa-solid fa-house"></i></a>
                     <a href="#" class="home-icon theme-toggle">
                         <i class="fa-solid fa-sun"></i>
@@ -128,6 +130,12 @@
             </div>
 
 
+            <!-- GLOBAL SEARCH TOGGLE -->
+            <div class="admin-search-toggle">
+                <input type="text" class="admin-search-input" id="adminSearchInput"
+                    placeholder="Search...">
+            </div>
+
             <!-- ADMIN KYC REVIEW TABLE -->
             <div class="admin-users-container card">
                 <table class="admin-users-table" id="adminKycTable">
@@ -146,7 +154,10 @@
                             <th>Phone</th>
                         </tr>
                     </thead>
-                    <tbody id="adminKycBody"></tbody>
+                    <tbody id="adminKycBody">
+                        <!-- DB data populates here -->
+
+                    </tbody>
                 </table>
             </div>
 

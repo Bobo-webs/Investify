@@ -18,6 +18,7 @@
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/admin.js"></script>
     <script type="module" src="/assets/js/trades-mgt.js"></script>
+    <script src="/assets/js/admin-search.js"></script>
 </head>
 
 <body>
@@ -101,6 +102,7 @@
                 </div>
 
                 <div class="topbar-right">
+                    <a class="home-icon" id="adminSearchBtn"><i class="fa-solid fa-search"></i></a>
                     <a href="index.html" class="home-icon"><i class="fa-solid fa-house"></i></a>
                     <a href="#" class="home-icon theme-toggle">
                         <i class="fa-solid fa-sun"></i>
@@ -126,6 +128,11 @@
                 </div>
             </div>
 
+            <!-- GLOBAL SEARCH TOGGLE -->
+            <div class="admin-search-toggle">
+                <input type="text" class="admin-search-input" id="adminSearchInput"
+                    placeholder="Search...">
+            </div>
 
             <!-- ADMIN TRADES TABLE -->
             <div class="admin-users-container card"> <!-- Reused class -->
@@ -133,7 +140,7 @@
                     <thead>
                         <tr>
                             <th>Actions</th>
-                            <th>Name</th>
+                            <th>User</th>
                             <th>Trade ID</th>
                             <th>Trade Type</th>
                             <th>Opened At</th>
@@ -143,10 +150,13 @@
                             <th>Symbol</th>
                             <th>Timeframe (secs)</th>
                             <th>Outcome</th>
-                            <th>Email</th>
+                            <th>User Email</th>
                         </tr>
                     </thead>
-                    <tbody id="adminTradesBody"></tbody>
+                    <tbody id="adminTradesBody">
+                        <!-- DB data populates here -->
+
+                    </tbody>
                 </table>
             </div>
 

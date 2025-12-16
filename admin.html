@@ -18,6 +18,7 @@
     <script type="module" src="/assets/js/firebase-init.js"></script>
     <script type="module" src="/assets/js/admin.js"></script>
     <script type="module" src="/assets/js/users-mgt.js"></script>
+    <script src="/assets/js/admin-search.js"></script>
 </head>
 
 <body>
@@ -101,6 +102,7 @@
                 </div>
 
                 <div class="topbar-right">
+                    <a class="home-icon" id="adminSearchBtn"><i class="fa-solid fa-search"></i></a>
                     <a href="index.html" class="home-icon"><i class="fa-solid fa-house"></i></a>
                     <a href="#" class="home-icon theme-toggle">
                         <i class="fa-solid fa-sun"></i>
@@ -127,7 +129,12 @@
             </div>
 
 
-            <!-- USERS CARD -->
+            <!-- GLOBAL SEARCH TOGGLE -->
+            <div class="admin-search-toggle">
+                <input type="text" class="admin-search-input" id="adminSearchInput"
+                    placeholder="Search...">
+            </div>
+
             <!-- ADMIN USERS TABLE -->
             <div class="admin-users-container card">
                 <table class="admin-users-table" id="adminUsersTable">
@@ -142,7 +149,10 @@
                             <th>UID</th>
                         </tr>
                     </thead>
-                    <tbody id="adminUsersBody"></tbody>
+                    <tbody id="adminUsersBody">
+                        <!-- DB data populates here -->
+
+                    </tbody>
                 </table>
             </div>
 
