@@ -93,15 +93,23 @@ document.addEventListener("DOMContentLoaded", () => {
             hideLoading();
         });
 
-        // Load current plan into sidebar
+        // Load current plan into sidebar — FROM allSubscriptions (active status)
         if (subPlanNameEl) {
-            const planRef = dbRef(db, `users/${user.uid}/subscription/plan`);
+            const subsRef = dbRef(db, `users/${user.uid}/allSubscriptions`);
 
-            onValue(planRef, (snapshot) => {
-                let plan = snapshot.val() || "free";
+            onValue(subsRef, (snapshot) => {
+                let currentPlan = "free"; // fallback
 
-                const formatted = plan.charAt(0).toUpperCase() + plan.slice(1);
+                if (snapshot.exists()) {
+                    snapshot.forEach(child => {
+                        const sub = child.val();
+                        if (sub.status === "active") {
+                            currentPlan = sub.plan || "free";
+                        }
+                    });
+                }
 
+                const formatted = currentPlan.charAt(0).toUpperCase() + currentPlan.slice(1);
                 subPlanNameEl.innerHTML = `${formatted} <span>Plan</span>`;
             }, (error) => {
                 console.warn("Failed to load plan:", error);
