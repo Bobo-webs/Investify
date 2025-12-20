@@ -15,7 +15,7 @@
   <!-- Links -->
   <link rel="icon" href="./assets/images/logo-icon.jpg" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="//fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style-starter.css" />
@@ -25,48 +25,72 @@
 </head>
 
 <body>
-  <!--header-->
+  <!--/Header-->
   <header id="site-header" class="fixed-top">
     <div class="container">
-      <nav class="navbar navbar-expand-lg stroke px-0">
+      <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
         <h1>
           <a class="navbar-brand" href="index.html">
-            <span class="fa" style="background: #fff; padding: 2px; border-radius: 5px">
-              <img src="assets/images/logo.png" alt="investify-logo" style="width: 1.5em; height: 1em" />
-            </span>
-            Investify
+            <img src="/assets/images/logo.png" alt="">
+            <span class="w3yellow">Investify</span>
           </a>
         </h1>
-        <!-- if logo is image enable this   
-  <a class="navbar-brand" href="#index.html">
-      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-  </a> -->
-        <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
-          data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon fa icon-expand fa-bars-staggered"></span>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
           <span class="navbar-toggler-icon fa icon-close fa-times"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item @@home__active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav mx-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
             </li>
-            <li class="nav-item @@about__active">
+            <li class="nav-item">
               <a class="nav-link" href="about.html">About</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="services.html">Services</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="services.html">Services</a>
             </li>
-            <li class="nav-item @@contact__active">
+            <li class="nav-item">
+              <a class="nav-link" href="terms.html">Usage Policy</a>
+            </li>
+            <li class="nav-item tradable-dropdown">
+              <a class="nav-link" href="#" id="marketsDropdown">
+                Tradable Markets
+                <i class="fa fa-chevron-down ms-2 dropdown-arrow"></i>
+              </a>
+
+              <div class="markets-mega">
+                <div class="markets-grid">
+
+                  <div class="market-col">
+                    <h6>Markets</h6>
+                    <a href="crypto-mkt.html">Crypto</a>
+                    <a href="stock-mkt.html">Stocks</a>
+                    <a href="index-mkt.html">Indices</a>
+                  </div>
+
+                  <div class="market-col">
+                    <h6>Live Charts</h6>
+                    <a href="bitcoin.html">Bitcoin</a>
+                    <a href="tsla.html">Tesla</a>
+                    <a href="dji.html">Dow Jones</a>
+                    <a href="unilever.html">Unilever</a>
+                    <a href="eurusd.html">EUR/USD</a>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="register.html">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">Login</a>
+          </ul>
+          <!--/search-right-->
+          <ul class="header-search me-lg-4">
+            <li class="nav-item search-right">
+              <a href="register.html" class="btn search-btn btn-primary" title="search">
+                Start Trading</a>
             </li>
           </ul>
         </div>
@@ -88,432 +112,365 @@
       </nav>
     </div>
   </header>
-  <!--/header-->
-  <div class="inner-banner"></div>
-  <section class="w3l-breadcrumb">
-    <div class="container">
-      <ul class="breadcrumbs-custom-path">
-        <li><a href="index.html">Home</a></li>
-        <li class="active">
-          <span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>
-          Services
-        </li>
-      </ul>
-    </div>
-  </section>
-  <!-- services page block grids -->
-  <section class="w3l-services py-5">
-    <div class="container py-lg-5 py-md-4 py-2">
-      <div class="row bottom-ab-grids">
-        <div class="col-lg-6 bottom-ab-left align-self">
-          <h3 class="title-big mb-4">
-            Trust us to make your financial growth our priority.
-          </h3>
-          <p class="">
-            Tailored investment strategies designed to align with individual
-            financial goals and risk preferences.
-          </p>
-          <div class="cont-4 mt-lg-5 mt-4">
-            <div class="list mb-4">
-              <span class="fa">✅️</span>
-              <div class="list-info">
-                <h4>Socially Responsible Investing (SRI)</h4>
-                <p>
-                  Investment options that align with ethical, environmental,
-                  or social values.
-                </p>
-              </div>
-            </div>
-            <div class="list">
-              <span class="fa">✅️</span>
-              <div class="list-info">
-                <h4>Retirement Planning</h4>
-                <p>
-                  Helping investors secure their financial future with IRAs,
-                  401(k)s, and pension plans.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 bottom-right-grids mt-lg-0 mt-5">
-          <img src="assets/images/inv.jfif" alt="" class="radius-image img-fluid" />
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- //services page block grids -->
-  <section class="w3l-content-4 py-5" id="features">
-    <div class="content-4-main py-lg-5 py-md-4 py-2">
+
+  <!--/inner-page-->
+  <div class="inner-banner py-5">
+    <section class="w3l-breadcrumb text-left py-sm-5">
       <div class="container">
-        <div class="content-info-in row">
-          <div class="content-left col-lg-6">
-            <h3 class="title-small">Our Features</h3>
-            <h3 class="title-big">Invest wisely, live richly.</h3>
+        <div class="w3breadcrumb-gids">
+          <div class="w3breadcrumb-left text-left">
+            <h2 class="inner-w3-title mt-lg-5 mt-4">Services</h2>
+          </div>
+          <div class="w3breadcrumb-right">
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="index.html">Home</a></li>
+              <li class="active">
+                <span class="fas fa-arrow-right mx-2"></span> Services
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!--/w3l-index3-->
+  <section class="w3l-index-about py-5" id="about2">
+    <div class="container py-md-5 py-2">
+      <div class="row">
+        <div class="col-lg-6 pe-lg-5">
+          <div class="w3l-abouthny-img">
+            <img src="assets/images/wall8.jpg" alt="" class="img-fluid radius-image" />
+          </div>
+        </div>
+        <div class="col-lg-6 mt-lg-0 mt-5">
+          <div class="w3l-abouthny-info">
+            <h6 class="title-subw3hny">What We Offer</h6>
+            <h3 class="title-w3l">
+              We power confident trading across global markets.
+            </h3>
             <p class="mt-4">
-              Making informed investment decisions can significantly impact
-              your financial future. By strategically allocating your
-              resources and choosing investments plans that align with your
-              goals, you set yourself up for long-term success. Wise investing
-              not only helps you build wealth but also enables you to enjoy a
-              richer, more fulfilling life with the financial security and
-              freedom you've worked hard to achieve.
+              At Investify, we provide a robust trading environment designed for clarity, speed, and control. Our
+              platform connects traders to real-time market data, advanced analytical tools, and secure execution
+              systems that support informed decision-making in fast-moving markets. Every trade is processed with
+              precision, ensuring transparency and reliability from order placement to execution.
             </p>
-          </div>
-          <div class="content-right col-lg-6 pl-lg-4 mt-lg-0 mt-md-5 mt-5">
-            <div class="row content4-right-grids mb-lg-5 mb-4">
-              <div class="col-2 content4-right-icon">
-                <div class="content4-icon">
-                  <span class="fa">⚙️</span>
-                </div>
-              </div>
-              <div class="col-10 content4-right-info">
-                <h6><a href="#url">Pioneering Strategy</a></h6>
-                <p>
-                  Our Pioneering strategy involves leveraging cutting-edge
-                  technologies and unconventional ideas to achieve superior
-                  results and gain a competitive edge.
-                </p>
-              </div>
-            </div>
-            <div class="row content4-right-grids mb-lg-5 mb-4">
-              <div class="col-2 content4-right-icon">
-                <div class="content4-icon">
-                  <span class="fa">🤖</span>
-                </div>
-              </div>
-              <div class="col-10 content4-right-info">
-                <h6><a href="#url">AI-Driven Signals</a></h6>
-                <p>
-                  We also leverage artificial intelligence to provide
-                  personalized investment recommendations and market trends.
-                </p>
-              </div>
-            </div>
-            <div class="row content4-right-grids">
-              <div class="col-2 content4-right-icon">
-                <div class="content4-icon">
-                  <span class="fa">☎️</span>
-                </div>
-              </div>
-              <div class="col-10 content4-right-info">
-                <h6><a href="contact.html">24/7 Support</a></h6>
-                <p>
-                  Offering round-the-clock assistance to ensure that investors
-                  have access to help whenever they need it, fostering a
-                  seamless investment experience.
-                </p>
-              </div>
-            </div>
+            <ul class="w3l-right-book w3l-right-book-grid mt-md-5 mt-4">
+              <li><span class="fas fa-check"></span> Multi-Asset Market Access</li>
+              <li>
+                <span class="fas fa-check"></span> Risk Management Controls
+              </li>
+              <li>
+                <span class="fas fa-check"></span> Intuitive Trading Interface
+              </li>
+              <li><span class="fas fa-check"></span> Advanced Charting Tools</li>
+              <li><span class="fas fa-check"></span> 24/7 Client Support</li>
+              <li>
+                <span class="fas fa-check"></span> Fast Trade Execution
+              </li>
+            </ul>
+            <a href="register.html" class="btn btn-style btn-primary mt-4">Open Account</a>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- /bottom-grids-->
-  <section class="w3l-bottom-grids-6 w3l-services py-5" id="services">
-    <div class="container py-lg-5 py-md-4">
-      <h6 class="title-small text-center">Our Services</h6>
-      <h3 class="title-big mb-md-5 mb-4 text-center">
-        Look our best Services
-      </h3>
-      <div class="grids-area-hny main-cont-wthree-fea row">
-        <div class="col-lg-4 col-md-6 grids-feature">
-          <div class="area-box">
-            <span class="fa">📊</span>
-            <h4>
-              <a href="#feature" class="title-head">Financial Planning</a>
-            </h4>
-            <p class="">
-              Comprehensive planning to manage financial goals, budgets, and
-              savings strategies.
-            </p>
+
+  <!--/bottom-3-grids-->
+  <div class="w3l-3-grids py-5" id="grids-3">
+    <div class="container py-md-4">
+      <div class="row">
+        <div class="col-md-6 mt-md-0">
+          <div class="grids3-info position-relative">
+            <a href="register.html" class="d-block zoom"><img src="assets/images/wall12.jpeg" alt=""
+                class="img-fluid news-image" /></a>
+            <div class="w3-grids3-info">
+              <h4 class="gdnhy-1">
+                <a href="register.html">Trade Market Assets with Confidence</a>
+                <a class="w3item-link btn btn-style mt-4" href="register.html">
+                  Start Trading
+                </a>
+              </h4>
+            </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 grids-feature mt-md-0 mt-4">
-          <div class="area-box">
-            <span class="fa">🏢</span>
-            <h4>
-              <a href="#feature" class="title-head">Portfolio Management</a>
-            </h4>
-            <p class="">
-              Customized management of your investments to achieve specific
-              financial goals.
-            </p>
+        <div class="col-md-6 mt-md-0 mt-4 grids3-info2">
+          <div class="grids3-info position-relative">
+            <a href="register.html" class="d-block zoom"><img src="assets/images/wall13.jpg" alt=""
+                class="img-fluid news-image" /></a>
+            <div class="w3-grids3-info second">
+              <h4 class="gdnhy-1">
+                <a href="register.html">Your Assets, Your Terms</a>
+                <a class="w3item-link btn btn-style mt-4" href="register.html">
+                  Start Trading
+                </a>
+              </h4>
+            </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 grids-feature mt-lg-0 mt-4">
-          <div class="area-box">
-            <span class="fa">💰</span>
-            <h4>
-              <a href="#feature" class="title-head">Tax Optimization</a>
-            </h4>
-            <p class="">
-              Strategies to minimize tax liabilities while maximizing
-              investment gains and returns.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 grids-feature mt-lg-5 mt-4">
-          <div class="area-box">
-            <span class="fa">💼</span>
-            <h4>
-              <a href="#feature" class="title-head">Wealth Advisory</a>
-            </h4>
-            <p class="">
-              Expert advice to help investors create effective strategies for
-              long-term success.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 grids-feature mt-lg-5 mt-4">
-          <div class="area-box">
-            <span class="fa">💵</span>
-            <h4>
-              <a href="#feature" class="title-head">Cash Management</a>
-            </h4>
-            <p class="">
-              Solutions for managing liquid assets, optimizing cash flow, and
-              earning interest on idle funds.
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 grids-feature mt-lg-5 mt-4">
-          <div class="area-box">
-            <span class="fa">🏷️</span>
-            <h4>
-              <a href="#feature" class="title-head">Best pricing</a>
-            </h4>
-            <p class="">
-              Competitive and clear pricing that maximizes value and minimizes
-              costs.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- //bottom-grids-->
-  <!-- middle -->
-  <div class="middle py-5" id="call">
-    <div class="container py-lg-3">
-      <div class="welcome-left text-center py-md-5 py-3">
-        <h3 class="title-big">Still Have Some Questions Left?</h3>
-        <a href="contact.html" class="btn btn-style btn-primary mt-sm-5 mt-4 mr-2">Contact Us</a>
       </div>
     </div>
   </div>
-  <!-- //middle -->
-  <!-- footer -->
-  <section class="w3l-footer-29-main">
-    <div class="footer-29 py-5">
-      <div class="container py-lg-4">
-        <div class="row footer-top-29">
-          <div class="col-lg-4 col-md-6 footer-list-29 footer-1 pr-lg-5">
-            <div class="footer-logo mb-4">
-              <a class="navbar-brand" href="index.html">
-                <span class="fa" style="background: #fff; padding: 2px; border-radius: 5px">
-                  <img src="assets/images/logo.png" alt="investify-logo" style="width: 1.5em; height: 1em" />
-                </span>
-                Investify</a>
+
+  <!--/register-step-section-->
+  <section class="w3l-features w3l-services-page py-5" id="work">
+    <div class="container py-lg-5 py-md-4 py-2">
+      <div class="title-content text-center mb-lg-3 mb-4">
+        <h6 class="title-subw3hny mb-1">Get Started</h6>
+        <h3 class="title-w3l">How To Trade With Investify</h3>
+      </div>
+      <div class="main-cont-wthree-2">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mt-lg-5 mt-4">
+            <div class="grids-1 box-wrap">
+              <div class="icon">
+                <i class="fa-solid fa-1"></i>
+              </div>
+              <div class="icon-info text-left">
+                <h4>
+                  <a href="register.html" class="title-head mt-0">Open your account</a>
+                </h4>
+                <p class="text-para">
+                  Complete your registration to activate trading privileges
+                </p>
+              </div>
             </div>
-            <p>
-              We stand out as a platform by advancing core technologies, strategically leveraging cryptocurrency
-              innovation, stock markets, and the evolving landscape of digital asset development.
-            </p>
           </div>
-          <div class="col-lg-2 col-md-6 col-sm-5 col-5 footer-list-29 footer-2 mt-md-0 mt-5">
-            <ul>
-              <h6 class="footer-title-29">Quick Links</h6>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="index.html#pricing"> Pricing plans</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="contact.html">Contact us</a></li>
-            </ul>
+          <div class="col-lg-4 col-md-6 mt-lg-5 mt-4">
+            <div class="grids-1 box-wrap">
+              <div class="icon">
+                <i class="fa-solid fa-2"></i>
+              </div>
+              <div class="icon-info text-left">
+                <h4>
+                  <a href="deposit.html" class="title-head mt-0">
+                    Fund your account</a>
+                </h4>
+                <p class="text-para">
+                  Deposit capital to enable participation in the markets
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-7 col-7 footer-list-29 footer-3 mt-lg-0 mt-5">
-            <h6 class="footer-title-29">Head Office</h6>
-            <p class="mb-3">
-              C11 C11 Generator Hall Electric Wharf, Sandy Lane, Coventry,
-              West Midlands, England, CV1 4JL
-            </p>
-            <p class="mb-2" style="overflow-x: scroll; scrollbar-width: thin">
-              <span class="fa fa-envelope-o"></span>
-              <a href="mailto:info.investify.traders@gmail.com">info.investify.traders@gmail.com</a>
-            </p>
-          </div>
-          <div class="col-lg-3 col-md-6 footer-list-29 footer-4 mt-lg-0 mt-5">
-            <h6 class="footer-title-29">Documents</h6>
-            <ul>
-              <li>
-                <a href="assets/images/Investify.pdf">Company Details</a>
-              </li>
-              <li>
-                <a href="assets/images/Investify.pdf">Company House Certificate</a>
-              </li>
-              <li><a href="about.html#testimonials">Testimonials</a></li>
-              <li><a>Digital Currency</a></li>
-            </ul>
+          <div class="col-lg-4 col-md-6 mt-lg-5 mt-4">
+            <div class="grids-1 box-wrap">
+              <div class="icon">
+                <i class="fa-solid fa-3"></i>
+              </div>
+              <div class="icon-info text-left">
+                <h4>
+                  <a href="dashboard-crypto.html" class="title-head mt-0">Start trading</a>
+                </h4>
+                <p class="text-para">
+                  Access the markets to execute trades with precision
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- copyright -->
-    <section class="w3l-copyright text-center">
-      <div class="container">
-        <p class="copy-footer-29">
-          copyright © 2025 Investify Traders Limited. All rights reserved
+  </section>
+
+  <!-- /faq accordion -->
+  <section id="faq" class="accordion mt-5 mb-5">
+    <h3 class="title-w3l text-center mb-5">FAQ</h3>
+    <div class="accordion-item">
+      <button class="accordion-header">
+        What is Investify?
+        <i class="fa fa-chevron-down accordion-icon"></i>
+      </button>
+      <div class="accordion-body">
+        <p>
+          Investify is an online trading platform that allows users to trade global markets, including stocks, indices,
+          and cryptocurrencies.
         </p>
       </div>
+    </div>
 
-      <!-- move top -->
-      <button onclick="topFunction()" id="movetop" title="Go to top">
-        &#10548;
+    <div class="accordion-item">
+      <button class="accordion-header">
+        Can I start trading immediately after registration?
+        <i class="fa fa-chevron-down accordion-icon"></i>
       </button>
-      <script>
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-          scrollFunction();
-        };
+      <div class="accordion-body">
+        <p>
+          Yes, after registration is complete and you have funded your account, you can start trading instantly.
+        </p>
+      </div>
+    </div>
 
-        function scrollFunction() {
-          if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
-          ) {
-            document.getElementById("movetop").style.display = "block";
-          } else {
-            document.getElementById("movetop").style.display = "none";
-          }
-        }
+    <div class="accordion-item">
+      <button class="accordion-header">
+        Which assets can I trade on Investify?
+        <i class="fa fa-chevron-down accordion-icon"></i>
+      </button>
+      <div class="accordion-body">
+        <p>
+          Currently, you can trade cryptocurrencies, stocks, and indices. Forex and CFDs trading are coming soon.
+        </p>
+      </div>
+    </div>
 
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
-      </script>
-      <!-- /move top -->
-    </section>
-    <!-- //copyright -->
+    <div class="accordion-item">
+      <button class="accordion-header">
+        Is Investify safe and regulated?
+        <i class="fa fa-chevron-down accordion-icon"></i>
+      </button>
+      <div class="accordion-body">
+        <p>
+          We employ strong security measures to protect your funds and personal information.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header">
+        How can I deposit and withdraw funds?
+        <i class="fa fa-chevron-down accordion-icon"></i>
+      </button>
+      <div class="accordion-body">
+        <p>
+          Deposits and withdrawals can be made via supported payment methods listed in your account dashboard.
+          Processing times vary by method.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header">
+        Do you provide trading tools or educational resources?
+        <i class="fa fa-chevron-down accordion-icon"></i>
+      </button>
+      <div class="accordion-body">
+        <p>
+          Yes, Investify offers charts, analytics, and learning resources to help you make informed trading decisions.
+        </p>
+      </div>
+    </div>
   </section>
-  <!-- //footer -->
 
-  <!--  javascripts file here -->
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!--/footer-->
+  <footer class="w3l-footer">
+    <div class="w3l-footer-16 py-5">
+      <div class="container py-md-5 py-3 pb-0">
 
-  <script src="assets/js/theme-change.js"></script>
-  <!-- //light and dark mode switch js -->
+        <div class="row footer-p">
 
-  <script src="assets/js/circles.js"></script>
+          <!-- Logo / Description -->
+          <div class="col-lg-3 col-md-12 pe-lg-5">
+            <h2 class="footerw3l-logo">
+              <a class="navbar-brand" href="index.html">
+                <img src="/assets/images/logo.png" alt="">
+                <span class="w3yellow">Investify</span>
+              </a>
+            </h2>
+            <p class="mt-3">
+              We stand out as a platform by advancing core technologies, strategically leveraging
+              cryptocurrency innovation, stock markets, and the evolving landscape of digital asset
+              development.
+            </p>
+          </div>
 
-  <!-- stats number counter-->
-  <script src="assets/js/jquery.waypoints.min.js"></script>
-  <script src="assets/js/jquery.countup.js"></script>
+          <!-- Links Section -->
+          <div class="col-lg-9 col-md-12 mt-lg-0 mt-4">
+            <div class="row">
+
+              <div class="col-lg-3 col-6 column">
+                <h3>About Us</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="index.html">Homepage</a></li>
+                  <li><a href="about.html">About Us</a></li>
+                  <li><a href="services.html">Services</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="assets/images/Investify.pdf">Company Details</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-6 column">
+                <h3>Markets</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="crypto-mkt.html">Crypto</a></li>
+                  <li><a href="stock-mkt.html">Stocks</a></li>
+                  <li><a href="index-mkt.html">Indices</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-6 column mt-4 mt-lg-0">
+                <h3>Live Charts</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="bitcoin.html">Bitcoin</a></li>
+                  <li><a href="tsla.html">Tesla</a></li>
+                  <li><a href="dji.html">Dow Jones</a></li>
+                  <li><a href="unilever.html">Unilever</a></li>
+                  <li><a href="eurusd.html">EUR/USD</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-6 column mt-4 mt-lg-0">
+                <h3>Support</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="contact.html">Help Center</a></li>
+                  <li><a href="services.html#faq">FAQs</a></li>
+                  <li><a href="terms.html">Terms of Service</a></li>
+                  <li><a href="terms.html">Privacy Policy</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="below-section text-center pt-lg-4 mt-5">
+          <p class="copy-text">
+            &copy; 2025 Investify Traders Ltd. All rights reserved.
+          </p>
+          <ul class="footer-gd-16 d-flex justify-content-center">
+            <!-- social links if needed -->
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- move top -->
+  <button onclick="topFunction()" id="movetop" title="Go to top">
+    <span class="fas fa-arrow-up" aria-hidden="true"></span>
+  </button>
   <script>
-    $(".counter").countUp();
-  </script>
-  <!-- //stats number counter -->
+    window.onscroll = function () {
+      scrollFunction();
+    };
 
-  <!-- owl carousel -->
-  <script src="assets/js/owl.carousel.js"></script>
-  <!-- script for banner slider-->
-  <script>
-    $(document).ready(function () {
-      $(".owl-one").owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        responsiveClass: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplaySpeed: 1000,
-        autoplayHoverPause: false,
-        responsive: {
-          0: {
-            items: 1,
-          },
-          480: {
-            items: 1,
-          },
-          667: {
-            items: 1,
-          },
-          1000: {
-            items: 1,
-          },
-        },
-      });
-    });
-  </script>
-  <!-- //script -->
-  <!-- owl carousel -->
-
-  <!-- script for tesimonials carousel slider -->
-  <script>
-    $(document).ready(function () {
-      $("#owl-demo2").owlCarousel({
-        loop: true,
-        margin: 20,
-        nav: false,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
-            nav: false,
-          },
-          1000: {
-            items: 1,
-            nav: false,
-            loop: false,
-          },
-        },
-      });
-    });
-  </script>
-  <!-- //script for tesimonials carousel slider -->
-
-  <!-- disable body scroll which navbar is in active -->
-  <script>
-    $(function () {
-      $(".navbar-toggler").click(function () {
-        $("body").toggleClass("noscroll");
-      });
-    });
-  </script>
-  <!-- disable body scroll which navbar is in active -->
-
-  <!--/MENU-JS-->
-  <script>
-    $(window).on("scroll", function () {
-      var scroll = $(window).scrollTop();
-
-      if (scroll >= 80) {
-        $("#site-header").addClass("nav-fixed");
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        document.getElementById("movetop").style.display = "block";
       } else {
-        $("#site-header").removeClass("nav-fixed");
+        document.getElementById("movetop").style.display = "none";
       }
-    });
+    }
 
-    //Main navigation Active Class Add Remove
-    $(".navbar-toggler").on("click", function () {
-      $("header").toggleClass("active");
-    });
-    $(document).on("ready", function () {
-      if ($(window).width() > 991) {
-        $("header").removeClass("active");
-      }
-      $(window).on("resize", function () {
-        if ($(window).width() > 991) {
-          $("header").removeClass("active");
-        }
-      });
-    });
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   </script>
-  <!--//MENU-JS-->
 
+  <!-- Template JavaScript -->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/theme-change.js"></script>
+
+  <!-- //bootstrap -->
   <script src="assets/js/bootstrap.min.js"></script>
-  <!-- //bootstrap js -->
+
+  <!-- app.js -->
+  <script src="assets/js/app.js"></script>
 </body>
 
 </html>

@@ -1,1 +1,1 @@
-# Invesify Traders - v3
+# Invesify Traders - v3.0.0

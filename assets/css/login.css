@@ -23,9 +23,9 @@ a {
 }
 
 :root {
-  --pry-color: #133917;
+  --pry-color: #ff7800;
   --bg-color: #fff;
-  --hover: #2e7436;
+  --hover: #fd7e14;
 }
 
 /* Remove the light blue outline on mobile devices */
@@ -99,7 +99,7 @@ input[type="password"] {
   border: none;
   border-radius: 8px;
   background-color: var(--bg-color);
-  border-bottom: 2px solid #4a7d47;
+  border-bottom: 2px solid var(--pry-color);
   font-size: 18px;
   z-index: 3;
 }
@@ -201,7 +201,7 @@ label {
   font-size: 14px;
   top: -70px;
   transition: all 0.2s;
-  color: #4a7d47;
+  color: #000;
 }
 
 #email:focus~label,
@@ -209,7 +209,7 @@ label {
   font-size: 14px;
   top: -70px;
   transition: all 0.2s;
-  color: #4a7d47;
+  color: #000;
 }
 
 #email:valid~.error {

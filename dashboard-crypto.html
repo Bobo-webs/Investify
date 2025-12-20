@@ -9,6 +9,15 @@
   <!-- ======== Styling ======= -->
   <link rel="icon" href="/assets/images/logo-icon.jpg" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
   <link rel="stylesheet" href="/assets/css/dashboard.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -31,7 +40,7 @@
   </div>
 
   <!-- CONTACT MODAL -->
-  <div class="contact-overlay" id="contactOverlay">
+  <!-- <div class="contact-overlay" id="contactOverlay">
     <div class="contact-modal">
       <div class="contact-header">
         <h3>Contact Us</h3>
@@ -66,7 +75,7 @@
         </button>
       </form>
     </div>
-  </div>
+  </div> -->
 
   <div class="app" id="appRoot">
 
@@ -166,7 +175,7 @@
 
         <div class="topbar-right">
           <a href="contact.html" id="openContact" class="home-icon contact-btn"><i class="fa-solid fa-headset"></i></a>
-          <a href="index.html" class="home-icon"><i class="fa-solid fa-house"></i></a>
+          <a href="index.html" class="home-icon back-home"><i class="fa-solid fa-house"></i></a>
           <a href="#" class="home-icon theme-toggle">
             <i class="fa-solid fa-sun"></i>
             <i class="fa-solid fa-moon"></i>

@@ -51,19 +51,19 @@ function loadTradesHistory() {
                     const val = String(trade.outcome).trim();
 
                     if (val.toLowerCase() === "pending") {
-                        outcomeHTML = `<span style="color:var(--muted); font-style:italic">Pending</span>`;
+                        outcomeHTML = `<span style="color:var(--bs-gray); font-style:italic">Pending</span>`;
                     }
 
                     else if (val.startsWith('-') || parseFloat(val) < 0) {
-                        outcomeHTML = `<span style="color:var(--red); font-weight:bold">${val}</span>`;
+                        outcomeHTML = `<span style="color:var(--bs-red); font-weight:bold">${val}</span>`;
                     }
 
                     else {
-                        outcomeHTML = `<span style="color:var(--success-green); font-weight:bold">+${val}</span>`;
+                        outcomeHTML = `<span style="color:var(--bs-teal); font-weight:bold">+${val}</span>`;
                     }
                 } else {
 
-                    outcomeHTML = `<span style="color:var(--muted); font-style:italic">Pending</span>`;
+                    outcomeHTML = `<span style="color:var(--bs-gray); font-style:italic">Pending</span>`;
                 }
 
                 const row = document.createElement('tr');

@@ -15,58 +15,85 @@
   <!-- Links -->
   <link rel="icon" href="./assets/images/logo-icon.jpg" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="//fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style-starter.css" />
 
   <!-- ===== Script ===== -->
   <script src="/assets/js/network-state.js"></script>
+  <script src="/assets/js/toast.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="/assets/js/contact.js"></script>
 </head>
 
 <body>
-  <!--header-->
+  <!--/Header-->
   <header id="site-header" class="fixed-top">
     <div class="container">
-      <nav class="navbar navbar-expand-lg stroke px-0">
+      <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
         <h1>
           <a class="navbar-brand" href="index.html">
-            <span class="fa" style="background: #fff; padding: 2px; border-radius: 5px">
-              <img src="assets/images/logo.png" alt="investify-logo" style="width: 1.5em; height: 1em" />
-            </span>
-            Investify
+            <img src="/assets/images/logo.png" alt="">
+            <span class="w3yellow">Investify</span>
           </a>
         </h1>
-        <!-- if logo is image enable this   
-  <a class="navbar-brand" href="#index.html">
-      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-  </a> -->
-        <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
-          data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon fa icon-expand fa-bars-staggered"></span>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
           <span class="navbar-toggler-icon fa icon-close fa-times"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item @@home__active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav mx-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
             </li>
-            <li class="nav-item @@about__active">
+            <li class="nav-item">
               <a class="nav-link" href="about.html">About</a>
             </li>
-            <li class="nav-item @@services__active">
+            <li class="nav-item">
               <a class="nav-link" href="services.html">Services</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="contact.html">Contact</a>
+            <li class="nav-item">
+              <a class="nav-link" href="terms.html">Usage Policy</a>
+            </li>
+            <li class="nav-item tradable-dropdown">
+              <a class="nav-link" href="#" id="marketsDropdown">
+                Tradable Markets
+                <i class="fa fa-chevron-down ms-2 dropdown-arrow"></i>
+              </a>
+
+              <div class="markets-mega">
+                <div class="markets-grid">
+
+                  <div class="market-col">
+                    <h6>Markets</h6>
+                    <a href="crypto-mkt.html">Crypto</a>
+                    <a href="stock-mkt.html">Stocks</a>
+                    <a href="index-mkt.html">Indices</a>
+                  </div>
+
+                  <div class="market-col">
+                    <h6>Live Charts</h6>
+                    <a href="bitcoin.html">Bitcoin</a>
+                    <a href="tsla.html">Tesla</a>
+                    <a href="dji.html">Dow Jones</a>
+                    <a href="unilever.html">Unilever</a>
+                    <a href="eurusd.html">EUR/USD</a>
+                  </div>
+
+                </div>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="register.html">Register</a>
+              <a class="nav-link active" href="contact.html">Contact</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">Login</a>
+          </ul>
+          <!--/search-right-->
+          <ul class="header-search me-lg-4">
+            <li class="nav-item search-right">
+              <a href="register.html" class="btn search-btn btn-primary" title="search">
+                Start Trading</a>
             </li>
           </ul>
         </div>
@@ -88,331 +115,217 @@
       </nav>
     </div>
   </header>
-  <!--/header-->
-  <div class="inner-banner"></div>
-  <section class="w3l-breadcrumb">
-    <div class="container">
-      <ul class="breadcrumbs-custom-path">
-        <li><a href="index.html">Home</a></li>
-        <li class="active">
-          <span class="fa fa-arrow-right mx-2" aria-hidden="true"></span>
-          Contact Us
-        </li>
-      </ul>
+
+  <!--/inner-page-->
+  <div class="inner-banner py-5">
+    <section class="w3l-breadcrumb text-left py-sm-5">
+      <div class="container">
+        <div class="w3breadcrumb-gids">
+          <div class="w3breadcrumb-left text-left">
+            <h2 class="inner-w3-title mt-lg-5 mt-4">Contact Us</h2>
+          </div>
+          <div class="w3breadcrumb-right">
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="index.html">Home</a></li>
+              <li class="active">
+                <span class="fas fa-arrow-right mx-2"></span> Contact
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!--//inner-page-->
+  <!-- contacts-5-grid -->
+  <div class="w3l-contact-10 py-5" id="contact">
+    <div class="form-41-mian pt-md-5 pt-3">
+      <div class="container">
+        <div class="row contacts-5-grid-main mb-5">
+          <div class="col-lg-6 contacts-5-grid pe-lg-5">
+            <h5 class="title-subw3hny">Contact our team</h5>
+            <h3 class="title-w3l mb-3">Get in touch with us</h3>
+            <h4 class="title-w3l-adinf mt-4">Address Info</h4>
+            <div class="address-grid d-flex">
+              <i class="fas fa-map-marker-alt mt-2"></i>
+              <p>
+                C11 C11 Generator Hall Electric Wharf, Sandy Lane, Coventry,
+                West Midlands, England, CV1 4JL
+              </p>
+            </div>
+            <h4 class="title-w3l-adinf mt-4">Support Center 24/7</h4>
+            <!-- <div class="address-grid d-flex">
+              <i class="fas fa-headset mt-2"></i>
+              <p>
+                <a href="tel:+12 324-016-694" class="link1">+44 741-837-7087</a>
+              </p>
+            </div> -->
+            <div class="address-grid d-flex">
+              <i class="fas fa-envelope"></i>
+              <p class="mt-0">
+                <a href="mailto:info.investify.traders@gmail.com" class="link1">info.investify.traders@gmail.com</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 form-inner-cont mt-lg-0 mt-4">
+            <form method="post" id="contactForm" class="signin-form">
+              <div class="form-grids">
+                <div class="form-input">
+                  <input type="text" name="w3lName" id="w3lName" placeholder="Enter your name *" required="" />
+                </div>
+                <div class="form-input">
+                  <input type="email" name="w3lSender" id="w3lSender" placeholder="Enter your email *" required />
+                </div>
+                <div class="form-input">
+                  <input type="text" name="w3lSubject" id="w3lSubject" placeholder="Enter subject *" required />
+                </div>
+              </div>
+              <div class="form-input">
+                <textarea name="w3lMessage" id="w3lMessage" placeholder="Type your query here" required=""></textarea>
+              </div>
+              <div class="w3-submit text-right">
+                <button type="submit" class="btn btn-style btn-primary">
+                  Send Message <i class="fas fa-paper-plane ms-2"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
-  <div class="w3l-contact-info py-5" id="contact">
-    <div class="container py-lg-5 py-md-4">
-      <div class="title text-center">
-        <h3 class="title-big">Get in touch with us</h3>
-        <p class="mt-2 mx-lg-5">
-          Feel free to get in touch with us for any inquiries or support, and
-          we'll respond as soon as possible.
-        </p>
-      </div>
-      <!--
-        <div class="row">
-          <div class="col-lg-6"></div>
-          <div class="align-self mt-lg-0 mt-md-5 mt-4">
-            <div class="contact-infos">
-              <div class="single-contact-infos">
-                <div class="icon-box">
-                  <span class="fa fa-map-marker"></span>
-                </div>
-                <div class="text-box">
-                  <h3 class="mb-1">Address info</h3>
-                  <p>Bank Card, 343 banking lane, #2214 cravel street, NY.</p>
-                </div>
-              </div>
-              <div class="single-contact-infos">
-                <div class="icon-box"><span class="fa fa-phone"></span></div>
-                <div class="text-box">
-                  <h3 class="mb-1">Call us on</h3>
-                  <p><a href="tel:+1(21) 234 4567">+1(21) 234 4567</a></p>
-                </div>
-              </div>
-              <div class="single-contact-infos">
-                <div class="icon-box"><span class="fa fa-envelope"></span></div>
-                <div class="text-box">
-                  <h3 class="mb-1">Email us</h3>
-                  <p><a href="mailto:info@support.com">info@support.com</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        -->
-      <div class="my-contact">
-        <div class="contact-div">
-          <span class="fa" style="font-size: 2rem">📍</span>
-          <div class="contact-box">
-            <h3 style="font-weight: bold; text-decoration: underline">
-              Head Office
-            </h3>
-            <p class="desc">
-              C11 C11 Generator Hall <br />
-              Electric Wharf, Sandy Lane, <br />
-              Coventry, West Midlands, <br />
-              England, CV1 4JL
-            </p>
-          </div>
-        </div>
-        <div class="contact-div">
-          <span class="fa" style="font-size: 2rem">✉️</span>
-          <div class="contact-box">
-            <h3 style="font-weight: bold; text-decoration: underline">
-              Email Us
-            </h3>
-            <p class="desc">
-              <a style="color: var(--font-color)" href="mailto:info.investify.traders@gmail.com">info.investify.traders
-                <br />
-                @gmail.com</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-5">
-        <div class="col-lg-6 map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155751.78516944812!2d-1.8102476073302247!3d52.41353311744783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870b151656e22b7%3A0x4f660f5564f0689!2sCoventry%2C%20UK!5e0!3m2!1sen!2sng!4v1726850291437!5m2!1sen!2sng">
-            frameborder="0" allowfullscreen="" ></iframe>
-        </div>
-        <div class="col-lg-6 form-inner-cont mt-lg-0 mt-sm-5 mt-4">
-          <form action="https://formspree.io/f/mrbzzlqv" method="POST" class="signin-form">
-            <!-- Hidden field to enable the honeypot feature -->
-            <input type="hidden" name="_captcha" value="false" />
-            <div class="form-input">
-              <input type="text" name="name" id="name" placeholder="Your name" required="" />
-            </div>
-            <div class="form-input">
-              <input type="email" name="email" id="email" placeholder="Your email address" required="" />
-            </div>
-            <div class="form-input">
-              <input type="text" name="subject" id="subject" placeholder="Subject of inquiry" required="" />
-            </div>
-            <div class="form-input">
-              <textarea name="message" id="message" placeholder="Your message" required=""></textarea>
-            </div>
-            <div class="text-right">
-              <button type="submit" class="btn btn-style btn-primary">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <!-- //contacts-5-grid -->
+  </div>
+  <!-- /map-->
+  <div class="contacts-sub-5">
+    <div class="contacts-mapw3 position-relative">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155751.78516944812!2d-1.8102476073302247!3d52.41353311744783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870b151656e22b7%3A0x4f660f5564f0689!2sCoventry%2C%20UK!5e0!3m2!1sen!2sng!4v1726850291437!5m2!1sen!2sng"
+        style="border: 0" allowfullscreen></iframe>
     </div>
   </div>
-  <!-- footer -->
-  <section class="w3l-footer-29-main">
-    <div class="footer-29 py-5">
-      <div class="container py-lg-4">
-        <div class="row footer-top-29">
-          <div class="col-lg-4 col-md-6 footer-list-29 footer-1 pr-lg-5">
-            <div class="footer-logo mb-4">
+
+  <!--/footer-->
+  <footer class="w3l-footer">
+    <div class="w3l-footer-16 py-5">
+      <div class="container py-md-5 py-3 pb-0">
+
+        <div class="row footer-p">
+
+          <!-- Logo / Description -->
+          <div class="col-lg-3 col-md-12 pe-lg-5">
+            <h2 class="footerw3l-logo">
               <a class="navbar-brand" href="index.html">
-                <span class="fa" style="background: #fff; padding: 2px; border-radius: 5px">
-                  <img src="assets/images/logo.png" alt="investify-logo" style="width: 1.5em; height: 1em" />
-                </span>
-                Investify</a>
+                <img src="/assets/images/logo.png" alt="">
+                <span class="w3yellow">Investify</span>
+              </a>
+            </h2>
+            <p class="mt-3">
+              We stand out as a platform by advancing core technologies, strategically leveraging
+              cryptocurrency innovation, stock markets, and the evolving landscape of digital asset
+              development.
+            </p>
+          </div>
+
+          <!-- Links Section -->
+          <div class="col-lg-9 col-md-12 mt-lg-0 mt-4">
+            <div class="row">
+
+              <div class="col-lg-3 col-6 column">
+                <h3>About Us</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="index.html">Homepage</a></li>
+                  <li><a href="about.html">About Us</a></li>
+                  <li><a href="services.html">Services</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="assets/images/Investify.pdf">Company Details</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-6 column">
+                <h3>Markets</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="crypto-mkt.html">Crypto</a></li>
+                  <li><a href="stock-mkt.html">Stocks</a></li>
+                  <li><a href="index-mkt.html">Indices</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-6 column mt-4 mt-lg-0">
+                <h3>Live Charts</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="bitcoin.html">Bitcoin</a></li>
+                  <li><a href="tsla.html">Tesla</a></li>
+                  <li><a href="dji.html">Dow Jones</a></li>
+                  <li><a href="unilever.html">Unilever</a></li>
+                  <li><a href="eurusd.html">EUR/USD</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-6 column mt-4 mt-lg-0">
+                <h3>Support</h3>
+                <ul class="footer-gd-16">
+                  <li><a href="contact.html">Help Center</a></li>
+                  <li><a href="services.html#faq">FAQs</a></li>
+                  <li><a href="terms.html">Terms of Service</a></li>
+                  <li><a href="terms.html">Privacy Policy</a></li>
+                </ul>
+              </div>
+
             </div>
-            <p>
-              We stand out as a platform by advancing core technologies, strategically leveraging cryptocurrency
-              innovation, stock markets, and the evolving landscape of digital asset development.
-            </p>
           </div>
-          <div class="col-lg-2 col-md-6 col-sm-5 col-5 footer-list-29 footer-2 mt-md-0 mt-5">
-            <ul>
-              <h6 class="footer-title-29">Quick Links</h6>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="index.html#pricing"> Pricing plans</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="contact.html">Contact us</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-7 col-7 footer-list-29 footer-3 mt-lg-0 mt-5">
-            <h6 class="footer-title-29">Head Office</h6>
-            <p class="mb-3">
-              C11 C11 Generator Hall Electric Wharf, Sandy Lane, Coventry,
-              West Midlands, England, CV1 4JL
-            </p>
-            <p class="mb-2" style="overflow-x: scroll; scrollbar-width: thin">
-              <span class="fa fa-envelope-o"></span>
-              <a href="mailto:info.investify.traders@gmail.com">info.investify.traders@gmail.com</a>
-            </p>
-          </div>
-          <div class="col-lg-3 col-md-6 footer-list-29 footer-4 mt-lg-0 mt-5">
-            <h6 class="footer-title-29">Documents</h6>
-            <ul>
-              <li>
-                <a href="assets/images/Investify.pdf">Company Details</a>
-              </li>
-              <li>
-                <a href="assets/images/Investify.pdf">Company House Certificate</a>
-              </li>
-              <li><a href="about.html#testimonials">Testimonials</a></li>
-              <li><a>Digital Currency</a></li>
-            </ul>
-          </div>
+
         </div>
+
+        <!-- Bottom Section -->
+        <div class="below-section text-center pt-lg-4 mt-5">
+          <p class="copy-text">
+            &copy; 2025 Investify Traders Ltd. All rights reserved.
+          </p>
+          <ul class="footer-gd-16 d-flex justify-content-center">
+            <!-- social links if needed -->
+          </ul>
+        </div>
+
       </div>
     </div>
-    <!-- copyright -->
-    <section class="w3l-copyright text-center">
-      <div class="container">
-        <p class="copy-footer-29">
-          copyright © 2025 Investify Traders Limited. All rights reserved
-        </p>
-      </div>
+  </footer>
 
-      <!-- move top -->
-      <button onclick="topFunction()" id="movetop" title="Go to top">
-        &#10548;
-      </button>
-      <script>
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-          scrollFunction();
-        };
-
-        function scrollFunction() {
-          if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
-          ) {
-            document.getElementById("movetop").style.display = "block";
-          } else {
-            document.getElementById("movetop").style.display = "none";
-          }
-        }
-
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }
-      </script>
-      <!-- /move top -->
-    </section>
-    <!-- //copyright -->
-  </section>
-  <!-- //footer -->
-
-  <!--  javascripts file here -->
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
-
-  <script src="assets/js/theme-change.js"></script>
-  <!-- //light and dark mode switch js -->
-
-  <script src="assets/js/circles.js"></script>
-
-  <!-- stats number counter-->
-  <script src="assets/js/jquery.waypoints.min.js"></script>
-  <script src="assets/js/jquery.countup.js"></script>
+  <!-- move top -->
+  <button onclick="topFunction()" id="movetop" title="Go to top">
+    <span class="fas fa-arrow-up" aria-hidden="true"></span>
+  </button>
   <script>
-    $(".counter").countUp();
-  </script>
-  <!-- //stats number counter -->
+    window.onscroll = function () {
+      scrollFunction();
+    };
 
-  <!-- owl carousel -->
-  <script src="assets/js/owl.carousel.js"></script>
-  <!-- script for banner slider-->
-  <script>
-    $(document).ready(function () {
-      $(".owl-one").owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        responsiveClass: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplaySpeed: 1000,
-        autoplayHoverPause: false,
-        responsive: {
-          0: {
-            items: 1,
-          },
-          480: {
-            items: 1,
-          },
-          667: {
-            items: 1,
-          },
-          1000: {
-            items: 1,
-          },
-        },
-      });
-    });
-  </script>
-  <!-- //script -->
-  <!-- owl carousel -->
-
-  <!-- script for tesimonials carousel slider -->
-  <script>
-    $(document).ready(function () {
-      $("#owl-demo2").owlCarousel({
-        loop: true,
-        margin: 20,
-        nav: false,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
-            nav: false,
-          },
-          1000: {
-            items: 1,
-            nav: false,
-            loop: false,
-          },
-        },
-      });
-    });
-  </script>
-  <!-- //script for tesimonials carousel slider -->
-
-  <!-- disable body scroll which navbar is in active -->
-  <script>
-    $(function () {
-      $(".navbar-toggler").click(function () {
-        $("body").toggleClass("noscroll");
-      });
-    });
-  </script>
-  <!-- disable body scroll which navbar is in active -->
-
-  <!--/MENU-JS-->
-  <script>
-    $(window).on("scroll", function () {
-      var scroll = $(window).scrollTop();
-
-      if (scroll >= 80) {
-        $("#site-header").addClass("nav-fixed");
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        document.getElementById("movetop").style.display = "block";
       } else {
-        $("#site-header").removeClass("nav-fixed");
+        document.getElementById("movetop").style.display = "none";
       }
-    });
+    }
 
-    //Main navigation Active Class Add Remove
-    $(".navbar-toggler").on("click", function () {
-      $("header").toggleClass("active");
-    });
-    $(document).on("ready", function () {
-      if ($(window).width() > 991) {
-        $("header").removeClass("active");
-      }
-      $(window).on("resize", function () {
-        if ($(window).width() > 991) {
-          $("header").removeClass("active");
-        }
-      });
-    });
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   </script>
-  <!--//MENU-JS-->
 
+  <!-- Template JavaScript -->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/theme-change.js"></script>
+
+  <!-- //bootstrap -->
   <script src="assets/js/bootstrap.min.js"></script>
-  <!-- //bootstrap js -->
+
+  <!-- app.js -->
+  <script src="assets/js/app.js"></script>
 </body>
 
 </html>

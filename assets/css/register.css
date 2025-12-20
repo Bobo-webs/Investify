@@ -32,8 +32,8 @@ input {
 }
 
 :root {
-  --pry-color: #133917;
-  --hover: #2e7436;
+  --pry-color: #ff7800;
+  --hover: #fd7e14;
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -11868,7 +11868,7 @@ h5,
   border-radius: 10px;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid var(--pry-color);
+  border: 1px solid #222;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -11898,7 +11898,7 @@ h5,
   outline: none !important;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid #e32249;
+  border: 1px solid #ff7800;
 }
 
 textarea.form-control {
@@ -12066,6 +12066,7 @@ textarea.form-control {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  width: fit-content;
 }
 
 .brand img {

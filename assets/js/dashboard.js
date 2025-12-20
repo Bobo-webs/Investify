@@ -205,21 +205,15 @@ popupOverlay?.addEventListener("click", hidePopup);
 // -------------------------------------
 // THEME TOGGLER
 // -------------------------------------
-/*
+
 const themeToggle = document.querySelector('.theme-toggle');
 
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
+themeToggle.addEventListener('click', (e) => {
+    e.preventDefault();
 
-        themeToggle.addEventListener('click', (e) => {
-            e.preventDefault();
+    document.documentElement.classList.toggle('dark');
 
-            document.documentElement.classList.toggle('dark');
-
-            // Save preference
-            const isDark = document.documentElement.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-*/
+    // Save preference
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});

@@ -23,7 +23,8 @@ a {
 }
 
 :root {
-  --pry-color: #133917;
+  --pry-color: #ff7800;
+  --hover: #fd7e14;
   --bg-color: #fff;
 }
 
@@ -107,7 +108,7 @@ input[type="email"] {
   border: none;
   border-radius: 8px;
   background-color: var(--bg-color);
-  border-bottom: 2px solid #4a7d47;
+  border-bottom: 2px solid var(--pry-color);
   font-size: 18px;
   z-index: 3;
   margin-top: 4rem;
@@ -147,8 +148,8 @@ input[type="email"]:autofill {
 }
 
 .login:hover {
-  background-color: #2e7436;
-  border: 1px solid #2e7436;
+  background-color: var(--hover);
+  border: 1px solid var(--hover);
   transition: all 0.5s;
 }
 
@@ -183,7 +184,7 @@ label {
   font-size: 14px;
   top: -70px;
   transition: all 0.2s;
-  color: #4a7d47;
+  color: #000;
 }
 
 .inputField {
