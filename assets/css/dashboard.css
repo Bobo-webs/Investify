@@ -1342,8 +1342,8 @@ body {
 }
 
 .tx-order-action.buy {
-    background: var(--success-bg-green);
-    color: var(--bs-green);
+    background: var(--bs-success-bg);
+    color: var(--bs-success);
 }
 
 .tx-order-action.sell {
