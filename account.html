@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta property="og:title" content="Investify Traders" />
+  <meta property="og:description"
+    content="We help you achieve financial success across global markets, delivering real-time data and seamless trading for assets ranging from stocks and forex to crypto, indices, and CFDs." />
+  <meta property="og:image" content="https://investifytraders.net/assets/images/logo-icon.jpg" />
+  <meta property="og:url" content="https://investifytraders.net" />
+  <title>Account - Investify</title>
+
+  <!-- Styling --->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="./assets/images/logo-icon.jpg" />
+  <link rel="stylesheet" href="./assets/css/account.css" />
+
+  <!-- Scripts -->
+  <script src="/assets/js/network-state.js"></script>
+  <script src="/assets/js/toast.js"></script>
+  <script type="module" src="/assets/js/firebase-init.js"></script>
+
+</head>
+
+<body>
+
+  <div class="auth-wrapper">
+
+    <!-- ════ LEFT PANEL ════ -->
+    <aside class="left-panel">
+      <div class="left-headline">
+        <h2>Trade smarter.<br><span>Earn better.</span></h2>
+        <p>Real-time signals · Crypto · Stocks · Indices</p>
+      </div>
+
+      <div class="chart-canvas-wrapper">
+        <div class="chart-stage">
+          <div class="chart-header">
+            <div>
+              <div class="chart-pair">BTC / USDT</div>
+              <div class="chart-price" id="btc-price"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="live-dot"></span>
+              <span class="chart-change up" id="btc-change"></span>
+            </div>
+          </div>
+          <canvas id="tradingChart"></canvas>
+        </div>
+
+        <div class="stats-strip">
+          <div class="stat-box">
+            <div class="s-label">24h Volume</div>
+            <div class="s-value">$70M</div>
+          </div>
+          <div class="stat-box">
+            <div class="s-label">Active Traders</div>
+            <div class="s-value up" id="trader-count">12,480</div>
+          </div>
+          <div class="stat-box">
+            <div class="s-label">Win Rate</div>
+            <div class="s-value up">88.4%</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ════ RIGHT PANEL ════ -->
+    <main class="right-panel">
+
+      <button class="theme-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+
+      <a href="index.html" class="auth-logo">
+        <img src="./assets/images/logo-icon.jpg" alt="investify" />
+        <span>Investify</span>
+      </a>
+
+      <div class="auth-card">
+        <div class="tab-bar" role="tablist">
+          <button class="tab-btn active" id="tab-signin" role="tab" aria-selected="true"
+            aria-controls="panel-signin">Sign In</button>
+          <button class="tab-btn" id="tab-signup" role="tab" aria-selected="false" aria-controls="panel-signup">Sign
+            Up</button>
+        </div>
+
+        <!-- Sign In Panel -->
+        <div class="form-panel active" id="panel-signin" role="tabpanel">
+          <p class="panel-title">Welcome back 👋</p>
+          <p class="panel-sub">Sign in to access your trading dashboard.</p>
+
+          <div class="field" id="si-email-field">
+            <label for="si-email">Email Address</label>
+            <input type="email" id="si-email" placeholder="you@example.com" autocomplete="email" />
+            <div class="field-msg" id="si-email-msg"></div>
+          </div>
+
+          <div class="field" id="si-pass-field">
+            <label for="si-password">Password</label>
+            <input type="password" id="si-password" class="has-icon" autocomplete="current-password" />
+            <span class="eye-toggle" id="si-eye"><i class="fa-solid fa-eye-slash"></i></span>
+            <div class="field-msg" id="si-pass-msg"></div>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn-submit" id="signin-btn">
+              <span class="btn-label"><i class="fa-solid fa-paper-plane"></i>&nbsp; Sign In</span>
+              <span class="spinner-sm"></span>
+            </button>
+            <a href="forgot.html" class="link-forgot">Forgot password?</a>
+          </div>
+        </div>
+
+        <!-- Sign Up Panel -->
+        <div class="form-panel" id="panel-signup" role="tabpanel">
+          <p class="panel-title">Create an account 🧾</p>
+          <p class="panel-sub">Join thousands of traders on Investify.</p>
+
+          <div class="field" id="su-user-field">
+            <label for="firstname">Username</label>
+            <input type="text" id="firstname" placeholder="e.g. john_doe" autocomplete="username" />
+            <div class="field-msg" id="su-user-msg"></div>
+          </div>
+
+          <div class="field" id="su-name-field">
+            <label for="lastname">Full Name</label>
+            <input type="text" id="lastname" placeholder="John Doe" autocomplete="name" />
+            <div class="field-msg" id="su-name-msg"></div>
+          </div>
+
+          <div class="field" id="su-email-field">
+            <label for="su-email">Email Address</label>
+            <input type="email" id="su-email" placeholder="you@example.com" autocomplete="email" />
+            <div class="field-msg" id="su-email-msg"></div>
+          </div>
+
+          <div class="field" id="su-pass-field">
+            <label for="su-password">Password</label>
+            <input type="password" id="su-password" class="has-icon" placeholder="Min. 8 characters"
+              autocomplete="new-password" />
+            <span class="eye-toggle" id="su-eye"><i class="fa-solid fa-eye-slash"></i></span>
+            <div class="strength-bar" id="strength-bar">
+              <div class="strength-seg" id="seg1"></div>
+              <div class="strength-seg" id="seg2"></div>
+              <div class="strength-seg" id="seg3"></div>
+              <div class="strength-seg" id="seg4"></div>
+            </div>
+            <div class="field-msg" id="su-pass-msg"></div>
+          </div>
+
+          <div class="field" id="su-pass2-field">
+            <label for="su-password2">Confirm Password</label>
+            <input type="password" id="su-password2" class="has-icon" placeholder="Repeat password"
+              autocomplete="new-password" />
+            <span class="eye-toggle" id="su-eye2"><i class="fa-solid fa-eye-slash"></i></span>
+            <div class="field-msg" id="su-pass2-msg"></div>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn-submit" id="signup-btn">
+              <span class="btn-label"><i class="fa-solid fa-paper-plane"></i>&nbsp; Create Account</span>
+              <span class="spinner-sm"></span>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /auth-card -->
+    </main>
+  </div>
+
+  <!-- GLOBAL LOADING OVERLAY -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p id="loading-msg">Please wait...</p>
+  </div>
+
+  <!-- Single module entry point — all logic lives in account.js -->
+  <script type="module" src="./assets/js/account.js"></script>
+
+</body>
+
+</html>
