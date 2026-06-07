@@ -379,9 +379,9 @@ canvas#tradingChart {
 }
 
 .auth-logo img {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 43px;
+  height: 30px;
+  border-radius: 5px;
   object-fit: cover;
 }
 

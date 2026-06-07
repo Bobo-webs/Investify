@@ -219,26 +219,34 @@ function initStrengthBar() {
     dom.suPassword.addEventListener('input', e => updateStrength(e.target.value));
 }
 
+
 function initTradingChart() {
     const canvas = dom.tradingCanvas;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    const W = canvas.parentElement.clientWidth - 48;
-    canvas.width = W;
-    canvas.height = 160;
-
     const N = 80;
     const data = [];
     let base = 67420;
+    let W = 0;
 
     for (let i = 0; i < N; i++) {
         base += (Math.random() - 0.48) * 220;
         data.push(base);
     }
 
+    function setSize() {
+        const newW = canvas.parentElement.clientWidth - 48;
+        if (newW > 0) {
+            W = newW;
+            canvas.width = W;
+            canvas.height = 160;
+        }
+    }
+
     // ── Draw ──
     function drawFrame() {
+        if (!W) return;
         const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
         ctx.clearRect(0, 0, W, 160);
 
@@ -287,7 +295,7 @@ function initTradingChart() {
         ctx.fillStyle = `rgba(255,120,0,${dotAlpha})`; ctx.fill();
     }
 
-    // ── Animate chart line ──
+    // ── Animate ──
     let tick = 0;
     function animate() {
         tick++;
@@ -309,9 +317,6 @@ function initTradingChart() {
         requestAnimationFrame(animate);
     }
 
-    animate();
-
-    // ── Seed BTC chart from real price ──
     function seedBtcChart(realPrice) {
         data.length = 0;
         let seed = realPrice * 0.985;
@@ -340,21 +345,37 @@ function initTradingChart() {
                     dom.btcChange.className = 'chart-change ' + (isUp ? 'up' : 'down');
                 }
             }
-        } catch (_) {
-            // silently fail — animation keeps running from last known price
-        }
+        } catch (_) { }
     }
 
-    // ── Trader count pulse ──
     let tc = 12480;
     setInterval(() => {
         tc += Math.floor(Math.random() * 7) - 2;
         if (dom.traderCount) dom.traderCount.textContent = tc.toLocaleString();
     }, 3000);
 
-    // ── Boot ──
-    fetchCrypto();
-    setInterval(fetchCrypto, 60000);
+    window.addEventListener('resize', () => {
+        setSize();
+    });
+
+    setSize();
+
+    if (!W) {
+        const ro = new ResizeObserver(() => {
+            setSize();
+            if (W > 0) {
+                ro.disconnect();
+                animate();
+                fetchCrypto();
+                setInterval(fetchCrypto, 60000);
+            }
+        });
+        ro.observe(canvas.parentElement);
+    } else {
+        animate();
+        fetchCrypto();
+        setInterval(fetchCrypto, 60000);
+    }
 }
 
 // ─────────────────────────────────────────────
