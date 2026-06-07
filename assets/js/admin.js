@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const role = roleSnap.val();
 
         if (role !== "admin") {
-            // Boot out immediately if not "user"
+            // Boot out immediately if not "admin"
             showToast("Access denied", "error");
             await signOut(auth);
             window.location.href = "login.html";

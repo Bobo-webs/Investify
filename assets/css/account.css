@@ -1,3 +1,31 @@
+/* ======= REMOVE LIGHT BLUE HIGHLIGHTS ONCLICK ======== */
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+a,
+img,
+button,
+input {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+img,
+button,
+input {
+  outline: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -moz-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -ms-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
+
+
 *,
 *::before,
 *::after {
@@ -508,6 +536,7 @@ canvas#tradingChart {
 .submit-row {
   margin-top: 1.6rem;
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;

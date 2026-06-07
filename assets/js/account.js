@@ -157,11 +157,26 @@ function activateTab(tab) {
 }
 
 function initTabs() {
-    const saved = sessionStorage.getItem('investify_auth_tab');
-    if (saved === 'signup') activateTab('signup');
+    const hash = window.location.hash.replace('#', '');
+    const saved = sessionStorage.getItem('tradera_auth_tab');
+    const initial = (hash === 'signin' || hash === 'signup') ? hash : (saved || 'signin');
 
-    dom.tabSignin.addEventListener('click', () => activateTab('signin'));
-    dom.tabSignup.addEventListener('click', () => activateTab('signup'));
+    activateTab(initial);
+
+    dom.tabSignin.addEventListener('click', () => {
+        activateTab('signin');
+        history.replaceState(null, '', '#signin');
+    });
+
+    dom.tabSignup.addEventListener('click', () => {
+        activateTab('signup');
+        history.replaceState(null, '', '#signup');
+    });
+
+    window.addEventListener('hashchange', () => {
+        const tab = window.location.hash.replace('#', '');
+        if (tab === 'signin' || tab === 'signup') activateTab(tab);
+    });
 }
 
 // ─────────────────────────────────────────────

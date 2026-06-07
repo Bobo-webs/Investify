@@ -1,204 +1,146 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-*,
-*::before,
-*::after {
-  font-family: "Poppins";
-  box-sizing: border-box;
-}
-
-/* ======= REMOVE LIGHT BLUE HIGHLIGHTS ONCLICK ======== */
-* {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth;
-}
-
-a,
-img,
-button,
-input {
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-a,
-img,
-button,
-input {
-  outline: none !important;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-  /* Safari */
-  -moz-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-  /* Firefox */
-  -ms-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-  /* Internet Explorer/Edge */
-  tap-highlight-color: rgba(0, 0, 0, 0) !important;
-  /* Standard */
-}
-
-html,
-body {
-  background-color: #f0f3f0;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
+/* ── PAGE WRAPPER ── */
+.page-wrapper {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-a {
-  text-decoration: none;
-}
-
-:root {
-  --pry-color: #ff7800;
-  --hover: #fd7e14;
-  --bg-color: #fff;
-}
-
-.loginDiv {
+  padding: 2rem 1.25rem;
   position: relative;
-  margin: 0 1rem;
-  padding: 2rem 3rem;
-  width: fit-content;
-  height: fit-content;
-  background-color: var(--bg-color);
-  box-sizing: content-box;
-  box-shadow: 0 0 20px -8px #bcbdbc;
+}
+
+/* ── CARD ── */
+.forgot-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 20px;
-}
-
-.logo-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: fit-content;
-  height: 30px;
-  margin: 0 auto;
-  color: var(--pry-color);
-}
-
-.span-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(13, 17, 23, 0.03);
-  background: #fff;
-}
-
-.logo-img {
-  width: 1.7em;
-  height: 1em;
-}
-
-input[type="email"] {
-  display: block;
   width: 100%;
-  min-width: 100px;
-  height: 30px;
-  padding: 4px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--bg-color);
-  border-bottom: 2px solid var(--pry-color);
-  font-size: 18px;
-  z-index: 3;
-  margin-top: 4rem;
+  max-width: 420px;
+  padding: 2.5rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-input[type="email"]:focus {
-  outline: none;
+/* ── ICON BADGE ── */
+.icon-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--pry-dim);
+  border: 1px solid rgba(255, 120, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--pry);
+  margin-bottom: 1.5rem;
 }
 
-input[type="email"]:autofill {
-  background-color: var(--bg-color) !important;
-}
-
-.return {
+/* ── HEADINGS ── */
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
   text-align: center;
-  font-size: 0.9rem;
-  margin-top: -1rem;
 }
 
-.return a {
-  color: var(--pry-color);
-  text-decoration: underline;
+.card-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 300px;
 }
 
-.login {
-  float: right;
-  width: 50px;
-  height: 50px;
-  background-color: var(--pry-color);
-  color: white;
-  border: 1px solid var(--pry-color);
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  transition: all 0.5s;
-}
-
-.login:hover {
-  background-color: var(--hover);
-  border: 1px solid var(--hover);
-  transition: all 0.5s;
-}
-
-h1 {
-  font-family: "Poppins";
-  color: #253e24;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-label {
+/* ── FIELD ── */
+.field {
+  width: 100%;
+  margin-bottom: 1.4rem;
   position: relative;
-  top: -40px;
-  font-size: 18px;
-  z-index: 0;
-  transition: all 0.4s;
-  pointer-events: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
-#email:focus~label,
-#email:valid~label {
-  font-size: 14px;
-  top: -70px;
-  transition: all 0.2s;
-  color: #000;
+.field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
 }
 
-.inputField {
-  height: 60px;
+.field input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.72rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  transition: all var(--transition);
+  outline: none;
+  -webkit-appearance: none;
 }
 
+.field input::placeholder {
+  color: var(--text-muted);
+}
 
-@media (max-width: 320px) {
+.field input:focus {
+  border-color: var(--border-focus);
+  background: var(--surface);
+}
 
-  p,
-  label,
-  a,
-  button {
-    font-size: small;
-  }
+.field.is-error input {
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
+.field-msg {
+  font-size: 0.72rem;
+  margin-top: 5px;
+  min-height: 16px;
+  color: var(--error-text);
+  display: none;
+}
+
+.field.is-error .field-msg {
+  display: block;
+}
+
+/* ── SUBMIT BTN ── */
+.btn-submit {
+  width: 100%;
+  background: var(--pry);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.78rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.5rem;
+}
+
+/* ── BACK LINK ── */
+.back-link {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transition);
+}
+
+.back-link:hover {
+  color: var(--pry);
 }
